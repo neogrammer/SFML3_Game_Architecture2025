@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Source Files\external">
+      <UniqueIdentifier>{6dffecea-1faf-446f-9c69-ea6d7cb752f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\external">
+      <UniqueIdentifier>{24a3da1e-9092-4b5e-9867-5cc51b8853e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\external\ImGui">
+      <UniqueIdentifier>{2c7dfc06-8221-47ac-bdb0-10b1e835a737}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\external\ImGui">
+      <UniqueIdentifier>{5a01b968-c3c2-4e0a-92a8-bda51e636c1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\external\ImGui\ImGui_SFML3">
+      <UniqueIdentifier>{c187b269-2568-4576-9f9e-0f055b3aeea9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\external\ImGui\ImGui_SFML3">
+      <UniqueIdentifier>{77c1ce35-7623-40a7-93f2-40f63893b5d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{5bac240c-8853-4ba2-b713-ae6cb132a41d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Fonts">
+      <UniqueIdentifier>{80c7878e-2fa8-4a93-b1c0-33e8211e467b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Textures">
+      <UniqueIdentifier>{a2b3b42b-7562-43f3-85f4-3d446e4fca13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core">
+      <UniqueIdentifier>{23094c05-a9a8-463c-88db-823dfdea6e27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\app">
+      <UniqueIdentifier>{6e340ce3-fb24-4801-8db4-664a2304203a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\handlers">
+      <UniqueIdentifier>{effd1085-32dd-4bc8-bb2b-bce1ed19f5fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\err">
+      <UniqueIdentifier>{3464872f-01e8-42bc-bdd9-581bb481769f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\states">
+      <UniqueIdentifier>{d9e5e360-916f-476b-a421-1772fcbcfb1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\states">
+      <UniqueIdentifier>{2da38eae-4250-46f0-b307-cc5de4558795}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="external\ImGui\ImGui_SFML3\imgui-SFML.cpp">
+      <Filter>Source Files\external\ImGui\ImGui_SFML3</Filter>
+    </ClCompile>
+    <ClCompile Include="external\ImGui\imgui.cpp">
+      <Filter>Source Files\external\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="external\ImGui\imgui_draw.cpp">
+      <Filter>Source Files\external\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="external\ImGui\imgui_tables.cpp">
+      <Filter>Source Files\external\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="external\ImGui\imgui_widgets.cpp">
+      <Filter>Source Files\external\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\app\AGameApp.cpp">
+      <Filter>Source Files\core\app</Filter>
+    </ClCompile>
+    <ClCompile Include="src\err\CidError.cpp">
+      <Filter>Source Files\err</Filter>
+    </ClCompile>
+    <ClCompile Include="src\handlers\GStateMgr.cpp">
+      <Filter>Source Files\handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\global.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\states\TitleState.cpp">
+      <Filter>Source Files\core\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\states\SplashState.cpp">
+      <Filter>Source Files\core\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\states\PlayState.cpp">
+      <Filter>Source Files\core\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\states\StateBase.cpp">
+      <Filter>Source Files\core\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\states\GameOverState.cpp">
+      <Filter>Source Files\core\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\states\MenuState.cpp">
+      <Filter>Source Files\core\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\states\PausedState.cpp">
+      <Filter>Source Files\core\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\states\WorldMapState.cpp">
+      <Filter>Source Files\core\states</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="external\ImGui\ImGui_SFML3\imgui-SFML.h">
+      <Filter>Header Files\external\ImGui\ImGui_SFML3</Filter>
+    </ClInclude>
+    <ClInclude Include="external\ImGui\imconfig.h">
+      <Filter>Header Files\external\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="external\ImGui\imgui.h">
+      <Filter>Header Files\external\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="external\ImGui\imgui_internal.h">
+      <Filter>Header Files\external\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="external\ImGui\imstb_rectpack.h">
+      <Filter>Header Files\external\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="external\ImGui\imstb_textedit.h">
+      <Filter>Header Files\external\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="external\ImGui\imstb_truetype.h">
+      <Filter>Header Files\external\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="external\ImGui\ImGui_SFML3\imconfig-SFML.h">
+      <Filter>Header Files\external\ImGui\ImGui_SFML3</Filter>
+    </ClInclude>
+    <ClInclude Include="external\ImGui\ImGui_SFML3\imgui-SFML_export.h">
+      <Filter>Header Files\external\ImGui\ImGui_SFML3</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\app\AGameApp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\err\CidError.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\err\ErrorMacros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\handlers\GStateMgr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\states\PlayState.h">
+      <Filter>Header Files\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\states\SplashState.h">
+      <Filter>Header Files\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\states\StateBase.h">
+      <Filter>Header Files\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\states\TitleState.h">
+      <Filter>Header Files\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\states\GameOverState.h">
+      <Filter>Header Files\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\states\MenuState.h">
+      <Filter>Header Files\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\states\PausedState.h">
+      <Filter>Header Files\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\states\WorldMapState.h">
+      <Filter>Header Files\states</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Assets\Fonts\Crusty.ttf">
+      <Filter>Assets\Fonts</Filter>
+    </Font>
+  </ItemGroup>
+</Project>
