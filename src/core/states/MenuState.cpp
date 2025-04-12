@@ -10,7 +10,20 @@ MenuState::MenuState(GStateMgr& stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
 std::string MenuState::update()
 {
 	//std::cout << "MenuState updating" << std::endl;
+	if (entering)
+	{
 
+
+		enterTimeElapsed += *pGameTime;
+	}
+	else if (exiting)
+	{
+		exitTimeElapsed += *pGameTime;
+	}
+	else
+	{
+
+	}
 	return "OK";
 }
 

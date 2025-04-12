@@ -1,10 +1,20 @@
 #ifndef TITLESTATE_H__
 #define TITLESTATE_H__
 #include "StateBase.h"
+#include <SFML/Graphics.hpp>
 class GameStateMgr;
 
 class TitleState : public StateBase
 {
+
+	sf::Sprite bgSpr;
+	float alphaValue{ 0.f };
+
+	float timeTillEndOfDisplay{ 2.f };
+
+	bool musicStarted{ false };
+	float musicVolume{ 100.f };
+	float timeInStateElapsed{ 0.f };
 public:
 	using StateBase::StateBase;
 

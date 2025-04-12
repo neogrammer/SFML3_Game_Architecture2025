@@ -10,7 +10,20 @@ std::string PlayState::update()
 {
 
 	//std::cout << "PlayState updating..." << std::endl;
+	if (entering)
+	{
 
+
+		enterTimeElapsed += *pGameTime;
+	}
+	else if (exiting)
+	{
+		exitTimeElapsed += *pGameTime;
+	}
+	else
+	{
+
+	}
 	return "OK";
 }
 

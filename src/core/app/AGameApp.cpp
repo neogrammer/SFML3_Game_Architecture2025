@@ -134,7 +134,7 @@ std::string  AGameApp::renderScene()
 {
 	std::string res = "Ok";
 
-	mWnd.clear(sf::Color(46, 146, 246, 255));
+	mWnd.clear(sf::Color(0, 0, 0, 255));
 	
 	res = pStateMgr->renderScene();
 

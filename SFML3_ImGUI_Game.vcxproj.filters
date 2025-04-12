@@ -54,6 +54,21 @@
     <Filter Include="Source Files\core\states">
       <UniqueIdentifier>{2da38eae-4250-46f0-b307-cc5de4558795}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\core\resources">
+      <UniqueIdentifier>{49948927-0537-4107-af31-6d38c96cbbda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\tpl">
+      <UniqueIdentifier>{99131712-cafa-4ed5-a58b-1072c66e672e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Textures\SplashState">
+      <UniqueIdentifier>{6096e331-9453-4565-b516-0ef4f80f44ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Textures\TitleState">
+      <UniqueIdentifier>{9a83d4dd-9271-4b78-bab1-1230a6a1c646}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Music">
+      <UniqueIdentifier>{2db1f33a-5a5d-40b5-9c65-3f0c0126a2c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\ImGui\ImGui_SFML3\imgui-SFML.cpp">
@@ -109,6 +124,9 @@
     </ClCompile>
     <ClCompile Include="src\core\states\WorldMapState.cpp">
       <Filter>Source Files\core\states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\resources\Cfg.cpp">
+      <Filter>Source Files\core\resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -178,10 +196,34 @@
     <ClInclude Include="src\core\states\WorldMapState.h">
       <Filter>Header Files\states</Filter>
     </ClInclude>
+    <ClInclude Include="src\core\resources\Cfg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\resources\ResourceManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Font Include="Assets\Fonts\Crusty.ttf">
       <Filter>Assets\Fonts</Filter>
     </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\core\resources\tpl\ResourceManager.tpl">
+      <Filter>Header Files\tpl</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\Textures\SplashState\splash.jpg">
+      <Filter>Assets\Textures\SplashState</Filter>
+    </Image>
+    <Image Include="Assets\Textures\TitleState\TitleBG.jpg">
+      <Filter>Assets\Textures\TitleState</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Assets\Music\TitleBGMusic.wav">
+      <Filter>Assets\Music</Filter>
+    </Media>
   </ItemGroup>
 </Project>

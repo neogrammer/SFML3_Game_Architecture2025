@@ -10,7 +10,20 @@ PausedState::PausedState(GStateMgr& stateMgr, sf::RenderWindow* pWnd_, float* pD
 std::string PausedState::update()
 {
 	//std::cout << "PausedState updating" << std::endl;
+	if (entering)
+	{
 
+
+		enterTimeElapsed += *pGameTime;
+	}
+	else if (exiting)
+	{
+		exitTimeElapsed += *pGameTime;
+	}
+	else
+	{
+
+	}
 	return "OK";
 }
 

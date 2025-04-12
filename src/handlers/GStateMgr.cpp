@@ -21,7 +21,7 @@ GStateMgr::GStateMgr(sf::RenderWindow& wnd_, float& gameTime_)
 	states.emplace(std::make_shared<WorldMapState>(*this, &wnd_, &gameTime_));
 
 	push<SplashState>();
-
+	activeStates.back().lock()->enter();
 	/*for (auto& state : states)
 	{
 		if (dynamic_cast<SplashState*>(state.get()) != nullptr)
@@ -76,16 +76,38 @@ std::string  GStateMgr::handleStaticInput()
 std::string  GStateMgr::updateGame()
 {
 	std::string res = "OK";
-
-	while (toRemoveCount > 0)
-	{
-		pop();
-		toRemoveCount--;
-	}
+	static bool popTimeDone = false;
 	if (toAdd != nullptr)
 	{
-		activeStates.push_back(toAdd);
-		toAdd = nullptr;
+		for (auto& st : activeStates)
+		{
+			if (st.lock()->shouldDoSwitch())
+			{
+				while (toRemoveCount > 0)
+				{
+
+					pop();
+					toRemoveCount--;
+				}
+				popTimeDone = true;
+
+			}
+			else
+			{
+				res = st.lock()->update();
+			}
+		}
+	}
+	if (popTimeDone)
+	{
+		popTimeDone = false;
+		if (toAdd != nullptr)
+		{	
+			activeStates.push_back(toAdd);
+			activeStates.back().lock()->enter();
+			toAdd = nullptr;
+			
+		}
 	}
 	
 

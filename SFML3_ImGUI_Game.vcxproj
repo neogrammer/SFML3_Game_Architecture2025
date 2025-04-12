@@ -152,6 +152,7 @@
     <ClCompile Include="external\ImGui\imgui_widgets.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="src\core\app\AGameApp.cpp" />
+    <ClCompile Include="src\core\resources\Cfg.cpp" />
     <ClCompile Include="src\core\states\GameOverState.cpp" />
     <ClCompile Include="src\core\states\MenuState.cpp" />
     <ClCompile Include="src\core\states\PausedState.cpp" />
@@ -175,6 +176,8 @@
     <ClInclude Include="external\ImGui\imstb_textedit.h" />
     <ClInclude Include="external\ImGui\imstb_truetype.h" />
     <ClInclude Include="src\core\app\AGameApp.h" />
+    <ClInclude Include="src\core\resources\Cfg.h" />
+    <ClInclude Include="src\core\resources\ResourceManager.h" />
     <ClInclude Include="src\core\states\GameOverState.h" />
     <ClInclude Include="src\core\states\MenuState.h" />
     <ClInclude Include="src\core\states\PausedState.h" />
@@ -190,6 +193,16 @@
   </ItemGroup>
   <ItemGroup>
     <Font Include="Assets\Fonts\Crusty.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\core\resources\tpl\ResourceManager.tpl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\Textures\SplashState\splash.jpg" />
+    <Image Include="Assets\Textures\TitleState\TitleBG.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Assets\Music\TitleBGMusic.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

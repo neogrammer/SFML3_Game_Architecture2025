@@ -1,10 +1,18 @@
 #ifndef SPLASHSTATE_H__
 #define SPLASHSTATE_H__
 #include "StateBase.h"
+#include <SFML/Graphics.hpp>
 class GameStateMgr;
 
 class SplashState : public StateBase
 {
+
+	sf::Sprite bgSpr;
+	float alphaValue{ 0.f };
+
+	float timeTillEndOfDisplay{ 2.f };
+
+	float timeInStateElapsed{ 0.f };
 public:
 	using StateBase::StateBase;
 

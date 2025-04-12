@@ -75,6 +75,25 @@ StateBase& StateBase::operator=(StateBase&& o) noexcept
 	return *this;
 }
 
+void StateBase::enter()
+{
+	std::cout << "Entering new state" << std::endl;
+	entering = true;
+	exiting = false;
+	enterTimeElapsed = 0.f;
+}
+
+void StateBase::exitState()
+{
+	std::cout << "Exitiig new state" << std::endl;
+
+	exiting = true;
+	entering = false;
+	exitTimeElapsed = 0.f;
+
+}
+
+
 std::string StateBase::processEvents()
 {
 	return "OK";
@@ -88,4 +107,20 @@ std::string StateBase::runScripts()
 std::string StateBase::handleInput()
 {
 	return "OK";
+}
+
+bool StateBase::shouldDoSwitch()
+{
+	return doSwitch;
+}
+
+bool StateBase::isEntering()
+{
+	
+	return entering;
+}
+
+bool StateBase::isExiting()
+{
+	return exiting;
 }

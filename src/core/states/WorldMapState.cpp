@@ -10,6 +10,22 @@ WorldMapState::WorldMapState(GStateMgr& stateMgr, sf::RenderWindow* pWnd_, float
 std::string WorldMapState::update()
 {
 	//std::cout << "WorldMapState updating" << std::endl;
+	if (entering)
+	{
+		enterTimeElapsed += *pGameTime;
+
+
+
+
+	}
+	else if (exiting)
+	{
+		exitTimeElapsed += *pGameTime;
+	}
+	else
+	{
+
+	}
 	return "OK";
 }
 

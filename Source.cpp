@@ -2,10 +2,10 @@
 #include "imgui-SFML.h"
 #include <core/app/AGameApp.h>
 #include <iostream>
-
+#include <core/resources/Cfg.h>
 int main(int argc, char* argv[])
 {
-
+    Cfg::Initialize();
 
     AGameApp app{};
 

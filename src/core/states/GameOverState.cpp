@@ -10,7 +10,20 @@ GameOverState::GameOverState(GStateMgr& stateMgr, sf::RenderWindow* pWnd_, float
 std::string GameOverState::update()
 {
 	//std::cout << "GameOverState updating" << std::endl;
+	if (entering)
+	{
 
+
+		enterTimeElapsed += *pGameTime;
+	}
+	else if (exiting)
+	{
+		exitTimeElapsed += *pGameTime;
+	}
+	else
+	{
+
+	}
 	return "OK";
 }
 
