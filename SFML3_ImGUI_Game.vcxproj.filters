@@ -78,6 +78,9 @@
     <Filter Include="Assets\Textures\Player">
       <UniqueIdentifier>{900a983a-4884-4706-9b06-e837dde5bbc1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\handlers">
+      <UniqueIdentifier>{286becda-3ab3-4fba-9324-da44548b0407}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\ImGui\ImGui_SFML3\imgui-SFML.cpp">
@@ -142,6 +145,9 @@
     </ClCompile>
     <ClCompile Include="src\game_objects\FaceObject.cpp">
       <Filter>Source Files\game_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\handlers\AnimMgr.cpp">
+      <Filter>Source Files\handlers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -222,6 +228,15 @@
     </ClInclude>
     <ClInclude Include="src\game_objects\FaceObject.h">
       <Filter>Header Files\game_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\handlers\AnimMgr.h">
+      <Filter>Header Files\handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\animation\AnimTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\animation\Animation.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -69,9 +69,7 @@ GameObject::~GameObject()
 
 GameObject::GameObject(const GameObject& o)
 	: quad{ o.quad }
-	, currIndex{ o.currIndex }
-	, currDir{ o.currDir }, currAnim{ o.currAnim }, currOffset{ o.currOffset }, currTexRect{ o.currTexRect }, currWorldSize{ o.currWorldSize }
-	, animMap{}
+	, currOffset{ o.currOffset }, currTexRect{ o.currTexRect }, currWorldSize{ o.currWorldSize }
 	, worldPos{ o.worldPos }, velocity{ o.velocity }, acceleration{o.acceleration}
 	, alive{o.alive}, texID{o.texID}
 {
@@ -80,11 +78,11 @@ GameObject::GameObject(const GameObject& o)
 		quad[i].color = sf::Color::White;
 	}
 
-	animMap.clear();
+	/*animMap.clear();
 	for (auto& an : o.animMap)
 	{
 		animMap[{an.first.first, an.first.second }] = an.second;
-	}
+	}*/
 }
 
 GameObject& GameObject::operator=(const GameObject& o)
@@ -96,9 +94,6 @@ GameObject& GameObject::operator=(const GameObject& o)
 		quad[i].color = sf::Color::White;
 	}
 
-	currIndex =(o.currIndex);
-	currDir = (o.currDir);
-	currAnim =(o.currAnim);
 	currOffset = (o.currOffset);
 	currTexRect =(o.currTexRect);
 	currWorldSize = (o.currWorldSize);
@@ -108,11 +103,11 @@ GameObject& GameObject::operator=(const GameObject& o)
 	alive = (o.alive);
 	texID = (o.texID);
 
-	animMap.clear();
+	/*animMap.clear();
 	for (auto& an : o.animMap)
 	{
 		animMap[{an.first.first, an.first.second }] = an.second;
-	}
+	}*/
 
 	return *this;
 	
@@ -120,9 +115,7 @@ GameObject& GameObject::operator=(const GameObject& o)
 
 GameObject::GameObject(GameObject&& o)
 	: quad{ std::move(o.quad) }
-	, currIndex{ std::move(o.currIndex) }
-	, currDir{ std::move(o.currDir) }, currAnim{ std::move(o.currAnim) }, currOffset{ std::move(o.currOffset) }, currTexRect{ std::move(o.currTexRect) }, currWorldSize{ std::move(o.currWorldSize) }
-	, animMap{}
+	, currOffset{ std::move(o.currOffset) }, currTexRect{ std::move(o.currTexRect) }, currWorldSize{ std::move(o.currWorldSize) }
 	, worldPos{ std::move(o.worldPos) }, velocity{ std::move(o.velocity) }, acceleration{ std::move(o.acceleration) }
 	, alive{ std::move(o.alive) }, texID{ std::move(o.texID) }
 {
@@ -131,12 +124,12 @@ GameObject::GameObject(GameObject&& o)
 		quad[i].color = sf::Color::White;
 	}
 
-	animMap.clear();
+	/*animMap.clear();
 	for (auto& an : o.animMap)
 	{
 		animMap[{an.first.first, an.first.second }] = std::move(an.second);
 	}
-	o.animMap.clear();
+	o.animMap.clear();*/
 }
 
 GameObject& GameObject::operator=(GameObject&& o)
@@ -147,9 +140,7 @@ GameObject& GameObject::operator=(GameObject&& o)
 		quad[i].color = sf::Color::White;
 	}
 
-	currIndex = std::move(o.currIndex);
-	currDir = std::move(o.currDir);
-	currAnim = std::move(o.currAnim);
+	
 	currOffset = std::move(o.currOffset);
 	currTexRect = std::move(o.currTexRect);
 	currWorldSize = std::move(o.currWorldSize);
@@ -160,12 +151,12 @@ GameObject& GameObject::operator=(GameObject&& o)
 	texID = std::move(o.texID);
 
 
-	animMap.clear();
+	/*animMap.clear();
 	for (auto& an : o.animMap)
 	{
 		animMap[{an.first.first, an.first.second }] = std::move(an.second);
 	}
-	o.animMap.clear();
+	o.animMap.clear();*/
 
 	return *this;
 }
@@ -212,6 +203,21 @@ sf::Vector2f GameObject::getPosition()
 sf::Vector2f GameObject::getWorldSize()
 {
 	return currWorldSize;
+}
+
+Cfg::Textures GameObject::getTexID()
+{
+	return texID;
+}
+
+void GameObject::setTexID(Cfg::Textures texID_)
+{
+	texID = texID_;
+}
+
+sf::Vector2f GameObject::getCurrOffset()
+{
+	return currOffset;
 }
 
 void GameObject::setTexRect(sf::IntRect rect_)

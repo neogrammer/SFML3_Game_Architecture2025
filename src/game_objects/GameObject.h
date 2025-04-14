@@ -5,22 +5,6 @@
 #include <map>
 #include <vector>
 
-enum class Dir
-{
-	Left,
-	Right,
-	Uni
-};
-
-enum class Anim
-{
-	Invariant
-};
-
-struct Animation
-{
-	Anim name;
-};
 
 /// <summary>
 /// GameObjects all have a representation in the game world.  First vertex in quad is the objects position in the world minus the tex offset
@@ -30,16 +14,9 @@ class GameObject : public sf::Transformable, public sf::Drawable
 
 protected:
 	sf::VertexArray quad{sf::PrimitiveType::Triangles, 6};
-	int currIndex{ 0 };
-	Dir currDir{ Dir::Uni };
-	Anim currAnim{ Anim::Invariant };
-	sf::Vector2f currOffset{ 0.f,0.f };
-	sf::IntRect currTexRect{ sf::IntRect{{0,0},{64,64}} };
 	sf::Vector2f currWorldSize{ 64.f,64.f };
-
-
-	std::map<std::pair<Anim, Dir>, Animation> animMap{};
-
+	sf::IntRect currTexRect{};
+	sf::Vector2f currOffset{ };
 	sf::Vector2f worldPos{ 0.f,0.f };
 	sf::Vector2f velocity{ 0.f,0.f };
 	sf::Vector2f acceleration{ 0.f,0.f };
@@ -68,6 +45,9 @@ public:
 	void setPosition(sf::Vector2f pos_);
 	sf::Vector2f getPosition();
 	sf::Vector2f getWorldSize();
+	Cfg::Textures getTexID();
+	void setTexID(Cfg::Textures texID_);
+	sf::Vector2f getCurrOffset();
 	sf::IntRect getTexRect();
 	void setTexRect(sf::IntRect rect_);
 };

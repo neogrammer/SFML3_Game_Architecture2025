@@ -7,6 +7,10 @@ PlayState::PlayState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
 	std::cout << "PlayState created" << std::endl;
 	face.setPosition({ 0.f,0.f });
 	face.setTexRect({ {0,0},{132,150} });
+
+	face.animMgr.AddRightFrames(AnimName::Idle, Cfg::Textures::PlayerAtlas132x150, 1, 1, 0, 0, 21, 132, 150);
+	face.setTexID(Cfg::Textures::PlayerAtlas132x150);
+
 }
 
 std::string PlayState::update()
@@ -18,6 +22,11 @@ std::string PlayState::update()
 
 
 		enterTimeElapsed += *pGameTime;
+		if (enterTimeElapsed > 1.f)
+		{
+			entering = false;
+		}
+
 	}
 	else if (exiting)
 	{
@@ -25,7 +34,7 @@ std::string PlayState::update()
 	}
 	else
 	{
-
+		face.animMgr.animate(*pGameTime);
 	}
 	return "OK";
 }
@@ -34,6 +43,12 @@ std::string PlayState::update()
 
 std::string PlayState::finalize()
 {
+	if (face.animMgr.getTexID() != face.getTexID())
+	{
+		face.setTexID(face.animMgr.getTexID());
+	}
+	face.setTexRect(face.animMgr.currFrame());
+	
 	return "OK";
 }
 
