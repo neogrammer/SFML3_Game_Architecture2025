@@ -8,7 +8,7 @@ class PausedState : public StateBase
 public:
 	using StateBase::StateBase;
 
-	 PausedState(GStateMgr& stateMgr, sf::RenderWindow* pWnd_, float* pDT_);
+	 PausedState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_);
 
 	//void processEvents() override final;
 	//void runScripts() override final;

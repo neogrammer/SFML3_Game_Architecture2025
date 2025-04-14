@@ -1,7 +1,7 @@
 #include "MenuState.h"
 #include <handlers/GStateMgr.h>
 #include <iostream>
-MenuState::MenuState(GStateMgr& stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
+MenuState::MenuState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
 	: StateBase{stateMgr, pWnd_, pDT_ }
 {
 	std::cout << "MenuState created" << std::endl;

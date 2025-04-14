@@ -1,7 +1,7 @@
 #include "WorldMapState.h"
 #include <handlers/GStateMgr.h>
 #include <iostream>
-WorldMapState::WorldMapState(GStateMgr& stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
+WorldMapState::WorldMapState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
 	: StateBase{stateMgr, pWnd_, pDT_ }
 {
 	std::cout << "WorldMapState created" << std::endl;

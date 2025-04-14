@@ -1,7 +1,7 @@
 #include "GameOverState.h"
 #include <handlers/GStateMgr.h>
 #include <iostream>
-GameOverState::GameOverState(GStateMgr& stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
+GameOverState::GameOverState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
 	: StateBase{ stateMgr, pWnd_, pDT_}
 {
 	std::cout << "GameOverState created" << std::endl;

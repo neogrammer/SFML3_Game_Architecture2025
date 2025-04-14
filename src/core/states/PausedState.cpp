@@ -1,7 +1,7 @@
 #include "PausedState.h"
 #include <handlers/GStateMgr.h>
 #include <iostream>
-PausedState::PausedState(GStateMgr& stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
+PausedState::PausedState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
 	: StateBase{stateMgr, pWnd_, pDT_ }
 {
 	std::cout << "PausedState created" << std::endl;

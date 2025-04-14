@@ -4,7 +4,7 @@
 #include <handlers/GStateMgr.h>
 #include <core/states/TitleState.h>
 #include <core/resources/Cfg.h>
-SplashState::SplashState(GStateMgr& stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
+SplashState::SplashState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
 	: StateBase{stateMgr, pWnd_, pDT_ }
 	, bgSpr{Cfg::textures.get((int)Cfg::Textures::SplashBG)}
 {

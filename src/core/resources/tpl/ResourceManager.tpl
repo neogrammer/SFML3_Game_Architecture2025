@@ -53,7 +53,7 @@ template<typename IDENTIFIER>
 template<typename ... Args>
 void ResourceManager<sf::Font,IDENTIFIER>::load(const IDENTIFIER& id,Args&& ... args)
 {
-    std::unique_ptr<sf::Font> ptr(new sf::Music);
+    std::unique_ptr<sf::Font> ptr(new sf::Font);
 
     if(not ptr->openFromFile(std::forward<Args>(args)...))
         throw std::runtime_error("Impossible to load file");

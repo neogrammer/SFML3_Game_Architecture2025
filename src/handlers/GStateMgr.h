@@ -11,20 +11,21 @@ class StateBase;
 class GStateMgr
 {
 	sf::RenderWindow* pWnd;
-	sf::Time* pGameTime;
-
+	float* pGameTime;
+	bool* gameOver;
 	std::set<std::shared_ptr<StateBase>> states;
 	std::deque<std::weak_ptr<StateBase>> activeStates;
 	friend class StateBase;
 	friend class TitleState;
 	friend class SplashState;
+	friend class PlayState;
 
 	int toRemoveCount{ 0 };
 	std::shared_ptr<StateBase> toAdd{ nullptr };
 public:
 
 
-	GStateMgr(sf::RenderWindow& wnd_, float& gameTime_);
+	GStateMgr(sf::RenderWindow& wnd_, float& gameTime_, bool& gameOver_);
 
 	~GStateMgr();
 	GStateMgr(const GStateMgr&) = delete;

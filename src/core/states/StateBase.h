@@ -27,7 +27,7 @@ protected:
 	void changeState(int index);
 public:
 	StateBase();
-	StateBase(GStateMgr& stateMgr, sf::RenderWindow* wnd_, float* dt_);
+	StateBase(GStateMgr* stateMgr, sf::RenderWindow* wnd_, float* dt_);
 	virtual ~StateBase() = 0;
 	StateBase(const StateBase& o);
 	StateBase& operator=(const StateBase& o);

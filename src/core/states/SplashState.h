@@ -16,7 +16,7 @@ class SplashState : public StateBase
 public:
 	using StateBase::StateBase;
 
-	SplashState(GStateMgr& stateMgr, sf::RenderWindow* pWnd_, float* pDT_);
+	SplashState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_);
 
 	//void processEvents() override final;
 	//void runScripts() override final;

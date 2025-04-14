@@ -162,6 +162,8 @@
     <ClCompile Include="src\core\states\TitleState.cpp" />
     <ClCompile Include="src\core\states\WorldMapState.cpp" />
     <ClCompile Include="src\err\CidError.cpp" />
+    <ClCompile Include="src\game_objects\FaceObject.cpp" />
+    <ClCompile Include="src\game_objects\GameObject.cpp" />
     <ClCompile Include="src\global.cpp" />
     <ClCompile Include="src\handlers\GStateMgr.cpp" />
   </ItemGroup>
@@ -188,6 +190,8 @@
     <ClInclude Include="src\core\states\WorldMapState.h" />
     <ClInclude Include="src\err\CidError.h" />
     <ClInclude Include="src\err\ErrorMacros.h" />
+    <ClInclude Include="src\game_objects\FaceObject.h" />
+    <ClInclude Include="src\game_objects\GameObject.h" />
     <ClInclude Include="src\global.h" />
     <ClInclude Include="src\handlers\GStateMgr.h" />
   </ItemGroup>
@@ -200,6 +204,7 @@
   <ItemGroup>
     <Image Include="Assets\Textures\SplashState\splash.jpg" />
     <Image Include="Assets\Textures\TitleState\TitleBG.jpg" />
+    <Image Include="Assets\Textures\TitleState\TitleText.png" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="Assets\Music\TitleBGMusic.wav" />

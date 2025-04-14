@@ -69,6 +69,12 @@
     <Filter Include="Assets\Music">
       <UniqueIdentifier>{2db1f33a-5a5d-40b5-9c65-3f0c0126a2c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\game_objects">
+      <UniqueIdentifier>{0f05d454-d714-4a70-a8a4-d3e65dd3c25d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\game_objects">
+      <UniqueIdentifier>{69a47488-4652-4a23-92bb-3d7b9777b6da}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\ImGui\ImGui_SFML3\imgui-SFML.cpp">
@@ -127,6 +133,12 @@
     </ClCompile>
     <ClCompile Include="src\core\resources\Cfg.cpp">
       <Filter>Source Files\core\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game_objects\GameObject.cpp">
+      <Filter>Source Files\game_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game_objects\FaceObject.cpp">
+      <Filter>Source Files\game_objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -202,6 +214,12 @@
     <ClInclude Include="src\core\resources\ResourceManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\game_objects\GameObject.h">
+      <Filter>Header Files\game_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game_objects\FaceObject.h">
+      <Filter>Header Files\game_objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Font Include="Assets\Fonts\Crusty.ttf">
@@ -219,6 +237,9 @@
     </Image>
     <Image Include="Assets\Textures\TitleState\TitleBG.jpg">
       <Filter>Assets\Textures\TitleState</Filter>
+    </Image>
+    <Image Include="Assets\Textures\TitleState\TitleText.png">
+      <Filter>Assets\Textures</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>

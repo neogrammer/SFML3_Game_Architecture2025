@@ -8,7 +8,7 @@ class WorldMapState : public StateBase
 public:
 	using StateBase::StateBase;
 
-	WorldMapState(GStateMgr& stateMgr, sf::RenderWindow* pWnd_, float* pDT_);
+	WorldMapState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_);
 
 	//void processEvents() override final;
 	//void runScripts() override final;

@@ -1,0 +1,73 @@
+#ifndef GAME_OBJECT_H__
+#define GAME_OBJECT_H__
+#include <SFML/Graphics.hpp>
+#include <core/resources/Cfg.h>
+#include <map>
+#include <vector>
+
+enum class Dir
+{
+	Left,
+	Right,
+	Uni
+};
+
+enum class Anim
+{
+	Invariant
+};
+
+struct Animation
+{
+	Anim name;
+};
+
+/// <summary>
+/// GameObjects all have a representation in the game world.  First vertex in quad is the objects position in the world minus the tex offset
+/// </summary>
+class GameObject : public sf::Transformable, public sf::Drawable
+{
+
+protected:
+	sf::VertexArray quad{sf::PrimitiveType::Triangles, 6};
+	int currIndex{ 0 };
+	Dir currDir{ Dir::Uni };
+	Anim currAnim{ Anim::Invariant };
+	sf::Vector2f currOffset{ 0.f,0.f };
+	sf::IntRect currTexRect{ sf::IntRect{{0,0},{64,64}} };
+	sf::Vector2f currWorldSize{ 64.f,64.f };
+
+
+	std::map<std::pair<Anim, Dir>, Animation> animMap{};
+
+	sf::Vector2f worldPos{ 0.f,0.f };
+	sf::Vector2f velocity{ 0.f,0.f };
+	sf::Vector2f acceleration{ 0.f,0.f };
+	
+	bool alive{ true };
+
+	Cfg::Textures texID{ Cfg::Textures::Invariant };
+
+	void updateTexCoords();
+	void updatePosition();
+public:
+	GameObject();
+	GameObject(Cfg::Textures texID_, sf::IntRect rect_ = { {0,0},{0,0} }, sf::Vector2f texOff_ = { 0.f,0.f }, sf::Vector2f size_ = {0.f,0.f}, sf::Vector2f pos_ = {0.f,0.f});
+
+	virtual ~GameObject() = 0;
+	GameObject(const GameObject& o);
+	GameObject& operator=(const GameObject& o);
+	GameObject(GameObject&& o);
+	GameObject& operator=(GameObject&& o);
+
+	friend bool operator==(GameObject& o, const GameObject& b);
+
+	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+
+	void move(sf::Vector2f amt_);
+	void setPosition(sf::Vector2f pos_);
+	sf::Vector2f getPosition();
+	sf::Vector2f getWorldSize();
+};
+
+#endif

@@ -8,17 +8,20 @@
 #include <core/states/SplashState.h>
 #include <core/states/PausedState.h>
 
-GStateMgr::GStateMgr(sf::RenderWindow& wnd_, float& gameTime_)
+GStateMgr::GStateMgr(sf::RenderWindow& wnd_, float& gameTime_, bool& gameOver_)
 	: states{}
 	, activeStates{}
+	, gameOver{&gameOver_}
+	, pWnd{&wnd_}
+	, pGameTime{&gameTime_}
 {
-	states.emplace(std::make_shared<SplashState>(*this, &wnd_,&gameTime_));
-	states.emplace(std::make_shared<MenuState>(*this, &wnd_, &gameTime_));
-	states.emplace(std::make_shared<PlayState>(*this,&wnd_, &gameTime_));
-	states.emplace(std::make_shared<GameOverState>(*this,&wnd_, &gameTime_));
-	states.emplace(std::make_shared<TitleState>(*this,&wnd_, &gameTime_));
-	states.emplace(std::make_shared<PausedState>(*this,&wnd_, &gameTime_));
-	states.emplace(std::make_shared<WorldMapState>(*this, &wnd_, &gameTime_));
+	states.emplace(std::make_shared<SplashState>(this, &wnd_,&gameTime_));
+	states.emplace(std::make_shared<MenuState>(this, &wnd_, &gameTime_));
+	states.emplace(std::make_shared<PlayState>(this,&wnd_, &gameTime_));
+	states.emplace(std::make_shared<GameOverState>(this,&wnd_, &gameTime_));
+	states.emplace(std::make_shared<TitleState>(this,&wnd_, &gameTime_));
+	states.emplace(std::make_shared<PausedState>(this,&wnd_, &gameTime_));
+	states.emplace(std::make_shared<WorldMapState>(this, &wnd_, &gameTime_));
 
 	push<SplashState>();
 	activeStates.back().lock()->enter();

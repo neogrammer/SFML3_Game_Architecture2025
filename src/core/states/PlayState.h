@@ -1,14 +1,16 @@
 #ifndef PLAYSTATE_H__
 #define PLAYSTATE_H__
 #include "StateBase.h"
+#include <game_objects/FaceObject.h>
 class GameStateMgr;
 
 class PlayState : public StateBase
 {
+	FaceObject face;
 public:
 	using StateBase::StateBase;
 
-	PlayState(GStateMgr& stateMgr, sf::RenderWindow* pWnd_, float* pDT_);
+	PlayState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_);
 
 	//void processEvents() override final;
 	//void runScripts() override final;

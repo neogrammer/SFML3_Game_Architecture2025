@@ -4,13 +4,33 @@
 #include <core/states/PlayState.h>
 #include <core/resources/Cfg.h>
 
-TitleState::TitleState(GStateMgr& stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
+TitleState::TitleState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
 	: StateBase{stateMgr, pWnd_, pDT_ }
 	, bgSpr{ Cfg::textures.get((int)Cfg::Textures::TitleBG) }
+	, titleTextSpr{Cfg::textures.get((int)Cfg::Textures::TitleText)}
+	, playGameText{ Cfg::fonts.get((int)Cfg::Fonts::Font1) }
+	, quitGameText{Cfg::fonts.get((int)Cfg::Fonts::Font1)}
 {
 	std::cout << "TitleState created" << std::endl;
 
 	bgSpr.setColor(sf::Color(255, 255, 255, (std::uint8_t)alphaValue));
+	titleTextSpr.setPosition({0.f,900.f});
+
+	playGameText.setCharacterSize(44U);
+	playGameText.setPosition({ 1200.f, 400.f });
+	playGameText.setFillColor(sf::Color(0, 0, 0, 0));
+	playGameText.setOutlineThickness(2);
+	playGameText.setOutlineColor(sf::Color(255,255,255,0));
+	playGameText.setString("Play Game");
+	quitGameText.setCharacterSize(44U);
+	quitGameText.setPosition({ 1200.f, 550.f });
+	quitGameText.setFillColor(sf::Color(0, 0, 0, 0));
+	quitGameText.setOutlineThickness(2);
+	quitGameText.setOutlineColor(sf::Color(255, 255, 255, 0));
+	quitGameText.setString("Quit Game");
+
+
+
 }
 
 std::string TitleState::handleInput()
@@ -43,6 +63,18 @@ std::string TitleState::handleInput()
 
 		}
 	}
+	
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
+	{
+		if (choice > 0)
+			choice--;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
+	{
+		if (choice < 1)
+			choice++;
+	}
+
 	return res;
 }
 
@@ -82,6 +114,7 @@ std::string TitleState::update()
 			exitTimeElapsed = 0.f;
 			enterTimeElapsed = 0.f;
 			timeInStateElapsed = 0.f;
+			bringInTextStart = true;
 		}
 	}
 	else if (exiting)
@@ -121,6 +154,91 @@ std::string TitleState::update()
 		}*/
 	}
 
+	if (bringInTextStart)
+	{
+		titleTextSpr.setPosition({ 0.f, titleTextSpr.getPosition().y - (450.f * *pGameTime)});
+		if (titleTextSpr.getPosition().y < 0.f)
+		{
+			titleTextSpr.setPosition({ 0.f,0.f });
+			bringInTextStart = false;
+		}
+	}
+	else
+	{
+		if (entering == false)
+			choiceAlpha += 100 * *pGameTime;
+		if (choiceAlpha > 255.f) { choiceAlpha = 255.f; }
+
+
+
+	}
+
+
+	static bool enterIsPressed{ false };
+	static bool enterIsDown{ false };
+
+
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter))
+	{
+		if (!enterIsDown)
+		{
+			enterIsPressed = true;
+		}
+		else
+		{
+			enterIsPressed = false;
+		}
+		enterIsDown = true;
+	}
+	else
+	{
+		enterIsDown = false;
+		enterIsPressed = false;
+	}
+	
+	if (choice == 0 && !bringInTextStart && !entering)
+	{
+		playGameText.setFillColor(sf::Color(0,0,0,(std::uint8_t)choiceAlpha));
+		playGameText.setOutlineColor(sf::Color(255, 255, 255, (std::uint8_t)choiceAlpha));
+		quitGameText.setFillColor(sf::Color(255, 255, 255, (std::uint8_t)choiceAlpha));
+		quitGameText.setOutlineColor(sf::Color(0, 0, 0, (std::uint8_t)choiceAlpha));
+
+		if (enterIsPressed)
+		{
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter))
+			{
+				for (auto& state : pStateMgr->states)
+				{
+					if (dynamic_cast<PlayState*>(state.get()) != nullptr)
+					{
+						removeMe();
+						pStateMgr->toAdd = state;
+						exiting = true;
+					}
+				}
+			}
+		}
+
+	}
+	else if (choice == 1 && !bringInTextStart && !entering)
+	{
+		quitGameText.setFillColor(sf::Color(0, 0, 0, (std::uint8_t)choiceAlpha));
+		quitGameText.setOutlineColor(sf::Color(255, 255, 255, (std::uint8_t)choiceAlpha));
+		playGameText.setFillColor(sf::Color(255, 255, 25, (std::uint8_t)choiceAlpha));
+		playGameText.setOutlineColor(sf::Color(0, 0, 0, (std::uint8_t)choiceAlpha));
+
+		if (enterIsPressed)
+		{
+					*pStateMgr->gameOver = true;
+					//pStateMgr->toAdd = state;
+					exiting = true;
+				
+		}
+	}
+
+
+
 	Cfg::music.get((int)Cfg::Music::TitleBGMusic).setVolume(musicVolume);
 	
 
@@ -136,6 +254,10 @@ std::string TitleState::render()
 {
 
 	pWnd->draw(bgSpr);
+	pWnd->draw(titleTextSpr);
+	pWnd->draw(playGameText);
+	pWnd->draw(quitGameText);
+
 	return "OK";
 }
 

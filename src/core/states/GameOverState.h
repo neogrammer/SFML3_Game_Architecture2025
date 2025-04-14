@@ -8,7 +8,7 @@ class GameOverState : public StateBase
 public:
 	using StateBase::StateBase;
 
-	GameOverState(GStateMgr& stateMgr, sf::RenderWindow* pWnd_, float* pDT_);
+	GameOverState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_);
 
 	//void processEvents() override final;
 	//void runScripts() override final;

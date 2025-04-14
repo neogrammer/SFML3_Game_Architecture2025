@@ -37,6 +37,12 @@ void Cfg::initTextures()
 {
 	textures.load((int)Textures::SplashBG, "Assets/Textures/SplashState/splash.jpg");
 	textures.load((int)Textures::TitleBG, "Assets/Textures/TitleState/TitleBG.jpg");
+	textures.load((int)Textures::TitleText, "Assets/Textures/TitleState/TitleText.png");
+	textures.load((int)Textures::Invariant, "Assets/Textures/misc/Invariant.png");
+	textures.load((int)Textures::Face, "Assets/Textures/misc/Face.png");
+
+
+
 }
 
 
@@ -48,7 +54,7 @@ void Cfg::destroyTextures()
 
 void Cfg::initFonts()
 {
-
+	fonts.load((int)Fonts::Font1, "Assets/Fonts/Crusty.ttf");
 }
 
 void Cfg::initPlayerInputs()

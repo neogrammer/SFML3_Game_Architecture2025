@@ -22,8 +22,8 @@ public:
 	static void Initialize();
 	static void Uninitialize();
 	// Resource Enums 
-	enum class Textures : int { SplashBG, TitleBG, Invalid };
-	enum class Fonts : int { };
+	enum class Textures : int { SplashBG, TitleBG,TitleText,Invariant, Face, Invalid };
+	enum class Fonts : int { Font1 };
 	enum class Music : int { TitleBGMusic };
   enum class Sounds : int { XHurt, XDie, BustershotNormal, BustershotCharged, XCharging, EnemyHurt1, EnemyDie1, HelmetHit, XJump, XLand, };
 

@@ -26,8 +26,8 @@ StateBase::StateBase()
 
 }
 
-StateBase::StateBase(GStateMgr& stateMgr, sf::RenderWindow* wnd_, float* dt_)
-	: pStateMgr{&stateMgr}
+StateBase::StateBase(GStateMgr* stateMgr, sf::RenderWindow* wnd_, float* dt_)
+	: pStateMgr{stateMgr}
 	, pWnd{wnd_}
 	, pGameTime{dt_}
 {

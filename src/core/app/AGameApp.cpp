@@ -9,7 +9,7 @@ void AGameApp::run()
 {
 	sf::Clock frameClock = {};
 
-	GStateMgr stateMgr{ mWnd,mGameTime };
+	GStateMgr stateMgr{ mWnd,mGameTime, mGameOver };
 	pStateMgr = &stateMgr;
 	/// GameStateMgr create
 

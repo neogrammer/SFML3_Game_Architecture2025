@@ -1,9 +1,11 @@
 #include "PlayState.h"
 #include <handlers/GStateMgr.h>
-PlayState::PlayState(GStateMgr& stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
+PlayState::PlayState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
 	: StateBase{stateMgr, pWnd_, pDT_ }
+	, face{Cfg::Textures::Face}
 {
 	std::cout << "PlayState created" << std::endl;
+	face.setPosition({ 500.f,300.f });
 }
 
 std::string PlayState::update()
@@ -27,6 +29,8 @@ std::string PlayState::update()
 	return "OK";
 }
 
+
+
 std::string PlayState::finalize()
 {
 	return "OK";
@@ -34,6 +38,7 @@ std::string PlayState::finalize()
 
 std::string PlayState::render()
 {
+	pStateMgr->pWnd->draw(face);
 	return "OK";
 }
 
