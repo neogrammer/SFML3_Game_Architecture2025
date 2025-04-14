@@ -214,6 +214,17 @@ sf::Vector2f GameObject::getWorldSize()
 	return currWorldSize;
 }
 
+void GameObject::setTexRect(sf::IntRect rect_)
+{
+	currTexRect = rect_;
+	updateTexCoords();
+	updatePosition();
+}
+
+sf::IntRect GameObject::getTexRect()
+{
+	return currTexRect;
+}
 
 void GameObject::updateTexCoords()
 {

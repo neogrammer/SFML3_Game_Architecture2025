@@ -40,6 +40,8 @@ void Cfg::initTextures()
 	textures.load((int)Textures::TitleText, "Assets/Textures/TitleState/TitleText.png");
 	textures.load((int)Textures::Invariant, "Assets/Textures/misc/Invariant.png");
 	textures.load((int)Textures::Face, "Assets/Textures/misc/Face.png");
+	textures.load((int)Textures::PlayerAtlas132x150, "Assets/Textures/Player/GokuSheet.png");
+
 
 
 

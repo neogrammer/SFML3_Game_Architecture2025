@@ -68,6 +68,8 @@ public:
 	void setPosition(sf::Vector2f pos_);
 	sf::Vector2f getPosition();
 	sf::Vector2f getWorldSize();
+	sf::IntRect getTexRect();
+	void setTexRect(sf::IntRect rect_);
 };
 
 #endif

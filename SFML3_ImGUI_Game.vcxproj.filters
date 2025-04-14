@@ -75,6 +75,9 @@
     <Filter Include="Source Files\game_objects">
       <UniqueIdentifier>{69a47488-4652-4a23-92bb-3d7b9777b6da}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\Textures\Player">
+      <UniqueIdentifier>{900a983a-4884-4706-9b06-e837dde5bbc1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\ImGui\ImGui_SFML3\imgui-SFML.cpp">
@@ -240,6 +243,9 @@
     </Image>
     <Image Include="Assets\Textures\TitleState\TitleText.png">
       <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="Assets\Textures\Player\GokuSheet.png">
+      <Filter>Assets\Textures\Player</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>

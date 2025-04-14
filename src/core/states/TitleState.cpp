@@ -18,13 +18,13 @@ TitleState::TitleState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_
 
 	playGameText.setCharacterSize(44U);
 	playGameText.setPosition({ 1200.f, 400.f });
-	playGameText.setFillColor(sf::Color(0, 0, 0, 0));
+	playGameText.setFillColor(sf::Color::Transparent);
 	playGameText.setOutlineThickness(2);
 	playGameText.setOutlineColor(sf::Color(255,255,255,0));
 	playGameText.setString("Play Game");
 	quitGameText.setCharacterSize(44U);
 	quitGameText.setPosition({ 1200.f, 550.f });
-	quitGameText.setFillColor(sf::Color(0, 0, 0, 0));
+	quitGameText.setFillColor(sf::Color::Transparent);
 	quitGameText.setOutlineThickness(2);
 	quitGameText.setOutlineColor(sf::Color(255, 255, 255, 0));
 	quitGameText.setString("Quit Game");
@@ -225,7 +225,7 @@ std::string TitleState::update()
 	{
 		quitGameText.setFillColor(sf::Color(0, 0, 0, (std::uint8_t)choiceAlpha));
 		quitGameText.setOutlineColor(sf::Color(255, 255, 255, (std::uint8_t)choiceAlpha));
-		playGameText.setFillColor(sf::Color(255, 255, 25, (std::uint8_t)choiceAlpha));
+		playGameText.setFillColor(sf::Color(255, 255, 255, (std::uint8_t)choiceAlpha));
 		playGameText.setOutlineColor(sf::Color(0, 0, 0, (std::uint8_t)choiceAlpha));
 
 		if (enterIsPressed)

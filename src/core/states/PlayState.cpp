@@ -2,10 +2,11 @@
 #include <handlers/GStateMgr.h>
 PlayState::PlayState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
 	: StateBase{stateMgr, pWnd_, pDT_ }
-	, face{Cfg::Textures::Face}
+	, face{Cfg::Textures::PlayerAtlas132x150}
 {
 	std::cout << "PlayState created" << std::endl;
-	face.setPosition({ 500.f,300.f });
+	face.setPosition({ 0.f,0.f });
+	face.setTexRect({ {0,0},{132,150} });
 }
 
 std::string PlayState::update()
