@@ -8,8 +8,9 @@ PlayState::PlayState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
 	face.setPosition({ 0.f,0.f });
 	face.setTexRect({ {0,0},{132,150} });
 
-	face.animMgr.AddRightFrames(AnimName::Idle, Cfg::Textures::PlayerAtlas132x150, 1, 1, 0, 0, 21, 132, 150);
-	face.setTexID(Cfg::Textures::PlayerAtlas132x150);
+	face.animMgr.AddRightFrames(AnimName::Idle, Cfg::Textures::MegaManSheet1x48x48x1, 2, 1, 0, 0, 21, 48, 48, AnimSheetType::Padded, 1, 1);
+	face.setTexID(Cfg::Textures::MegaManSheet1x48x48x1);
+	face.setScale({ 3.f,3.f });
 
 }
 

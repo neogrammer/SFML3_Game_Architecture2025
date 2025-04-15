@@ -23,7 +23,7 @@ GStateMgr::GStateMgr(sf::RenderWindow& wnd_, float& gameTime_, bool& gameOver_)
 	states.emplace(std::make_shared<PausedState>(this,&wnd_, &gameTime_));
 	states.emplace(std::make_shared<WorldMapState>(this, &wnd_, &gameTime_));
 
-	push<SplashState>();
+	push<PlayState>();
 	activeStates.back().lock()->enter();
 	/*for (auto& state : states)
 	{

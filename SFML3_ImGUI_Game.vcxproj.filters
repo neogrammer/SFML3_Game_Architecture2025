@@ -262,6 +262,9 @@
     <Image Include="Assets\Textures\Player\GokuSheet.png">
       <Filter>Assets\Textures\Player</Filter>
     </Image>
+    <Image Include="Assets\Textures\Player\MegaManWee.png">
+      <Filter>Assets\Textures\Player</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Media Include="Assets\Music\TitleBGMusic.wav">

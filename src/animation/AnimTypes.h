@@ -25,4 +25,12 @@ enum class AnimDir
 	Invariant
 };
 
+enum class AnimSheetType
+{
+	Normal,
+	Padded,
+	Blocks,
+	Vertical
+};
+
 #endif

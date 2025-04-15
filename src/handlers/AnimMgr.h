@@ -28,9 +28,9 @@ public:
 
 	void allocateAnim(AnimName name_, Cfg::Textures  texID_);
 
-	void AddLeftFrames(AnimName name_, Cfg::Textures texID_, int numFrames_, int numRows_, int startCol_, int startRow_, int pitch_, int frameW_, int frameH_);
-	void AddRightFrames(AnimName name_, Cfg::Textures texID_, int numFrames_, int numRows_, int startCol_, int startRow_, int pitch_, int frameW_, int frameH_);
-	void AddUniFrames(AnimName name_, Cfg::Textures texID_, int numFrames_, int numRows_, int startCol_, int startRow_, int pitch_, int frameW_, int frameH_);
+	void AddLeftFrames(AnimName name_, Cfg::Textures texID_, int numFrames_, int numRows_, int startCol_, int startRow_, int pitch_, int frameW_, int frameH_, AnimSheetType sheetType_ = AnimSheetType::Normal, int pad_ = 0 , int spacer_ = 0);
+	void AddRightFrames(AnimName name_, Cfg::Textures texID_, int numFrames_, int numRows_, int startCol_, int startRow_, int pitch_, int frameW_, int frameH_, AnimSheetType sheetType_ = AnimSheetType::Normal, int pad_ = 0 , int spacer_ = 0);
+	void AddUniFrames(AnimName name_, Cfg::Textures texID_, int numFrames_, int numRows_, int startCol_, int startRow_, int pitch_, int frameW_, int frameH_, AnimSheetType sheetType_ = AnimSheetType::Normal, int pad_ = 0 , int spacer_ = 0);
 	Cfg::Textures getTexID();
 	sf::IntRect currFrame();
 	sf::Vector2f currOffset();

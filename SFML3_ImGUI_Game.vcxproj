@@ -207,6 +207,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\Player\GokuSheet.png" />
+    <Image Include="Assets\Textures\Player\MegaManWee.png" />
     <Image Include="Assets\Textures\SplashState\splash.jpg" />
     <Image Include="Assets\Textures\TitleState\TitleBG.jpg" />
     <Image Include="Assets\Textures\TitleState\TitleText.png" />

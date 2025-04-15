@@ -17,7 +17,7 @@ void AnimMgr::allocateAnim(AnimName name_, Cfg::Textures  texID_)
 }
 
 
-void AnimMgr::AddLeftFrames(AnimName name_, Cfg::Textures texID_, int numFrames_, int numRows_, int startCol_, int startRow_, int pitch_, int frameW_, int frameH_)
+void AnimMgr::AddLeftFrames(AnimName name_, Cfg::Textures texID_, int numFrames_, int numRows_, int startCol_, int startRow_, int pitch_, int frameW_, int frameH_, AnimSheetType sheetType_, int pad_, int spacer_)
 {
 	if (animMap.find(name_) == animMap.end())
 	{
@@ -42,16 +42,32 @@ void AnimMgr::AddLeftFrames(AnimName name_, Cfg::Textures texID_, int numFrames_
 		{
 			for (int col = startCol_; col < pitch_ && (row * pitch_ + col) - (startRow_ * pitch_ + startCol_) < numFrames_; col++)
 			{
-				animMap[name_].leftFrames.emplace_back(sf::IntRect{{col * frameW_, row * frameH_},{frameW_,frameH_}});
-				worldSizeMap[name_].push_back({ float(frameW_),float(frameH_) });
+				if (sheetType_ == AnimSheetType::Padded)
+				{
+					animMap[name_].leftFrames.emplace_back(sf::IntRect{ {col * frameW_ + ((spacer_*col) + (col * (2 * pad_)) + pad_), row * frameH_ + ((spacer_ * row) + (row * (2 * pad_)) + pad_)},{frameW_,frameH_}});
+					worldSizeMap[name_].push_back({ (float)frameW_,(float)frameH_ });
+				}
+				else if (sheetType_ == AnimSheetType::Normal)
+				{
+					animMap[name_].leftFrames.emplace_back(sf::IntRect{ {col * frameW_, row * frameH_},{frameW_,frameH_} });
+					worldSizeMap[name_].push_back({ (float)frameW_,(float)frameH_ });
+				}
 			}
 		}
 		for (int row = startRow_ + 1; row < numRows_; row++)
 		{
 			for (int col = 0; col < pitch_ && (row * pitch_ + col) - (startRow_ * pitch_ + startCol_) < numFrames_; col++)
 			{
-				animMap[name_].leftFrames.emplace_back(sf::IntRect{{col * frameW_, row * frameH_},{frameW_,frameH_}});
-				worldSizeMap[name_].push_back({ (float)frameW_,(float)frameH_ });
+				if (sheetType_ == AnimSheetType::Padded)
+				{
+					animMap[name_].leftFrames.emplace_back(sf::IntRect{ {col * frameW_ + ((spacer_ * col) + (col * (2 * pad_)) + pad_), row * frameH_ + ((spacer_ * row) + (row * (2 * pad_)) + pad_)},{frameW_,frameH_} });
+					worldSizeMap[name_].push_back({ (float)frameW_,(float)frameH_ });
+				}
+				else if (sheetType_ == AnimSheetType::Normal)
+				{
+					animMap[name_].leftFrames.emplace_back(sf::IntRect{ {col * frameW_, row * frameH_},{frameW_,frameH_} });
+					worldSizeMap[name_].push_back({ (float)frameW_,(float)frameH_ });
+				}
 
 			}
 		}
@@ -65,7 +81,7 @@ void AnimMgr::AddLeftFrames(AnimName name_, Cfg::Textures texID_, int numFrames_
 }
 
 
-void AnimMgr::AddRightFrames(AnimName name_, Cfg::Textures texID_, int numFrames_, int numRows_, int startCol_, int startRow_, int pitch_, int frameW_, int frameH_)
+void AnimMgr::AddRightFrames(AnimName name_, Cfg::Textures texID_, int numFrames_, int numRows_, int startCol_, int startRow_, int pitch_, int frameW_, int frameH_, AnimSheetType sheetType_, int pad_, int spacer_)
 {
 
 	if (animMap.find(name_) == animMap.end())
@@ -86,17 +102,32 @@ void AnimMgr::AddRightFrames(AnimName name_, Cfg::Textures texID_, int numFrames
 		{
 			for (int col = startCol_; col < pitch_ && (row * pitch_ + col) - (startRow_ * pitch_ + startCol_) < numFrames_; col++)
 			{
-				animMap[name_].rightFrames.emplace_back(sf::IntRect{ {col * frameW_, row * frameH_},{frameW_,frameH_} });
-				worldSizeMap[name_].push_back({ (float)frameW_,(float)frameH_ });
-				
+				if (sheetType_ == AnimSheetType::Padded)
+				{
+					animMap[name_].rightFrames.emplace_back(sf::IntRect{ {col * frameW_ + ((col*spacer_)+(col * (2 * pad_)) + pad_), row * frameH_ + ((row*spacer_)+(row * (2 * pad_)) + pad_)},{frameW_,frameH_} });
+					worldSizeMap[name_].push_back({ (float)frameW_,(float)frameH_ });
+				}
+				else if (sheetType_ == AnimSheetType::Normal)
+				{
+					animMap[name_].rightFrames.emplace_back(sf::IntRect{ {col * frameW_, row * frameH_},{frameW_,frameH_} });
+					worldSizeMap[name_].push_back({ (float)frameW_,(float)frameH_ });
+				}
 			}
 		}
 		for (int row = startRow_ + 1; row < numRows_; row++)
 		{
 			for (int col = 0; col < pitch_ && (row * pitch_ + col) - (startRow_ * pitch_ + startCol_) < numFrames_; col++)
 			{
-				animMap[name_].rightFrames.emplace_back(sf::IntRect{ {col * frameW_, row * frameH_},{frameW_,frameH_} });
-				worldSizeMap[name_].push_back({ (float)frameW_,(float)frameH_ });
+				if (sheetType_ == AnimSheetType::Padded)
+				{
+					animMap[name_].rightFrames.emplace_back(sf::IntRect{ {col * frameW_ + ((spacer_*col)+(col * (2 * pad_)) + pad_), row * frameH_ + ((spacer_*row) + (row * (2 * pad_)) + pad_)},{frameW_,frameH_}});
+					worldSizeMap[name_].push_back({ (float)frameW_,(float)frameH_ });
+				}
+				else if (sheetType_ == AnimSheetType::Normal)
+				{
+					animMap[name_].rightFrames.emplace_back(sf::IntRect{ {col * frameW_, row * frameH_},{frameW_,frameH_} });
+					worldSizeMap[name_].push_back({ (float)frameW_,(float)frameH_ });
+				}
 
 			}
 		}
@@ -107,7 +138,7 @@ void AnimMgr::AddRightFrames(AnimName name_, Cfg::Textures texID_, int numFrames
 	}
 }
 
-void AnimMgr::AddUniFrames(AnimName name_, Cfg::Textures texID_, int numFrames_, int numRows_, int startCol_, int startRow_, int pitch_, int frameW_, int frameH_)
+void AnimMgr::AddUniFrames(AnimName name_, Cfg::Textures texID_, int numFrames_, int numRows_, int startCol_, int startRow_, int pitch_, int frameW_, int frameH_, AnimSheetType sheetType_, int pad_, int spacer_)
 {
 	if (animMap.find(name_) == animMap.end())
 	{
@@ -126,8 +157,16 @@ void AnimMgr::AddUniFrames(AnimName name_, Cfg::Textures texID_, int numFrames_,
 		{
 			for (int col = startCol_; col < pitch_ && (row * pitch_ + col) - (startRow_ * pitch_ + startCol_) < numFrames_; col++)
 			{
-				animMap[name_].uniFrames.emplace_back(sf::IntRect{ {col * frameW_, row * frameH_},{frameW_,frameH_} });
-				worldSizeMap[name_].push_back({ (float)frameW_,(float)frameH_ });
+				if (sheetType_ == AnimSheetType::Padded)
+				{
+					animMap[name_].uniFrames.emplace_back(sf::IntRect{ {col * frameW_ + ((spacer_ * col) + (col * (2 * pad_)) + pad_), row * frameH_ + ((spacer_ * row) + (row * (2 * pad_)) + pad_)}, {frameW_,frameH_} });
+					worldSizeMap[name_].push_back({ (float)frameW_,(float)frameH_ });
+				}
+				else if (sheetType_ == AnimSheetType::Normal)
+				{
+					animMap[name_].uniFrames.emplace_back(sf::IntRect{ {col * frameW_, row * frameH_},{frameW_,frameH_} });
+					worldSizeMap[name_].push_back({ (float)frameW_,(float)frameH_ });
+				}
 
 			}
 		}
@@ -135,8 +174,17 @@ void AnimMgr::AddUniFrames(AnimName name_, Cfg::Textures texID_, int numFrames_,
 		{
 			for (int col = 0; col < pitch_ && (row * pitch_ + col) - (startRow_ * pitch_ + startCol_) < numFrames_; col++)
 			{
-				animMap[name_].uniFrames.emplace_back(sf::IntRect{ {col * frameW_, row * frameH_},{frameW_,frameH_} });
-				worldSizeMap[name_].push_back({ (float)frameW_,(float)frameH_ });
+
+				if (sheetType_ == AnimSheetType::Padded)
+				{
+					animMap[name_].uniFrames.emplace_back(sf::IntRect{ {col * frameW_ + ((spacer_ * col) + (col * (2 * pad_)) + pad_), row * frameH_ + ((spacer_ * row) + (row * (2 * pad_)) + pad_)},{frameW_,frameH_}});
+					worldSizeMap[name_].push_back({ (float)frameW_,(float)frameH_ });
+				}
+				else if (sheetType_ == AnimSheetType::Normal)
+				{
+					animMap[name_].uniFrames.emplace_back(sf::IntRect{ {col * frameW_, row * frameH_},{frameW_,frameH_} });
+					worldSizeMap[name_].push_back({ (float)frameW_,(float)frameH_ });
+				}
 
 			}
 		}
