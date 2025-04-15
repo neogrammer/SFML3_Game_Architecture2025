@@ -17,7 +17,7 @@ void AnimMgr::allocateAnim(AnimName name_, Cfg::Textures  texID_)
 }
 
 
-void AnimMgr::AddLeftFrames(AnimName name_, Cfg::Textures texID_, int numFrames_, int numRows_, int startCol_, int startRow_, int pitch_, int frameW_, int frameH_, AnimSheetType sheetType_, int pad_, int spacer_)
+void AnimMgr::AddLeftFrames(AnimName name_, Cfg::Textures texID_, int numFrames_, int numRows_, int startCol_, int startRow_, int pitch_, int frameW_, int frameH_, AnimSheetType sheetType_, int pad_, int spacer_, bool loopWaits_, float loopDelay_)
 {
 	if (animMap.find(name_) == animMap.end())
 	{
@@ -81,7 +81,7 @@ void AnimMgr::AddLeftFrames(AnimName name_, Cfg::Textures texID_, int numFrames_
 }
 
 
-void AnimMgr::AddRightFrames(AnimName name_, Cfg::Textures texID_, int numFrames_, int numRows_, int startCol_, int startRow_, int pitch_, int frameW_, int frameH_, AnimSheetType sheetType_, int pad_, int spacer_)
+void AnimMgr::AddRightFrames(AnimName name_, Cfg::Textures texID_, int numFrames_, int numRows_, int startCol_, int startRow_, int pitch_, int frameW_, int frameH_, AnimSheetType sheetType_, int pad_, int spacer_, bool loopWaits_, float loopDelay_)
 {
 
 	if (animMap.find(name_) == animMap.end())
@@ -138,7 +138,7 @@ void AnimMgr::AddRightFrames(AnimName name_, Cfg::Textures texID_, int numFrames
 	}
 }
 
-void AnimMgr::AddUniFrames(AnimName name_, Cfg::Textures texID_, int numFrames_, int numRows_, int startCol_, int startRow_, int pitch_, int frameW_, int frameH_, AnimSheetType sheetType_, int pad_, int spacer_)
+void AnimMgr::AddUniFrames(AnimName name_, Cfg::Textures texID_, int numFrames_, int numRows_, int startCol_, int startRow_, int pitch_, int frameW_, int frameH_, AnimSheetType sheetType_, int pad_, int spacer_, bool loopWaits_, float loopDelay_)
 {
 	if (animMap.find(name_) == animMap.end())
 	{
