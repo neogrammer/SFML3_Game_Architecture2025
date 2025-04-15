@@ -1,12 +1,14 @@
 #pragma once
 #include "GameObject.h"
 #include <handlers/AnimMgr.h>
-class FaceObject : public GameObject
+class AnimObject : public GameObject
 {
 public:
 	AnimMgr animMgr{};
 public:
 	using GameObject::GameObject;
 
-	virtual ~FaceObject() override final {}
+	virtual ~AnimObject() override final {}
+
+	std::string loadInFile(std::string animFile_);
 };

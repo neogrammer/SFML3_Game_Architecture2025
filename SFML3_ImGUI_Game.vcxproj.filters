@@ -84,6 +84,33 @@
     <Filter Include="Source Files\animation">
       <UniqueIdentifier>{62e675f3-1a7a-4d5c-9d2a-55bc0584202b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\game_objects\Player">
+      <UniqueIdentifier>{e0c9c70d-1c61-4c24-988e-da848c731367}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game_objects\Enemies">
+      <UniqueIdentifier>{0bbbf1b6-bcc5-4ab0-820e-eb458db3f118}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game_objects\Projectiles">
+      <UniqueIdentifier>{321ba070-31d6-4671-b1c0-3c5f3ecb0531}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game_objects\Platforms">
+      <UniqueIdentifier>{b47d05e2-f9cf-42d7-abe6-78eecb1a58f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game_objects\Pickups">
+      <UniqueIdentifier>{1e521efe-66bf-4dde-9d16-430a5c896356}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game_objects\Decor">
+      <UniqueIdentifier>{ef3bcbf6-1584-44e6-9fe5-b494184e3880}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\tilemap">
+      <UniqueIdentifier>{222fb05c-e5c8-4bf9-9fab-6b788294abdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Config">
+      <UniqueIdentifier>{5cbaf771-b2af-4f39-9b97-7f421b865abb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Config\Animations">
+      <UniqueIdentifier>{2940b54e-6cc3-42c8-bfa7-5e047c4706ff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\ImGui\ImGui_SFML3\imgui-SFML.cpp">
@@ -146,7 +173,7 @@
     <ClCompile Include="src\game_objects\GameObject.cpp">
       <Filter>Source Files\game_objects</Filter>
     </ClCompile>
-    <ClCompile Include="src\game_objects\FaceObject.cpp">
+    <ClCompile Include="src\game_objects\AnimObject.cpp">
       <Filter>Source Files\game_objects</Filter>
     </ClCompile>
     <ClCompile Include="src\handlers\AnimMgr.cpp">
@@ -232,7 +259,7 @@
     <ClInclude Include="src\game_objects\GameObject.h">
       <Filter>Header Files\game_objects</Filter>
     </ClInclude>
-    <ClInclude Include="src\game_objects\FaceObject.h">
+    <ClInclude Include="src\game_objects\AnimObject.h">
       <Filter>Header Files\game_objects</Filter>
     </ClInclude>
     <ClInclude Include="src\handlers\AnimMgr.h">
@@ -253,6 +280,9 @@
   <ItemGroup>
     <None Include="src\core\resources\tpl\ResourceManager.tpl">
       <Filter>Header Files\tpl</Filter>
+    </None>
+    <None Include="Config\Animations\Player.anim">
+      <Filter>Config\Animations</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

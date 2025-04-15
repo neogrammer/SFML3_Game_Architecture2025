@@ -8,6 +8,13 @@
 #include <string>
 #include <core/resources/Cfg.h>
 
+
+extern std::unordered_map<std::string, AnimName> AnimNameLUT;
+extern std::unordered_map < std::string, AnimDir> DirectionLUT;
+extern std::unordered_map < std::string, Cfg::Textures> TextureIDLUT;
+extern std::unordered_map < std::string, AnimSheetType> AnimSheetTypeLUT;
+
+
 struct Animation
 {
 public:
@@ -31,6 +38,7 @@ public:
 	float loopWaitDelay{ 0.f };
 	bool loopWaits{ false };
 	bool loops{true};
+	bool playing{ true };
 
 	bool hasLeftFrames();
 	bool hasRightFrames();

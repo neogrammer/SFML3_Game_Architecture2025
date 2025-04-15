@@ -1,0 +1,17 @@
+ANIMATION
+// CODEX
+// numAnimations
+//	NameAnim1:string DirAnim1:string
+//	TextureID:string numFrames:int numRows:int StartTileX:int StartTileY:int pitch:int frameWidth:int frameHeight:int frameDelay:int(MS) AnimSheetType:string AnimSheetPadding:int AnimSheetSpacerSize:int loops:boolint loopWaits:boolint loopWaitDelay:int(MS)
+//	worldSizeX:int worldSizeY:int HasVariableOffsets:boolint(1 - true or 0 - false) ((TexOffsetFrame1X TexOffsetFrame1Y..TexOffsetFrameNX TexOffsetFrameNY) || texOffset1toNX texOffset1toNY)
+//	...
+//	...AnimN
++
+2
+Idle Right
+PlayerAtlas 2 1 0 0 21 48 48 5000 Padded 1 1 1 1 100
+48 48 0 0 0
+Idle Left
+PlayerAtlas 2 1 0 13 21 48 48 5000 Padded 1 1 1 1 100
+48 48 0 0 0
+

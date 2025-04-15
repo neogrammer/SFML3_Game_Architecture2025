@@ -1,5 +1,27 @@
 #include "Animation.h"
 
+
+std::unordered_map<std::string, AnimName> AnimNameLUT = {
+    {"Idle",AnimName::Idle},
+    {"Invariant",AnimName::Invariant},
+    {"Fly",AnimName::Fly}
+};
+std::unordered_map < std::string, AnimDir> DirectionLUT = {
+    {"Left",AnimDir::Left},
+    {"Right",AnimDir::Right},
+    {"Uni",AnimDir::Uni}
+};
+std::unordered_map < std::string, Cfg::Textures> TextureIDLUT = {
+    {"PlayerAtlas",Cfg::Textures::MegaManSheet1x48x48x1}
+};
+std::unordered_map < std::string, AnimSheetType> AnimSheetTypeLUT = {
+    {"Blocks", AnimSheetType::Blocks},
+    {"Normal", AnimSheetType::Normal},
+    {"Padded", AnimSheetType::Padded},
+    {"Vertical", AnimSheetType::Vertical}
+};
+
+
 bool Animation::hasLeftFrames()
 {
     return !leftFrames.empty();

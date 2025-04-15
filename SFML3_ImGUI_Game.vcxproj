@@ -163,7 +163,7 @@
     <ClCompile Include="src\core\states\TitleState.cpp" />
     <ClCompile Include="src\core\states\WorldMapState.cpp" />
     <ClCompile Include="src\err\CidError.cpp" />
-    <ClCompile Include="src\game_objects\FaceObject.cpp" />
+    <ClCompile Include="src\game_objects\AnimObject.cpp" />
     <ClCompile Include="src\game_objects\GameObject.cpp" />
     <ClCompile Include="src\global.cpp" />
     <ClCompile Include="src\handlers\AnimMgr.cpp" />
@@ -194,7 +194,7 @@
     <ClInclude Include="src\core\states\WorldMapState.h" />
     <ClInclude Include="src\err\CidError.h" />
     <ClInclude Include="src\err\ErrorMacros.h" />
-    <ClInclude Include="src\game_objects\FaceObject.h" />
+    <ClInclude Include="src\game_objects\AnimObject.h" />
     <ClInclude Include="src\game_objects\GameObject.h" />
     <ClInclude Include="src\global.h" />
     <ClInclude Include="src\handlers\AnimMgr.h" />
@@ -204,6 +204,7 @@
     <Font Include="Assets\Fonts\Crusty.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Config\Animations\Player.anim" />
     <None Include="src\core\resources\tpl\ResourceManager.tpl" />
   </ItemGroup>
   <ItemGroup>

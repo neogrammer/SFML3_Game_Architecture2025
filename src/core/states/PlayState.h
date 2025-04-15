@@ -1,12 +1,12 @@
 #ifndef PLAYSTATE_H__
 #define PLAYSTATE_H__
 #include "StateBase.h"
-#include <game_objects/FaceObject.h>
+#include <game_objects/AnimObject.h>
 class GameStateMgr;
 
 class PlayState : public StateBase
 {
-	FaceObject face;
+	AnimObject face;
 public:
 	using StateBase::StateBase;
 

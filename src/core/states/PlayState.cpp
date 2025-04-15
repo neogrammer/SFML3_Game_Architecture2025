@@ -1,20 +1,19 @@
 #include "PlayState.h"
 #include <handlers/GStateMgr.h>
+#include <err/ErrorMacros.h>
+
 PlayState::PlayState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
 	: StateBase{stateMgr, pWnd_, pDT_ }
-	, face{Cfg::Textures::PlayerAtlas132x150}
+	, face{Cfg::Textures::MegaManSheet1x48x48x1}
 {
 	std::cout << "PlayState created" << std::endl;
 	face.setPosition({ 0.f,0.f });
 	face.setTexRect({ {0,0},{132,150} });
 
-	face.animMgr.AddRightFrames(AnimName::Idle, Cfg::Textures::MegaManSheet1x48x48x1, 2, 1, 0, 0, 21, 48, 48, AnimSheetType::Padded, 1, 1, true, 3.f);
-	face.setTexID(Cfg::Textures::MegaManSheet1x48x48x1);
+	// causes a memory leak when failing, may want to set up a deferred Errorfunction called after construction before any other functions or summin
+	chk(face.loadInFile("Player.anim"));
+
 	face.setScale({ 5.f,5.f });
-
-	face.animMgr.AddLeftFrames(AnimName::Idle, Cfg::Textures::MegaManSheet1x48x48x1, 2, 1, 0, 13, 21, 48, 48, AnimSheetType::Padded, 1, 1, true, 3.f);
-
-
 }
 
 std::string PlayState::update()
