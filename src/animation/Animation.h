@@ -31,6 +31,14 @@ public:
 	float loopWaitDelay{ 0.f };
 	bool loopWaits{ false };
 	bool loops{true};
+
+	bool hasLeftFrames();
+	bool hasRightFrames();
+	bool hasUniFrames();
+
+	sf::IntRect getFrame(AnimDir dir_, int index);
+	sf::Vector2f getOffset(AnimDir dir_, int index);
+
 };
 
 

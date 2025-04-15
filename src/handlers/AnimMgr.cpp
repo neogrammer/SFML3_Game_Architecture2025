@@ -202,56 +202,13 @@ Cfg::Textures AnimMgr::getTexID()
 
 sf::IntRect AnimMgr::currFrame()
 {
-	switch (currDir)
-	{
-	case AnimDir::Left:
-	{
-		return animMap[currAnim].leftFrames.at(currIndex);
-	}
-		break;
-	case AnimDir::Right:
-	{
-		return animMap[currAnim].rightFrames.at(currIndex);
-
-	}
-	break;
-	case AnimDir::Uni:
-	{
-		return animMap[currAnim].uniFrames.at(currIndex);
-
-	}
-	break;
-	default:
-	{}
-	break;
-	}
+	return animMap[currAnim].getFrame(currDir, currIndex);
 }
 
 sf::Vector2f AnimMgr::currOffset()
 {
-	switch (currDir)
-	{
-	case AnimDir::Left:
-	{
-		return animMap[currAnim].leftOffsets.at(currIndex);
-	}
-	break;
-	case AnimDir::Right:
-	{
-		return animMap[currAnim].rightOffsets.at(currIndex);
 
-	}
-	break;
-	case AnimDir::Uni:
-	{
-		return animMap[currAnim].uniOffsets.at(currIndex);
-
-	}
-	break;
-	default:
-	{}
-	break;
-	}
+	return animMap[currAnim].getOffset(currDir, currIndex);
 }
 
 sf::Vector2f AnimMgr::currSize()

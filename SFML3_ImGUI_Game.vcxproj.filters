@@ -81,6 +81,9 @@
     <Filter Include="Header Files\handlers">
       <UniqueIdentifier>{286becda-3ab3-4fba-9324-da44548b0407}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\animation">
+      <UniqueIdentifier>{62e675f3-1a7a-4d5c-9d2a-55bc0584202b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\ImGui\ImGui_SFML3\imgui-SFML.cpp">
@@ -148,6 +151,9 @@
     </ClCompile>
     <ClCompile Include="src\handlers\AnimMgr.cpp">
       <Filter>Source Files\handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\animation\Animation.cpp">
+      <Filter>Source Files\animation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
