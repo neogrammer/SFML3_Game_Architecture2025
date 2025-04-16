@@ -21,7 +21,6 @@ void AnimMgr::AddLeftFrames(AnimName name_, Cfg::Textures texID_, int numFrames_
 	if (animMap.find(name_) == animMap.end())
 	{
 		allocateAnim(name_,texID_);
-		this->texIDs[name_] = texID_;
 
 	}
 	
@@ -75,6 +74,7 @@ void AnimMgr::AddLeftFrames(AnimName name_, Cfg::Textures texID_, int numFrames_
 		this->currAnim = name_;
 		this->currDir = AnimDir::Left;
 		this->currIndex = 0;
+		this->currTex = texIDs[name_];
 	
 
 	}
@@ -87,7 +87,6 @@ void AnimMgr::AddRightFrames(AnimName name_, Cfg::Textures texID_, int numFrames
 	if (animMap.find(name_) == animMap.end())
 	{
 		allocateAnim(name_,texID_);
-		this->texIDs[name_] = texID_;
 
 	}
 	if (animMap[name_].rightFrames.empty())
@@ -138,6 +137,8 @@ void AnimMgr::AddRightFrames(AnimName name_, Cfg::Textures texID_, int numFrames
 		this->currAnim = name_;
 		this->currDir = AnimDir::Right;
 		this->currIndex = 0;
+		this->currTex = texIDs[name_];
+
 	}
 }
 
@@ -146,7 +147,6 @@ void AnimMgr::AddUniFrames(AnimName name_, Cfg::Textures texID_, int numFrames_,
 	if (animMap.find(name_) == animMap.end())
 	{
 		allocateAnim(name_,texID_);
-		this->texIDs[name_] = texID_;
 
 	}
 	if (animMap[name_].uniFrames.empty())
@@ -199,6 +199,8 @@ void AnimMgr::AddUniFrames(AnimName name_, Cfg::Textures texID_, int numFrames_,
 		this->currAnim = name_;
 		this->currDir = AnimDir::Uni;
 		this->currIndex = 0;
+		this->currTex = texIDs[name_];
+
 	}
 }
 
@@ -329,4 +331,13 @@ void AnimMgr::setOffset(AnimName animName_, AnimDir animDir_, int index_, int x_
 void AnimMgr::setSize(AnimName animName_, int sizeX, int sizeY)
 {
 	this->worldSizeMap[animName_] = {(float)sizeX,(float)sizeY};
+}
+
+void AnimMgr::switchAnim(AnimName name_, AnimDir dir_)
+{
+	this->currAnim = name_;
+	this->currDir = dir_;
+	this->currIndex = 0;
+	this->currTex = texIDs[name_];
+
 }

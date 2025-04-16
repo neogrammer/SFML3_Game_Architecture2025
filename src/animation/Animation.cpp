@@ -4,6 +4,9 @@
 std::unordered_map<std::string, AnimName> AnimNameLUT = {
     {"Idle",AnimName::Idle},
     {"Invariant",AnimName::Invariant},
+    {"IdleToRun", AnimName::IdleToRun},
+    {"RunToIdle", AnimName::RunToIdle},
+    {"Run", AnimName::Run},
     {"Fly",AnimName::Fly}
 };
 std::unordered_map < std::string, AnimDir> DirectionLUT = {

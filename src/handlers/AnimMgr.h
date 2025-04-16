@@ -10,6 +10,8 @@ class AnimMgr
 	AnimName currAnim{ AnimName::Invariant };
 	int currIndex{ 0 };
 	AnimDir currDir{AnimDir::Invariant};
+	Cfg::Textures currTex{ Cfg::Textures::Invariant };
+
 
 	std::map<AnimName, Animation> animMap{};
 	std::map<AnimName, sf::Vector2f> worldSizeMap{};
@@ -47,6 +49,7 @@ public:
 	void resizeOffsets(AnimName animName_, AnimDir animDir_, int numFrames_);
 	void setOffset(AnimName animName_, AnimDir animDir_, int index_, int x_, int y_);
 	void setSize(AnimName animName_, int sizeX, int sizeY);
+	void switchAnim(AnimName name_, AnimDir dir_);
 
 };
 

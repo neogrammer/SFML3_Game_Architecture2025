@@ -14,6 +14,7 @@ PlayState::PlayState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
 	chk(face.loadInFile("Player.anim"));
 
 	face.setScale({ 5.f,5.f });
+	face.animMgr.switchAnim(AnimName::Run, AnimDir::Right);
 }
 
 std::string PlayState::update()
