@@ -7,8 +7,7 @@ public:
 	AnimMgr animMgr{};
 public:
 	using GameObject::GameObject;
-
-	virtual ~AnimObject() override final {}
+	virtual ~AnimObject() override;
 
 	std::string loadInFile(std::string animFile_);
 };

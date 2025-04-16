@@ -15,6 +15,11 @@ void AnimMgr::allocateAnim(AnimName name_, Cfg::Textures  texID_)
 	animMap[name_].name = name_;
 }
 
+int AnimMgr::getNumAnims()
+{
+	return (int)animMap.size();
+}
+
 
 void AnimMgr::AddLeftFrames(AnimName name_, Cfg::Textures texID_, int numFrames_, int numRows_, int startCol_, int startRow_, int pitch_, int frameW_, int frameH_, float frameDelay_, AnimSheetType sheetType_, int pad_, int spacer_, bool loops_, bool loopWaits_, float loopDelay_)
 {
@@ -74,7 +79,8 @@ void AnimMgr::AddLeftFrames(AnimName name_, Cfg::Textures texID_, int numFrames_
 		this->currAnim = name_;
 		this->currDir = AnimDir::Left;
 		this->currIndex = 0;
-		this->currTex = texIDs[name_];
+		this->currTex = texID_;
+		texIDs.emplace(std::pair<AnimName, Cfg::Textures>{ name_, texID_ });
 	
 
 	}
@@ -137,7 +143,8 @@ void AnimMgr::AddRightFrames(AnimName name_, Cfg::Textures texID_, int numFrames
 		this->currAnim = name_;
 		this->currDir = AnimDir::Right;
 		this->currIndex = 0;
-		this->currTex = texIDs[name_];
+		this->currTex = texID_;
+		texIDs.emplace(std::pair<AnimName,Cfg::Textures>{ name_, texID_ });
 
 	}
 }
@@ -199,7 +206,8 @@ void AnimMgr::AddUniFrames(AnimName name_, Cfg::Textures texID_, int numFrames_,
 		this->currAnim = name_;
 		this->currDir = AnimDir::Uni;
 		this->currIndex = 0;
-		this->currTex = texIDs[name_];
+		this->currTex = texID_;
+		texIDs.emplace(std::pair<AnimName, Cfg::Textures>{ name_, texID_ });
 
 	}
 }

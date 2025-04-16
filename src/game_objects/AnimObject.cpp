@@ -1,6 +1,9 @@
 #include "AnimObject.h"
 #include <fstream>
+AnimObject::~AnimObject()
+{
 
+}
 std::string AnimObject::loadInFile(std::string animFile_)
 {
 

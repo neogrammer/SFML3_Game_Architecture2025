@@ -10,6 +10,7 @@ ResourceManager<sf::SoundBuffer, int> Cfg::sounds = {};
 
 void Cfg::Initialize()
 {
+	textures.clear();
     initTextures();
     initFonts();
    initMusic();
@@ -24,23 +25,24 @@ void Cfg::Uninitialize()
 
 void Cfg::initMusic()
 {
+	music.clear();
 	music.load((int)Music::TitleBGMusic, "Assets/Music/TitleBGMusic.wav");
 }
 
 void Cfg::initSounds()
 {
-
+	sounds.clear();
 
 }
 
 void Cfg::initTextures()
 {
+	textures.clear();
 	textures.load((int)Textures::SplashBG, "Assets/Textures/SplashState/splash.jpg");
 	textures.load((int)Textures::TitleBG, "Assets/Textures/TitleState/TitleBG.jpg");
 	textures.load((int)Textures::TitleText, "Assets/Textures/TitleState/TitleText.png");
 	textures.load((int)Textures::Invariant, "Assets/Textures/misc/Invariant.png");
-	textures.load((int)Textures::Face, "Assets/Textures/misc/Face.png");
-	textures.load((int)Textures::PlayerAtlas132x150, "Assets/Textures/Player/GokuSheet.png");
+	//textures.load((int)Textures::PlayerAtlas132x150, "Assets/Textures/Player/GokuSheet.png");
 	textures.load((int)Textures::MegaManSheet1x48x48x1, "Assets/Textures/Player/MegaManWee.png");
 
 
@@ -58,6 +60,7 @@ void Cfg::destroyTextures()
 
 void Cfg::initFonts()
 {
+	fonts.clear();
 	fonts.load((int)Fonts::Font1, "Assets/Fonts/Crusty.ttf");
 }
 
