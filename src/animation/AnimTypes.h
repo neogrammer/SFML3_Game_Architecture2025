@@ -6,7 +6,7 @@ enum class AnimName
 	Idle,
 	Fly,
 	IdleToRun,
-	Run,
+	Running,
 	RunToIdle,
 	Invariant
 };

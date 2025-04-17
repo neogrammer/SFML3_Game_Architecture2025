@@ -26,10 +26,10 @@ PlayerAtlas 1 1 2 0 21 48 48 0 Padded 1 1 0 0 0
 RunToIdle Left
 PlayerAtlas 1 1 2 13 21 48 48 0 Padded 1 1 0 0 0
 48 48 0 0 0
-Run Right
+Running Right
 PlayerAtlas 10 1 3 0 21 48 48 75 Padded 1 1 1 0 0
 48 48 0 0 0
-Run Left
-PlayerAtlas 10 1 3 0 21 48 48 75 Padded 1 1 1 0 0
+Running Left
+PlayerAtlas 10 1 3 13 21 48 48 75 Padded 1 1 1 0 0
 48 48 0 0 0
 

@@ -10,6 +10,8 @@ PlayState::PlayState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
 
 std::string PlayState::update()
 {
+	player.handleInput();
+
 
 	//std::cout << "PlayState updating..." << std::endl;
 	if (entering)
@@ -17,7 +19,7 @@ std::string PlayState::update()
 
 
 		enterTimeElapsed += *pGameTime;
-		if (enterTimeElapsed > 1.f)
+		if (enterTimeElapsed >= 0.f)
 		{
 			entering = false;
 		}
@@ -46,6 +48,7 @@ std::string PlayState::finalize()
 std::string PlayState::render()
 {
 	pStateMgr->pWnd->draw(player);
+
 	return "OK";
 }
 

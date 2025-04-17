@@ -95,15 +95,14 @@ void AnimMgr::AddLeftFrames(AnimName name_, Cfg::Textures texID_, int numFrames_
 			}
 		}
 
-		if (currDir == AnimDir::Invariant)
+
 			this->currDir = AnimDir::Left;
-		if (currIndex != 0)
+
 			this->currIndex = 0;
-		if (currAnim == AnimName::Invariant)
-		{
+
 			this->currAnim = name_;
 			switchAnim(name_, AnimDir::Left);
-		}
+		
 
 	}
 }
@@ -132,7 +131,7 @@ void AnimMgr::AddRightFrames(AnimName name_, Cfg::Textures texID_, int numFrames
 			{
 				if (sheetType_ == AnimSheetType::Padded)
 				{
-					animMap[name_].rightFrames.emplace_back(sf::IntRect{ {col * frameW_ + ((col*spacer_)+(col * (2 * pad_)) + pad_), row * frameH_ + ((row*spacer_)+(row * (2 * pad_)) + pad_)},{frameW_,frameH_} });
+					animMap[name_].rightFrames.emplace_back(sf::IntRect{ {col * frameW_ + ((col * spacer_) + (col * (2 * pad_)) + pad_), row * frameH_ + ((row * spacer_) + (row * (2 * pad_)) + pad_)},{frameW_,frameH_} });
 				}
 				else if (sheetType_ == AnimSheetType::Normal)
 				{
@@ -146,7 +145,7 @@ void AnimMgr::AddRightFrames(AnimName name_, Cfg::Textures texID_, int numFrames
 			{
 				if (sheetType_ == AnimSheetType::Padded)
 				{
-					animMap[name_].rightFrames.emplace_back(sf::IntRect{ {col * frameW_ + ((spacer_*col)+(col * (2 * pad_)) + pad_), row * frameH_ + ((spacer_*row) + (row * (2 * pad_)) + pad_)},{frameW_,frameH_}});
+					animMap[name_].rightFrames.emplace_back(sf::IntRect{ {col * frameW_ + ((spacer_ * col) + (col * (2 * pad_)) + pad_), row * frameH_ + ((spacer_ * row) + (row * (2 * pad_)) + pad_)},{frameW_,frameH_} });
 				}
 				else if (sheetType_ == AnimSheetType::Normal)
 				{
@@ -155,15 +154,14 @@ void AnimMgr::AddRightFrames(AnimName name_, Cfg::Textures texID_, int numFrames
 
 			}
 		}
-		if (currDir == AnimDir::Invariant)
-			this->currDir = AnimDir::Left;
-		if (currIndex != 0)
-			this->currIndex = 0;
-		if (currAnim == AnimName::Invariant)
-		{
-			this->currAnim = name_;
-			switchAnim(name_, AnimDir::Left);
-		}
+
+		this->currDir = AnimDir::Right;
+
+		this->currIndex = 0;
+
+		this->currAnim = name_;
+		switchAnim(name_, AnimDir::Right);
+	
 	}
 }
 
@@ -217,15 +215,13 @@ void AnimMgr::AddUniFrames(AnimName name_, Cfg::Textures texID_, int numFrames_,
 			}
 		}
 
-		if (currDir == AnimDir::Invariant)
-			this->currDir = AnimDir::Left;
-		if (currIndex != 0)
+			this->currDir = AnimDir::Uni;
+		
 			this->currIndex = 0;
-		if (currAnim == AnimName::Invariant)
-		{
+	
 			this->currAnim = name_;
-			switchAnim(name_, AnimDir::Left);
-		}
+			switchAnim(name_, AnimDir::Uni);
+	
 	}
 }
 

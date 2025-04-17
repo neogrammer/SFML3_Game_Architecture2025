@@ -152,6 +152,7 @@
     <ClCompile Include="external\ImGui\imgui_widgets.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="src\animation\Animation.cpp" />
+    <ClCompile Include="src\animation\FSMEvent.cpp" />
     <ClCompile Include="src\core\app\AGameApp.cpp" />
     <ClCompile Include="src\core\resources\Cfg.cpp" />
     <ClCompile Include="src\core\states\GameOverState.cpp" />
@@ -182,6 +183,13 @@
     <ClInclude Include="external\ImGui\imstb_truetype.h" />
     <ClInclude Include="src\animation\Animation.h" />
     <ClInclude Include="src\animation\AnimTypes.h" />
+    <ClInclude Include="src\animation\DuckFold.h" />
+    <ClInclude Include="src\animation\Events.h" />
+    <ClInclude Include="src\animation\FSM.h" />
+    <ClInclude Include="src\animation\FSMEvent.h" />
+    <ClInclude Include="src\animation\IgnoreUnknownEvent.h" />
+    <ClInclude Include="src\animation\PlayerAnimFSM.h" />
+    <ClInclude Include="src\animation\PlayerAnimStates.h" />
     <ClInclude Include="src\core\app\AGameApp.h" />
     <ClInclude Include="src\core\resources\Cfg.h" />
     <ClInclude Include="src\core\resources\ResourceManager.h" />

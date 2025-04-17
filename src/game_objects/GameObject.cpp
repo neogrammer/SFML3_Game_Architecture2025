@@ -186,6 +186,7 @@ void GameObject::move(sf::Vector2f amt_)
 	worldPos += amt_;
 
 	updatePosition();
+
 }
 
 void GameObject::setPosition(sf::Vector2f pos_)
