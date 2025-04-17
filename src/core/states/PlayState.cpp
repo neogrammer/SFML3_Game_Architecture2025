@@ -6,20 +6,8 @@ PlayState::PlayState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
 	: StateBase{stateMgr, pWnd_, pDT_ }
 	, player{}
 {
-<<<<<<< HEAD
 	// causes a memory leak when failing, may want to set up a deferred Errorfunction called after construction before any other functions or summin
 	chk(player.loadInFile("Player.anim"));
-=======
-	std::cout << "PlayState created" << std::endl;
-	player.setPosition({ 0.f,0.f });
-	player.setTexRect({ {1,1},{48,48} });
-
-	// causes a memory leak when failing, may want to set up a deferred Errorfunction called after construction before any other functions or summin
-	chk(player.loadInFile("Player.anim"));
-
-	player.setScale({ 5.f,5.f });
-	//player.animMgr.switchAnim(AnimName::Run, AnimDir::Right);
->>>>>>> 715163d0180834600f23e60846ea0b9689190064
 }
 
 std::string PlayState::update()
@@ -43,12 +31,7 @@ std::string PlayState::update()
 	}
 	else
 	{
-<<<<<<< HEAD
 		player.update(*pGameTime);
-
-=======
-		player.animMgr.animate(*pGameTime);
->>>>>>> 715163d0180834600f23e60846ea0b9689190064
 	}
 	return "OK";
 }
@@ -57,29 +40,13 @@ std::string PlayState::update()
 
 std::string PlayState::finalize()
 {
-<<<<<<< HEAD
 	player.finalize(*pGameTime);
 
-
-=======
-	if (player.animMgr.getNumAnims() > 0)
-	{
-		if (player.animMgr.getTexID() != player.getTexID())
-		{
-			player.setTexID(player.animMgr.getTexID());
-		}
-		player.setTexRect(player.animMgr.currFrame());
-	}
->>>>>>> 715163d0180834600f23e60846ea0b9689190064
 	return "OK";
 }
 
 std::string PlayState::render()
 {
-<<<<<<< HEAD
-	
-=======
->>>>>>> 715163d0180834600f23e60846ea0b9689190064
 	pStateMgr->pWnd->draw(player);
 	return "OK";
 }

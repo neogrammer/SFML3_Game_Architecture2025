@@ -1,17 +1,12 @@
 #include "AnimObject.h"
 #include <fstream>
-AnimObject::~AnimObject()
-{
 
-<<<<<<< HEAD
 void AnimObject::setTexRect(sf::IntRect tRect_)
 {
 	GameObject::setTexRect(tRect_);
 }
 
-=======
-}
->>>>>>> 715163d0180834600f23e60846ea0b9689190064
+
 std::string AnimObject::loadInFile(std::string animFile_)
 {
 
