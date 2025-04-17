@@ -8,7 +8,11 @@ public:
 public:
 	using GameObject::GameObject;
 
-	virtual ~AnimObject() override final {}
-
+	virtual ~AnimObject() override {}
+	virtual void handleInput() override {}
+	virtual void executeScript() override {}
+	virtual void setTexRect(sf::IntRect tRect_);
+	virtual void update(float dt_) override = 0;
+	virtual void finalize(float dt_) override = 0;
 	std::string loadInFile(std::string animFile_);
 };

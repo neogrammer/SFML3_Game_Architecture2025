@@ -165,6 +165,7 @@
     <ClCompile Include="src\err\CidError.cpp" />
     <ClCompile Include="src\game_objects\AnimObject.cpp" />
     <ClCompile Include="src\game_objects\GameObject.cpp" />
+    <ClCompile Include="src\game_objects\Player.cpp" />
     <ClCompile Include="src\global.cpp" />
     <ClCompile Include="src\handlers\AnimMgr.cpp" />
     <ClCompile Include="src\handlers\GStateMgr.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="src\err\ErrorMacros.h" />
     <ClInclude Include="src\game_objects\AnimObject.h" />
     <ClInclude Include="src\game_objects\GameObject.h" />
+    <ClInclude Include="src\game_objects\Player.h" />
     <ClInclude Include="src\global.h" />
     <ClInclude Include="src\handlers\AnimMgr.h" />
     <ClInclude Include="src\handlers\GStateMgr.h" />

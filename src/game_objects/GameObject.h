@@ -40,6 +40,12 @@ public:
 	friend bool operator==(GameObject& o, const GameObject& b);
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+	
+	
+	virtual void handleInput() {}
+	virtual void executeScript() {}
+	virtual void update(float dt_) = 0;
+	virtual void finalize(float dt_) = 0;
 
 	void move(sf::Vector2f amt_);
 	void setPosition(sf::Vector2f pos_);

@@ -1,6 +1,11 @@
 #include "AnimObject.h"
 #include <fstream>
 
+void AnimObject::setTexRect(sf::IntRect tRect_)
+{
+	GameObject::setTexRect(tRect_);
+}
+
 std::string AnimObject::loadInFile(std::string animFile_)
 {
 
@@ -24,9 +29,9 @@ std::string AnimObject::loadInFile(std::string animFile_)
 
 
 			// correct file type and it is open
-			
+
 			// File codex
-			
+
 			// Header before the +
 			// +
 		// numAnimations
@@ -35,7 +40,7 @@ std::string AnimObject::loadInFile(std::string animFile_)
 		//	worldSizeX:int worldSizeY:int HasVariableOffsets:boolint(1 - true or 0 - false) ((TexOffsetFrame1X TexOffsetFrame1Y..TexOffsetFrameNX TexOffsetFrameNY) || texOffset1toNX texOffset1toNY)
 		//	...
 		//	...AnimN
-			
+
 			std::string junk;
 			iFile >> junk;
 			while (junk != "+")
@@ -53,7 +58,7 @@ std::string AnimObject::loadInFile(std::string animFile_)
 
 				std::string animName, direction, textureID, animSheetType;
 				int rows, numFrames, startTileX, startTileY, pitch, frameW, frameH, animPadding, spacerSize, frameDelay, loops, loopWaits, loopWaitDelay, worldSizeX, worldSizeY, hasVariableOffsets;
-				
+
 				iFile >> animName >> direction >> textureID >> numFrames >> rows >> startTileX >> startTileY >> pitch >> frameW >> frameH >> frameDelay >> animSheetType >> animPadding >> spacerSize >> loops >> loopWaits >> loopWaitDelay;
 				AnimName aName = AnimNameLUT[animName];
 				AnimDir aDir = DirectionLUT[direction];
@@ -63,29 +68,27 @@ std::string AnimObject::loadInFile(std::string animFile_)
 				bool aLoopWaits = loopWaits == 1 ? true : false;
 				float aFrameDelay = (float)frameDelay / 1000.f;
 				float aLoopWaitDelay = (float)loopWaitDelay / 1000.f;
-				
+				iFile >> worldSizeX >> worldSizeY;
 				switch (aDir)
 				{
 				case AnimDir::Left:
-					animMgr.AddLeftFrames(aName, aTex, numFrames, rows, startTileX, startTileY, pitch, frameW, frameH, aFrameDelay, aSheetType, animPadding, spacerSize, aLoops, aLoopWaits, aLoopWaitDelay);
+					animMgr.AddLeftFrames(aName, aTex, numFrames, rows, startTileX, startTileY, pitch, frameW, frameH, aFrameDelay, aSheetType, animPadding, spacerSize, aLoops, aLoopWaits, aLoopWaitDelay, { (float)worldSizeX, (float)worldSizeY });
 					break;
 				case AnimDir::Right:
-					animMgr.AddRightFrames(aName, aTex, numFrames, rows, startTileX, startTileY, pitch, frameW, frameH, aFrameDelay, aSheetType, animPadding, spacerSize, aLoops,  aLoopWaits, aLoopWaitDelay);
+					animMgr.AddRightFrames(aName, aTex, numFrames, rows, startTileX, startTileY, pitch, frameW, frameH, aFrameDelay, aSheetType, animPadding, spacerSize, aLoops, aLoopWaits, aLoopWaitDelay, { (float)worldSizeX, (float)worldSizeY });
 					break;
 				case AnimDir::Uni:
-					animMgr.AddUniFrames(aName, aTex, numFrames, rows, startTileX, startTileY, pitch, frameW, frameH, aFrameDelay, aSheetType, animPadding, spacerSize, aLoops, aLoopWaits, aLoopWaitDelay);
+					animMgr.AddUniFrames(aName, aTex, numFrames, rows, startTileX, startTileY, pitch, frameW, frameH, aFrameDelay, aSheetType, animPadding, spacerSize, aLoops, aLoopWaits, aLoopWaitDelay, { (float)worldSizeX, (float)worldSizeY });
 					break;
 				default:
 					break;
 				}
 
-				iFile >> worldSizeX >> worldSizeY >> hasVariableOffsets;
+				iFile >> hasVariableOffsets;
 				bool aHasVariableOffsets = hasVariableOffsets == 1 ? true : false;
 
-				animMgr.setSize(aName, worldSizeX, worldSizeY);
-
 				if (aHasVariableOffsets)
-				{		
+				{
 					animMgr.resizeOffsets(aName, aDir, numFrames);
 					for (int j = 0; j < numFrames; j++)
 					{

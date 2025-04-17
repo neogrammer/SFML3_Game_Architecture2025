@@ -182,6 +182,9 @@
     <ClCompile Include="src\animation\Animation.cpp">
       <Filter>Source Files\animation</Filter>
     </ClCompile>
+    <ClCompile Include="src\game_objects\Player.cpp">
+      <Filter>Source Files\game_objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="external\ImGui\ImGui_SFML3\imgui-SFML.h">
@@ -270,6 +273,9 @@
     </ClInclude>
     <ClInclude Include="src\animation\Animation.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game_objects\Player.h">
+      <Filter>Header Files\game_objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

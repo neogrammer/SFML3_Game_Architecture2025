@@ -34,6 +34,7 @@ public:
 	AnimName name{ AnimName::Invariant };
 	Cfg::Textures texID{ Cfg::Textures::Invariant };
 
+	sf::Vector2f worldSize{0.f,0.f};
 	float frameDelay{ 0.f };
 	float loopWaitDelay{ 0.f };
 	bool loopWaits{ false };

@@ -4,17 +4,10 @@
 
 PlayState::PlayState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
 	: StateBase{stateMgr, pWnd_, pDT_ }
-	, face{Cfg::Textures::MegaManSheet1x48x48x1}
+	, player{}
 {
-	std::cout << "PlayState created" << std::endl;
-	face.setPosition({ 0.f,0.f });
-	face.setTexRect({ {0,0},{132,150} });
-
 	// causes a memory leak when failing, may want to set up a deferred Errorfunction called after construction before any other functions or summin
-	chk(face.loadInFile("Player.anim"));
-
-	face.setScale({ 5.f,5.f });
-	face.animMgr.switchAnim(AnimName::Run, AnimDir::Right);
+	chk(player.loadInFile("Player.anim"));
 }
 
 std::string PlayState::update()
@@ -38,7 +31,8 @@ std::string PlayState::update()
 	}
 	else
 	{
-		face.animMgr.animate(*pGameTime);
+		player.update(*pGameTime);
+
 	}
 	return "OK";
 }
@@ -47,18 +41,16 @@ std::string PlayState::update()
 
 std::string PlayState::finalize()
 {
-	if (face.animMgr.getTexID() != face.getTexID())
-	{
-		face.setTexID(face.animMgr.getTexID());
-	}
-	face.setTexRect(face.animMgr.currFrame());
-	
+	player.finalize(*pGameTime);
+
+
 	return "OK";
 }
 
 std::string PlayState::render()
 {
-	pStateMgr->pWnd->draw(face);
+	
+	pStateMgr->pWnd->draw(player);
 	return "OK";
 }
 
