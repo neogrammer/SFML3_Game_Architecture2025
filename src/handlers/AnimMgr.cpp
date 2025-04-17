@@ -36,6 +36,11 @@ void AnimMgr::setCurrDir(AnimDir dir_)
 	currDir = dir_;
 }
 
+int AnimMgr::getNumAnims()
+{
+	return (int)animMap.size();
+}
+
 
 
 void AnimMgr::AddLeftFrames(AnimName name_, Cfg::Textures texID_, int numFrames_, int numRows_, int startCol_, int startRow_, int pitch_, int frameW_, int frameH_, float frameDelay_, AnimSheetType sheetType_, int pad_, int spacer_, bool loops_, bool loopWaits_, float loopDelay_, sf::Vector2f size_)
@@ -89,6 +94,22 @@ void AnimMgr::AddLeftFrames(AnimName name_, Cfg::Textures texID_, int numFrames_
 
 			}
 		}
+<<<<<<< HEAD
+=======
+		worldSizeMap.clear();
+		worldSizeMap.emplace(name_, sf::Vector2f{});
+		worldSizeMap[name_] = { (float)frameW_,(float)frameH_ };
+		animMap[name_].loops = loops_;
+		animMap[name_].loopWaits = loopWaits_;
+		animMap[name_].loopWaitDelay = loopDelay_;
+		animMap[name_].frameDelay = frameDelay_;
+		animMap[name_].texID = texID_;
+		this->currAnim = name_;
+		this->currDir = AnimDir::Left;
+		this->currIndex = 0;
+		this->currTex = texID_;
+		texIDs.emplace(std::pair<AnimName, Cfg::Textures>{ name_, texID_ });
+>>>>>>> 715163d0180834600f23e60846ea0b9689190064
 	
 		if (currDir == AnimDir::Invariant)
 			this->currDir = AnimDir::Left;
@@ -151,6 +172,23 @@ void AnimMgr::AddRightFrames(AnimName name_, Cfg::Textures texID_, int numFrames
 			}
 		}
 
+<<<<<<< HEAD
+=======
+		worldSizeMap.clear();
+		worldSizeMap.emplace(name_, sf::Vector2f{});
+		worldSizeMap[name_] = { (float)frameW_,(float)frameH_ };
+		animMap[name_].loops = loops_;
+		animMap[name_].loopWaits = loopWaits_;
+		animMap[name_].loopWaitDelay = loopDelay_;
+		animMap[name_].frameDelay = frameDelay_;
+		animMap[name_].texID = texID_;
+
+		this->currAnim = name_;
+		this->currDir = AnimDir::Right;
+		this->currIndex = 0;
+		this->currTex = texID_;
+		texIDs.emplace(std::pair<AnimName,Cfg::Textures>{ name_, texID_ });
+>>>>>>> 715163d0180834600f23e60846ea0b9689190064
 
 		if (currDir == AnimDir::Invariant)
 			this->currDir = AnimDir::Left;
@@ -213,6 +251,23 @@ void AnimMgr::AddUniFrames(AnimName name_, Cfg::Textures texID_, int numFrames_,
 
 			}
 		}
+<<<<<<< HEAD
+=======
+		worldSizeMap.clear();
+		worldSizeMap.emplace(name_, sf::Vector2f{});
+		worldSizeMap[name_] = { (float)frameW_,(float)frameH_ };
+		animMap[name_].loops = loops_;
+		animMap[name_].loopWaits = loopWaits_;
+		animMap[name_].loopWaitDelay = loopDelay_;
+		animMap[name_].frameDelay = frameDelay_;
+		animMap[name_].texID = texID_;
+
+		this->currAnim = name_;
+		this->currDir = AnimDir::Uni;
+		this->currIndex = 0;
+		this->currTex = texID_;
+		texIDs.emplace(std::pair<AnimName, Cfg::Textures>{ name_, texID_ });
+>>>>>>> 715163d0180834600f23e60846ea0b9689190064
 
 		if (currDir == AnimDir::Invariant)
 			this->currDir = AnimDir::Left;

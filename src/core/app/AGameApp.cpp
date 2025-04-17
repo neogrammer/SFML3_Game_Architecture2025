@@ -1,6 +1,7 @@
 //AGameApp.cpp
 #include <core/app/AGameApp.h>
 #include <err/ErrorMacros.h>
+#include <core/resources/Cfg.h>
 
 AGameApp::AGameApp() : mWnd{ sf::VideoMode{{gWndWidth,gWndHeight}, 32U }, "Xastle Xashers", sf::State::Windowed }, mGameOver{ false }, mGameTime{ 0.f }, pStateMgr{ nullptr } {}
 AGameApp::~AGameApp() {}
@@ -51,7 +52,9 @@ void AGameApp::run()
 	if (mWnd.isOpen())
 		mWnd.close();
 
-	pStateMgr = nullptr;
+	//pStateMgr = nullptr;
+	Cfg::textures.clear();
+	Cfg::textures;
 
 }
 

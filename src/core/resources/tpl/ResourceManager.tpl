@@ -21,8 +21,7 @@ void ResourceManager<RESOURCE,IDENTIFIER>::unload(const IDENTIFIER& id)
 template<typename RESOURCE,typename IDENTIFIER>
 void ResourceManager<RESOURCE,IDENTIFIER>::unloadAll()
 {
-    for (auto& m : _map)
-        m.second.reset();
+   
 }
 
 template<typename RESOURCE,typename IDENTIFIER>

@@ -9,8 +9,8 @@
 template<typename RESOURCE,typename IDENTIFIER = int>
 struct ResourceManager
 {
-	ResourceManager() = default;
-    ~ResourceManager() { unloadAll(); };
+    ResourceManager() {  }
+    ~ResourceManager<RESOURCE,IDENTIFIER>() {  };
     ResourceManager(const ResourceManager&) = delete;
     ResourceManager& operator=(const ResourceManager&) = delete;
 
@@ -25,15 +25,17 @@ struct ResourceManager
 
     RESOURCE& get(const IDENTIFIER& id)const;
 
+    void clear() { this->_map.clear(); }
+
 private:
-    std::unordered_map<IDENTIFIER,std::unique_ptr<RESOURCE>> _map;
+    std::unordered_map<IDENTIFIER, std::unique_ptr<RESOURCE>> _map;
 };
 
 template<typename IDENTIFIER>
 struct ResourceManager<sf::Music,IDENTIFIER>
 {
-	ResourceManager() = default;
-
+    ResourceManager() {  }
+    ~ResourceManager<sf::Music,IDENTIFIER>() {}
     ResourceManager(const ResourceManager&) = delete;
     ResourceManager& operator=(const ResourceManager&) = delete;
 
@@ -43,15 +45,17 @@ struct ResourceManager<sf::Music,IDENTIFIER>
 
     sf::Music& get(const IDENTIFIER& id)const;
 
+    void clear() {this-> _map.clear(); }
+
 private:
-    std::unordered_map<IDENTIFIER,std::unique_ptr<sf::Music>> _map;
+    std::unordered_map<IDENTIFIER, std::unique_ptr<sf::Music>> _map;
 };
 
 template<typename IDENTIFIER>
 struct ResourceManager<sf::Font, IDENTIFIER>
 {
-    ResourceManager() = default;
-
+    ResourceManager() { }
+    ~ResourceManager<sf::Font,IDENTIFIER>() {}
     ResourceManager(const ResourceManager&) = delete;
     ResourceManager& operator=(const ResourceManager&) = delete;
 
@@ -60,7 +64,7 @@ struct ResourceManager<sf::Font, IDENTIFIER>
     void load(const IDENTIFIER& id, Args&& ... args);
 
     sf::Font& get(const IDENTIFIER& id)const;
-
+    void clear() {this-> _map.clear(); }
 private:
     std::unordered_map<IDENTIFIER, std::unique_ptr<sf::Font>> _map;
 };

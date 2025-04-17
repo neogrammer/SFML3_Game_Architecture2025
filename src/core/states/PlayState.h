@@ -1,12 +1,22 @@
 #ifndef PLAYSTATE_H__
 #define PLAYSTATE_H__
 #include "StateBase.h"
+<<<<<<< HEAD
 #include <game_objects/Player.h>
+=======
+#include <game_objects/AnimObject.h>
+#include <game_objects/Player.h>
+
+>>>>>>> 715163d0180834600f23e60846ea0b9689190064
 class GameStateMgr;
 
 class PlayState : public StateBase
 {
+<<<<<<< HEAD
 	Player player;
+=======
+	Player player{};
+>>>>>>> 715163d0180834600f23e60846ea0b9689190064
 public:
 	using StateBase::StateBase;
 
