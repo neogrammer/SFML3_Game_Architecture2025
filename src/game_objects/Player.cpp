@@ -6,6 +6,8 @@ Player::Player()
 	setPosition({ 0.f,0.f });
 	setTexRect({ {1,1},{48,48} });
 	setScale({ 5.f,5.f });
+
+	loadInFile("Player.anim");
 }
 
 Player::~Player()

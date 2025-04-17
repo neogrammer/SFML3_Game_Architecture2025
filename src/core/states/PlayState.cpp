@@ -6,8 +6,6 @@ PlayState::PlayState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
 	: StateBase{stateMgr, pWnd_, pDT_ }
 	, player{}
 {
-	// causes a memory leak when failing, may want to set up a deferred Errorfunction called after construction before any other functions or summin
-	chk(player.loadInFile("Player.anim"));
 }
 
 std::string PlayState::update()
