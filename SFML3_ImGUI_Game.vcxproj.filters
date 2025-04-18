@@ -183,11 +183,9 @@
       <Filter>Source Files\animation</Filter>
     </ClCompile>
     <ClCompile Include="src\game_objects\Player.cpp">
-<<<<<<< HEAD
+
       <Filter>Source Files\game_objects</Filter>
-=======
-      <Filter>Source Files</Filter>
->>>>>>> 715163d0180834600f23e60846ea0b9689190064
+
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -279,11 +277,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\game_objects\Player.h">
-<<<<<<< HEAD
       <Filter>Header Files\game_objects</Filter>
-=======
-      <Filter>Header Files</Filter>
->>>>>>> 715163d0180834600f23e60846ea0b9689190064
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

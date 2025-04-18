@@ -2,12 +2,11 @@
 #include <animation/DuckFold.h>
 
 Player::Player()
-	: AnimObject{ Cfg::Textures::MegaManSheet1x48x48x1,{{1,1},{48,48}},{0.f,0.f}, {0.f,0.f},{300.f,300.f}}
+	: AnimObject{ Cfg::Textures::MegaManSheet1x48x48x1,{{0,160},{130,160}},{0.f,0.f}, {130.f,160.f},{300.f,300.f}}
 {
-	setPosition({ 0.f,0.f });
-	setTexRect({ {1,1},{48,48} });
-	setScale({ 5.f,5.f });
-	currWorldSize = {48.f*5.f,48.f*5.f};
+	setPosition({ 300.f,600.f });
+	setTexRect({ {0,160},{130,160} });
+	currWorldSize = {130.f,160.f};
 	loadInFile("Player.anim");
 }
 
