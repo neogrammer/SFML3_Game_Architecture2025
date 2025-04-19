@@ -22,7 +22,7 @@ public:
 	void setTW(int tw_);
 	void setTH(int th_);
 
-	Tile&& copyTile();
+	std::unique_ptr<Tile> copyTile();
 
 	virtual void update(float dt_) override;
 	virtual void finalize(float dt_, sf::RenderWindow& wnd_) override;

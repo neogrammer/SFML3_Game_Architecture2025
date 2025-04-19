@@ -113,13 +113,9 @@ Tilemap::Tilemap(std::string tilesetFile_, std::string tilemapFile)
 		}
 		else 
 		{
-		
 			std::string tex;
-
 			iFile2 >> tex >> cols >> rows;
 			texID = TextureIDLUT[tex];
-
-		
 			for (int y = 0; y < rows; y++)
 			{
 				for (int x = 0; x < cols; x++)
@@ -127,32 +123,13 @@ Tilemap::Tilemap(std::string tilesetFile_, std::string tilemapFile)
 					int num;
 					iFile2 >> num;
 					int n = y * cols + x;
+					std::unique_ptr<Tile> aTile = std::move(tilesetTiles_[num]->copyTile());
 
-					std::cout << n << "\n" << num << std::endl;
-
-
-					tilemapTiles_.emplace_back(std::make_shared<Tile>(tilesetTiles_[num]->getTexID(), tilesetTiles_[num]->getTexRect(), sf::Vector2f{ 0.f,0.f }, tilesetTiles_[num]->getWorldSize(), sf::Vector2f({ (float)(x * tw), (float)(y * th) })));
-					
-					tilemapTiles_.back()->setSolid(tilesetTiles_[num]->isSolid());
-					tilemapTiles_.back()->setVisible(tilesetTiles_[num]->isVisible());
-					tilemapTiles_.back()->setTW(tw);
-					tilemapTiles_.back()->setTH(th);
-
-					//tilemapTiles_.back()->setWorldSize({ 50.f,50.f });
-
-
-					
-				/*	if (tilesetTiles_[num]->isVisible())
-					{
-						visibleTiles_.push_back(tilemapTiles_[num]);
-					}*/
+					tilemapTiles_.emplace_back(std::make_shared<Tile>(aTile->getTexID(), aTile->getWorldSize(), aTile->getTexRect().position, sf::Vector2f{ (float)(x * tw),(float)(y * th) }, aTile->isSolid(), aTile->isVisible()));
 				}
-			
 			}
-
 			iFile2.close(); 
 		}	
-
 	} 
 }
 
@@ -183,12 +160,26 @@ void Tilemap::Render(sf::RenderWindow& wnd_, float dt_)
 	right = (int)std::max((float)std::min(right + 1, cols), 0.f);
 	bottom = (int)std::max((float)std::min(bottom + 1, rows), 0.f);
 
-	for (auto& t : tilemapTiles_)
+	left = (int)((vw.getCenter().x - (int)(vw.getSize().x / 2.f)) / (float)tw);
+	top = (int)((vw.getCenter().y - (int)(vw.getSize().y / 2.f)) / (float)th);
+	right = left + 33;
+	bottom = top + 19;
+
+	for (int y = top; y < bottom; y++)
 	{
-		wnd_.draw(*(t.get()));
+		for (int x = left; x < right; x++)
+		{
+			int i = y * cols + x;
+			if (i >= tilemapTiles_.size())
+				break;
+			if (tilemapTiles_[i]->isVisible())
+			{
+				wnd_.draw(*tilemapTiles_[i]);
+			}
+		}
 	}
 
-	for (int y = (int)top; y < bottom; y++)
+	/*for (int y = (int)top; y < bottom; y++)
 	{
 		if (y >= bottom - top)
 			break;
@@ -199,7 +190,10 @@ void Tilemap::Render(sf::RenderWindow& wnd_, float dt_)
 			int i = y * cols + x;
 			if (i >= tilemapTiles_.size())
 				break;
-			//wnd_.draw(*tilemapTiles_[i]);
+			if (tilemapTiles_[i]->isVisible())
+			{
+				wnd_.draw(*tilemapTiles_[i]);
+			}
 		}
-	}
+	}*/
 }

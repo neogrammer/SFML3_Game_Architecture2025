@@ -78,7 +78,7 @@ std::string PlayState::render()
 	pStateMgr->pWnd->draw(bgIntro);
 	tmap.Render(*pWnd, *pGameTime);
 	pStateMgr->pWnd->draw(player);
-	pStateMgr->pWnd->draw(aTile);
+	
 	//pWnd->setView(guiView);
 	return "OK";
 }

@@ -57,13 +57,13 @@ void Tile::setTH(int th_)
 	th = th_;
 }
 
-Tile&& Tile::copyTile()
+std::unique_ptr<Tile> Tile::copyTile()
 {
-	Tile aTile{ texID,{{0,0}, {tw, th}}, {0.f,0.f}, {(float)tw,(float)th} , {0.f,0.f} };
-	aTile.setSolid(this->isSolid());
-	aTile.setVisible(this->isVisible());
+	std::unique_ptr<Tile> aTile;
+	aTile = std::make_unique<Tile>(texID, getWorldSize(), currTexRect.position, getPosition(), isSolid(), isVisible());
+	
 
-	return static_cast<Tile&&>(aTile);
+	return std::move(aTile);
 }
 
 void Tile::update(float dt_)
