@@ -19,6 +19,9 @@ public:
 	void setSolid(int cond_);
 	void setVisible(bool cond_);
 	void setVisible(int cond_);
+	void setTW(int tw_);
+	void setTH(int th_);
+
 	Tile&& copyTile();
 
 	virtual void update(float dt_) override;

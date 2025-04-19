@@ -51,6 +51,7 @@ public:
 	void setPosition(sf::Vector2f pos_);
 	sf::Vector2f getPosition();
 	sf::Vector2f getWorldSize();
+	void setWorldSize(sf::Vector2f size_);
 	Cfg::Textures getTexID();
 	void setTexID(Cfg::Textures texID_);
 	sf::Vector2f getCurrOffset();

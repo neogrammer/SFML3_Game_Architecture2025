@@ -4,6 +4,7 @@
 #include <string>
 #include <err/CidError.h>
 #include <animation/Animation.h>
+#include <iostream>
 //
 //void Tilemap::Initialize(LevelName level)
 //{
@@ -32,6 +33,12 @@ Tilemap::Tilemap(std::string tilesetFile_, std::string tilemapFile)
 		}
 		else
 		{
+			Cfg::Textures theTexID;
+			std::string theTexIDStr;
+			//iFile >> theTexIDStr;
+
+			//theTexID = TextureIDLUT[theTexIDStr];
+			texID = Cfg::Textures::TilesetIntro;
 			// tileset file loaded, now lets fill in the void
 			iFile >> tilesheetPitch >> tilesheetNumTiles >> tw >> th;
 			int rows = tilesheetNumTiles / tilesheetPitch;
@@ -44,6 +51,11 @@ Tilemap::Tilemap(std::string tilesetFile_, std::string tilemapFile)
 				for (int x = 0; x < tilesheetPitch; x++)
 				{
 					tilesetTiles_.push_back(std::make_shared<Tile>(texID, sf::IntRect{ sf::Vector2i{(int)(x * tw),(int)(y * th)}, sf::Vector2i{ (int)tw,(int)th} }, sf::Vector2f{ 0.f,0.f }, sf::Vector2f{ (float)tw,(float)th }, sf::Vector2f{ (float)(x * tw),(float)(y * th) }));
+					tilesetTiles_.back()->setTexID(texID);
+					tilesetTiles_.back()->setTW(tw);
+					tilesetTiles_.back()->setTH(th);
+					tilesetTiles_.back()->setTexRect(sf::IntRect{ sf::Vector2i{(int)(x * tw),(int)(y * th)}, sf::Vector2i{ (int)tw,(int)th} });
+
 				}
 			}
 
@@ -73,7 +85,7 @@ Tilemap::Tilemap(std::string tilesetFile_, std::string tilemapFile)
 
 					iFile >> vis;
 
-					tilesetTiles_[num]->setSolid(vis);
+					tilesetTiles_[num]->setVisible(vis);
 				}
 			}
 
@@ -107,19 +119,35 @@ Tilemap::Tilemap(std::string tilesetFile_, std::string tilemapFile)
 			iFile2 >> tex >> cols >> rows;
 			texID = TextureIDLUT[tex];
 
+		
 			for (int y = 0; y < rows; y++)
 			{
 				for (int x = 0; x < cols; x++)
 				{
 					int num;
 					iFile2 >> num;
-					tilemapTiles_.emplace_back(std::make_shared<Tile>( tilesetTiles_[num]->copyTile().getTexID(), sf::Vector2f{ (float)tw,(float)th },sf::Vector2i(x * tw, y * th), sf::Vector2f{(float)(x * tw), (float)(y * th)}, tilesetTiles_[num]->isSolid(), tilesetTiles_[num]->isVisible()));
+					int n = y * cols + x;
 
-					if (tilesetTiles_[num]->isVisible())
+					std::cout << n << "\n" << num << std::endl;
+
+
+					tilemapTiles_.emplace_back(std::make_shared<Tile>(tilesetTiles_[num]->getTexID(), tilesetTiles_[num]->getTexRect(), sf::Vector2f{ 0.f,0.f }, tilesetTiles_[num]->getWorldSize(), sf::Vector2f({ (float)(x * tw), (float)(y * th) })));
+					
+					tilemapTiles_.back()->setSolid(tilesetTiles_[num]->isSolid());
+					tilemapTiles_.back()->setVisible(tilesetTiles_[num]->isVisible());
+					tilemapTiles_.back()->setTW(tw);
+					tilemapTiles_.back()->setTH(th);
+
+					//tilemapTiles_.back()->setWorldSize({ 50.f,50.f });
+
+
+					
+				/*	if (tilesetTiles_[num]->isVisible())
 					{
-						visibleTiles_.push_back(tilemapTiles_[y * cols + x]);
-					}
+						visibleTiles_.push_back(tilemapTiles_[num]);
+					}*/
 				}
+			
 			}
 
 			iFile2.close(); 
@@ -155,6 +183,10 @@ void Tilemap::Render(sf::RenderWindow& wnd_, float dt_)
 	right = (int)std::max((float)std::min(right + 1, cols), 0.f);
 	bottom = (int)std::max((float)std::min(bottom + 1, rows), 0.f);
 
+	for (auto& t : tilemapTiles_)
+	{
+		wnd_.draw(*(t.get()));
+	}
 
 	for (int y = (int)top; y < bottom; y++)
 	{
@@ -167,7 +199,7 @@ void Tilemap::Render(sf::RenderWindow& wnd_, float dt_)
 			int i = y * cols + x;
 			if (i >= tilemapTiles_.size())
 				break;
-			wnd_.draw(*tilemapTiles_[i]);
+			//wnd_.draw(*tilemapTiles_[i]);
 		}
 	}
 }

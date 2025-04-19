@@ -209,6 +209,11 @@ sf::Vector2f GameObject::getWorldSize()
 	return currWorldSize;
 }
 
+void GameObject::setWorldSize(sf::Vector2f size_)
+{
+	currWorldSize = size_;
+}
+
 Cfg::Textures GameObject::getTexID()
 {
 	return texID;

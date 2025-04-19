@@ -47,6 +47,16 @@ void Tile::setVisible(int cond_)
 	visible = (cond_ == 1) ? true : false;
 }
 
+void Tile::setTW(int tw_)
+{
+	tw = tw_;
+}
+
+void Tile::setTH(int th_)
+{
+	th = th_;
+}
+
 Tile&& Tile::copyTile()
 {
 	Tile aTile{ texID,{{0,0}, {tw, th}}, {0.f,0.f}, {(float)tw,(float)th} , {0.f,0.f} };
