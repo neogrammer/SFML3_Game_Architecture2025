@@ -15,7 +15,8 @@ std::unordered_map < std::string, AnimDir> DirectionLUT = {
     {"Uni",AnimDir::Uni}
 };
 std::unordered_map < std::string, Cfg::Textures> TextureIDLUT = {
-    {"PlayerAtlas",Cfg::Textures::MegaManSheet1x48x48x1}
+    {"PlayerAtlas",Cfg::Textures::MegaManSheet1x48x48x1},
+    {"Intro", Cfg::Textures::TilesetIntro}
 };
 std::unordered_map < std::string, AnimSheetType> AnimSheetTypeLUT = {
     {"Blocks", AnimSheetType::Blocks},

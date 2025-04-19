@@ -54,9 +54,6 @@
     <Filter Include="Source Files\core\states">
       <UniqueIdentifier>{2da38eae-4250-46f0-b307-cc5de4558795}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\core\resources">
-      <UniqueIdentifier>{49948927-0537-4107-af31-6d38c96cbbda}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\tpl">
       <UniqueIdentifier>{99131712-cafa-4ed5-a58b-1072c66e672e}</UniqueIdentifier>
     </Filter>
@@ -110,6 +107,18 @@
     </Filter>
     <Filter Include="Config\Animations">
       <UniqueIdentifier>{2940b54e-6cc3-42c8-bfa7-5e047c4706ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tilemap">
+      <UniqueIdentifier>{c94118e7-0e14-44c3-8e4c-53bfcf09a4c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\tilemaps">
+      <UniqueIdentifier>{e45b7ff7-dfa6-49e2-8a73-6ec39699e24a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\tilesets">
+      <UniqueIdentifier>{1d257ec3-ae18-4752-a27f-728a1d76b50d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\states\resources">
+      <UniqueIdentifier>{49948927-0537-4107-af31-6d38c96cbbda}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -168,7 +177,7 @@
       <Filter>Source Files\core\states</Filter>
     </ClCompile>
     <ClCompile Include="src\core\resources\Cfg.cpp">
-      <Filter>Source Files\core\resources</Filter>
+      <Filter>Source Files\core\states\resources</Filter>
     </ClCompile>
     <ClCompile Include="src\game_objects\GameObject.cpp">
       <Filter>Source Files\game_objects</Filter>
@@ -183,9 +192,22 @@
       <Filter>Source Files\animation</Filter>
     </ClCompile>
     <ClCompile Include="src\game_objects\Player.cpp">
-
       <Filter>Source Files\game_objects</Filter>
-
+    </ClCompile>
+    <ClCompile Include="src\animation\FSMEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game_objects\BackgroundStatic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game_objects\InvariantObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tilemap\Tile.cpp">
+      <Filter>Source Files\tilemap</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tilemap\Tilemap.cpp">
+      <Filter>Source Files\tilemap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -279,6 +301,39 @@
     <ClInclude Include="src\game_objects\Player.h">
       <Filter>Header Files\game_objects</Filter>
     </ClInclude>
+    <ClInclude Include="src\animation\DuckFold.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\animation\Events.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\animation\FSM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\animation\FSMEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\animation\IgnoreUnknownEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\animation\PlayerAnimFSM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\animation\PlayerAnimStates.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game_objects\BackgroundStatic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game_objects\InvariantObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tilemap\Tile.h">
+      <Filter>Header Files\tilemap</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tilemap\Tilemap.h">
+      <Filter>Header Files\tilemap</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Font Include="Assets\Fonts\Crusty.ttf">
@@ -291,6 +346,12 @@
     </None>
     <None Include="Config\Animations\Player.anim">
       <Filter>Config\Animations</Filter>
+    </None>
+    <None Include="Assets\tilesets\intro.tset">
+      <Filter>Assets\tilesets</Filter>
+    </None>
+    <None Include="Assets\tilemaps\intro.tmap">
+      <Filter>Assets\tilemaps</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -309,6 +370,8 @@
     <Image Include="Assets\Textures\Player\MegaManWee.png">
       <Filter>Assets\Textures\Player</Filter>
     </Image>
+    <Image Include="Assets\Textures\backgrounds\Bg1.jpg" />
+    <Image Include="Assets\Textures\tilesets\TSet1_50x50.png" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="Assets\Music\TitleBGMusic.wav">

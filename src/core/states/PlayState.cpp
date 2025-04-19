@@ -9,6 +9,7 @@ PlayState::PlayState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
 	, bgIntro{ Cfg::Textures::BGIntro }
 	, gameView{}
 	, guiView{}
+	, tmap{"intro.tset", "intro.tmap"}
 {
 	aTile.setTexID(Cfg::Textures::TilesetIntro);
 
@@ -75,6 +76,7 @@ std::string PlayState::render()
 {
 	pWnd->setView(gameView);
 	pStateMgr->pWnd->draw(bgIntro);
+	tmap.Render(*pWnd, *pGameTime);
 	pStateMgr->pWnd->draw(player);
 	pStateMgr->pWnd->draw(aTile);
 	//pWnd->setView(guiView);

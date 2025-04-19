@@ -7,6 +7,8 @@
 #include <game_objects/InvariantObject.h>
 #include <tilemap/Tile.h>
 #include <game_objects/BackgroundStatic.h>
+#include <tilemap/Tilemap.h>
+
 class GameStateMgr;
 
 class PlayState : public StateBase
@@ -15,6 +17,8 @@ class PlayState : public StateBase
 	Player player{};
 	Tile aTile{};
 	BackgroundStatic bgIntro;
+
+	Tilemap tmap;
 
 	sf::View gameView;
 	sf::View guiView;
