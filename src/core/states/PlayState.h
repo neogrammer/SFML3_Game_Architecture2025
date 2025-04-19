@@ -4,15 +4,20 @@
 
 #include <game_objects/Player.h>
 
-#include <game_objects/AnimObject.h>
-#include <game_objects/Player.h>
-
+#include <game_objects/InvariantObject.h>
+#include <tilemap/Tile.h>
+#include <game_objects/BackgroundStatic.h>
 class GameStateMgr;
 
 class PlayState : public StateBase
 {
 	
 	Player player{};
+	Tile aTile{};
+	BackgroundStatic bgIntro;
+
+	sf::View gameView;
+	sf::View guiView;
 public:
 	using StateBase::StateBase;
 

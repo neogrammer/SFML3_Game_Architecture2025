@@ -124,19 +124,46 @@ void Player::update(float dt_)
 
 }
 
-void Player::finalize(float dt_)
+void Player::finalize(float dt_, sf::RenderWindow& wnd_)
 {
+	auto vw = wnd_.getView();
+	if (rightPressed)
+	{
+		// if player is going to be still on the left side of screen after moving, then move the player
+		if (getPosition().x + velocity.x * dt_ < bgLowBoundX || vw.getCenter().x >= bgHighBoundX)
+		{
+			move(velocity * dt_);
+		}
+		else // move the player to the center, move the view instead by (playerPosition if moved - view.getCenter) * dt_
+		{
+			vw.move({ (getPosition().x + velocity.x * dt_) - vw.getCenter().x, 0.f });
+			wnd_.setView(vw);
+			setPosition({ wnd_.mapPixelToCoords({(int)bgLowBoundX,(int)bgLowBoundY}).x, getPosition().y});
+		}
+	}
+	else if (leftPressed)
+	{
+		// if player is going to be still on the left side of screen after moving, then move the player
+		if (getPosition().x + velocity.x * dt_ > bgHighBoundX || vw.getCenter().x <= bgLowBoundX)
+		{
+			move(velocity * dt_);
+		}
+		else // move the player to the center, move the view instead by (playerPosition if moved - view.getCenter) * dt_
+		{
+			vw.move({ (getPosition().x + velocity.x * dt_) - (vw.getCenter().x) , 0.f });
+			wnd_.setView(vw);
+			setPosition({ wnd_.mapPixelToCoords({(int)bgLowBoundX,(int)bgLowBoundY}).x, getPosition().y });
+		}
+	}
+}
 
-	setTexRect(animMgr.currFrame());
-	move(velocity * dt_);
+void Player::setBGSize(float lx_, float hx_, float ly_, float hy_)
+{
+	bgLowBoundX = lx_;
+	bgLowBoundY = ly_;
+	bgHighBoundX = hx_;
+	bgHighBoundY = hy_;
 
-	// final tick after collision detection
 
-	//if (animMgr.getTexID() != getTexID())
-	//{
-	//	setTexID(animMgr.getTexID());
-	//}
-
-	//setTexRect(animMgr.currFrame());
 }
 

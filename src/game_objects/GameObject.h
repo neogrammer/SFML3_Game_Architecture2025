@@ -45,7 +45,7 @@ public:
 	virtual void handleInput() {}
 	virtual void executeScript() {}
 	virtual void update(float dt_) = 0;
-	virtual void finalize(float dt_) = 0;
+	virtual void finalize(float dt_, sf::RenderWindow& wnd_) = 0;
 
 	void move(sf::Vector2f amt_);
 	void setPosition(sf::Vector2f pos_);

@@ -165,11 +165,14 @@
     <ClCompile Include="src\core\states\WorldMapState.cpp" />
     <ClCompile Include="src\err\CidError.cpp" />
     <ClCompile Include="src\game_objects\AnimObject.cpp" />
+    <ClCompile Include="src\game_objects\BackgroundStatic.cpp" />
     <ClCompile Include="src\game_objects\GameObject.cpp" />
+    <ClCompile Include="src\game_objects\InvariantObject.cpp" />
     <ClCompile Include="src\game_objects\Player.cpp" />
     <ClCompile Include="src\global.cpp" />
     <ClCompile Include="src\handlers\AnimMgr.cpp" />
     <ClCompile Include="src\handlers\GStateMgr.cpp" />
+    <ClCompile Include="src\tilemap\Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="external\ImGui\imconfig.h" />
@@ -204,11 +207,14 @@
     <ClInclude Include="src\err\CidError.h" />
     <ClInclude Include="src\err\ErrorMacros.h" />
     <ClInclude Include="src\game_objects\AnimObject.h" />
+    <ClInclude Include="src\game_objects\BackgroundStatic.h" />
     <ClInclude Include="src\game_objects\GameObject.h" />
+    <ClInclude Include="src\game_objects\InvariantObject.h" />
     <ClInclude Include="src\game_objects\Player.h" />
     <ClInclude Include="src\global.h" />
     <ClInclude Include="src\handlers\AnimMgr.h" />
     <ClInclude Include="src\handlers\GStateMgr.h" />
+    <ClInclude Include="src\tilemap\Tile.h" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Assets\Fonts\Crusty.ttf" />
@@ -218,9 +224,11 @@
     <None Include="src\core\resources\tpl\ResourceManager.tpl" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Assets\Textures\backgrounds\Bg1.jpg" />
     <Image Include="Assets\Textures\Player\GokuSheet.png" />
     <Image Include="Assets\Textures\Player\MegaManWee.png" />
     <Image Include="Assets\Textures\SplashState\splash.jpg" />
+    <Image Include="Assets\Textures\tilesets\TSet1_50x50.png" />
     <Image Include="Assets\Textures\TitleState\TitleBG.jpg" />
     <Image Include="Assets\Textures\TitleState\TitleText.png" />
   </ItemGroup>

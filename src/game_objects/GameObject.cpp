@@ -2,7 +2,8 @@
 #include <iostream>
 GameObject::GameObject()
 {
-
+	texID = Cfg::Textures::Invariant;
+	currTexRect = { {0,0},{64,64} };
 
 	// define the 6 corners of the two triangles
 	quad[0].position = sf::Vector2f(0.f, 0.f);
@@ -25,6 +26,7 @@ GameObject::GameObject()
 		quad[i].color = sf::Color::White;
 	}
 
+	worldPos = { 0.f,0.f };
 
 }
 
@@ -186,7 +188,7 @@ void GameObject::move(sf::Vector2f amt_)
 	worldPos += amt_;
 
 	updatePosition();
-
+	updateTexCoords();
 }
 
 void GameObject::setPosition(sf::Vector2f pos_)
@@ -194,6 +196,7 @@ void GameObject::setPosition(sf::Vector2f pos_)
 	worldPos = pos_;
 
 	updatePosition();
+	updateTexCoords();
 }
 
 sf::Vector2f GameObject::getPosition()
