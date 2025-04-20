@@ -20,6 +20,7 @@ void Player::handleInput()
 
 	rightPressed = false;
 	leftPressed = false;
+	jumpPressed = false;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
 	{
@@ -32,6 +33,11 @@ void Player::handleInput()
 		leftPressed = true;
 	}
 	
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
+	{
+		jumpPressed = true;
+	}
+
 }
 
 void Player::update(float dt_)
@@ -107,6 +113,14 @@ void Player::update(float dt_)
 
 	}
 
+	// lets update jump before doing a jump() so that the initial jump state gets counted for this frame then next frame it will update as needed, jump() is idempotent if canJump is false, which happens when first jumping until landing back down
+	//  flag must be changed by the collision system
+	updateJump(dt_);
+	if (jumpPressed)
+	{
+		jump();
+	}
+
 	//if (name != fsm.getStateName() || dir != animMgr.getCurrDir())
 	//{
 		//animation switched, update the texture
@@ -133,7 +147,7 @@ void Player::finalize(float dt_, sf::RenderWindow& wnd_)
 		// if player is going to be still on the left side of screen after moving, then move the player
 		if (getPosition().x + velocity.x * dt_ < bgLowBoundX || vw.getCenter().x >= bgHighBoundX)
 		{
-			move(velocity * dt_);
+			move({ velocity.x * dt_, 0.f });
 		}
 		else // move the player to the center, move the view instead by (playerPosition if moved - view.getCenter) * dt_
 		{
@@ -169,5 +183,58 @@ void Player::setBGSize(float lx_, float hx_, float ly_, float hy_)
 	bgHighBoundY = hy_;
 
 
+}
+
+void Player::jump()
+{
+	if (canJump)
+	{
+		justJumped = true;
+		canJump = false;
+		velocity.y -= JUMPSTRENGTH;  // up is down the y axis, so subtract the jump power to send play upward
+		falling = false;
+		rising = true;
+
+		jumpHeightComparator = getPosition().y;
+		currJumpHeight = jumpHeightComparator;
+	}
+
+}
+
+void Player::updateJump(float dt_)
+{
+	if (rising)
+	{
+		currJumpHeight += velocity.y * dt_;
+		if (jumpHeightComparator - currJumpHeight > MAXJUMPHEIGHT) // beacuse up goes down the y axis, and you jump upward
+		{
+			reachedJumpPeak = true;
+			
+			topOfJumpHoldTimeElapsed = 0.f;
+			rising = false;
+			falling = false;
+			setVelocity({ getVelocity().x, 0.f });
+		}
+	}
+	else if (reachedJumpPeak)
+	{
+		topOfJumpHoldTimeElapsed += dt_;
+		setVelocity({ getVelocity().x, 0.f });
+
+		if (topOfJumpHoldTimeElapsed >= topOfJumpHoldTime)
+		{
+			topOfJumpHoldTimeElapsed = 0.f;
+			reachedJumpPeak = false;
+			falling = true;
+		}
+	}
+	else if (falling)
+	{
+		// if the collision detection changed the canJump flag, we are no longer falling
+		if (canJump)
+		{
+			falling = false;
+		}
+	}
 }
 

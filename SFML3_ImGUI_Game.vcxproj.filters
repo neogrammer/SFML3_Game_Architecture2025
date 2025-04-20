@@ -12,17 +12,8 @@
     <Filter Include="Source Files\external">
       <UniqueIdentifier>{6dffecea-1faf-446f-9c69-ea6d7cb752f9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\external">
-      <UniqueIdentifier>{24a3da1e-9092-4b5e-9867-5cc51b8853e8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\external\ImGui">
       <UniqueIdentifier>{2c7dfc06-8221-47ac-bdb0-10b1e835a737}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\external\ImGui">
-      <UniqueIdentifier>{5a01b968-c3c2-4e0a-92a8-bda51e636c1c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\external\ImGui\ImGui_SFML3">
-      <UniqueIdentifier>{c187b269-2568-4576-9f9e-0f055b3aeea9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\external\ImGui\ImGui_SFML3">
       <UniqueIdentifier>{77c1ce35-7623-40a7-93f2-40f63893b5d8}</UniqueIdentifier>
@@ -122,6 +113,15 @@
     </Filter>
     <Filter Include="Source Files\physics">
       <UniqueIdentifier>{a717a01d-b8c8-4768-89b0-cb9aa0a50dc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\external">
+      <UniqueIdentifier>{24a3da1e-9092-4b5e-9867-5cc51b8853e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\external\ImGui">
+      <UniqueIdentifier>{5a01b968-c3c2-4e0a-92a8-bda51e636c1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\external\ImGui\ImGui_SFML3">
+      <UniqueIdentifier>{c187b269-2568-4576-9f9e-0f055b3aeea9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -364,6 +364,9 @@
     </None>
     <None Include="Config\tilemaps\intro.tmap" />
     <None Include="Config\tilesets\intro.tset" />
+    <None Include="Config\tilemaps\intro2.tmap">
+      <Filter>Assets\tilemaps</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\SplashState\splash.jpg">

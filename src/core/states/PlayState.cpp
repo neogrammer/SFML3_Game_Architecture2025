@@ -10,7 +10,7 @@ PlayState::PlayState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
 	, bgIntro{ Cfg::Textures::BGIntro }
 	, gameView{}
 	, guiView{}
-	, tmap{"intro.tset", "intro.tmap"}
+	, tmap{"intro.tset", "intro2.tmap"}
 {
 	aTile.setTexID(Cfg::Textures::TilesetIntro);
 

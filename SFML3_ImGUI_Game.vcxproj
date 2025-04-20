@@ -228,6 +228,7 @@
     <None Include="Assets\tilesets\intro.tset" />
     <None Include="Config\Animations\Player.anim" />
     <None Include="Config\tilemaps\intro.tmap" />
+    <None Include="Config\tilemaps\intro2.tmap" />
     <None Include="Config\tilesets\intro.tset" />
     <None Include="src\core\resources\tpl\ResourceManager.tpl" />
   </ItemGroup>
