@@ -33,8 +33,7 @@ Tilemap::Tilemap(std::string tilesetFile_, std::string tilemapFile)
 		}
 		else
 		{
-			Cfg::Textures theTexID;
-			std::string theTexIDStr;
+
 			//iFile >> theTexIDStr;
 
 			//theTexID = TextureIDLUT[theTexIDStr];
@@ -126,6 +125,12 @@ Tilemap::Tilemap(std::string tilesetFile_, std::string tilemapFile)
 					std::unique_ptr<Tile> aTile = std::move(tilesetTiles_[num]->copyTile());
 
 					tilemapTiles_.emplace_back(std::make_shared<Tile>(aTile->getTexID(), aTile->getWorldSize(), aTile->getTexRect().position, sf::Vector2f{ (float)(x * tw),(float)(y * th) }, aTile->isSolid(), aTile->isVisible()));
+
+					if (aTile->isSolid())
+					{
+						std::shared_ptr<Tile> tileShared = tilemapTiles_.back();
+						solidTiles_.push_back(tileShared);
+					}
 				}
 			}
 			iFile2.close(); 
@@ -134,9 +139,29 @@ Tilemap::Tilemap(std::string tilesetFile_, std::string tilemapFile)
 }
 
 
-std::vector<std::weak_ptr<Tile>>& Tilemap::getVisibleTiles()
+std::vector<std::weak_ptr<Tile>>& Tilemap::getSolidTiles(sf::FloatRect testArea_)
 {
-	return visibleTiles_;
+	solidTiles_.clear();
+	int left = std::max((int)testArea_.position.x / tw - 1, 0);
+	int top = std::max((int)testArea_.position.y / th - 1, 0);
+	int right = std::min((int)(testArea_.position.x + testArea_.size.x) / tw + 1, cols -1);
+	int bottom = std::min((int)(testArea_.position.y + testArea_.size.y) / th + 1, rows -1);
+
+	for (int y = top; y < bottom; y++)
+	{
+		for (int x = left; x < right; x++)
+		{
+			int index = y * cols + x;
+			if (index > tilemapTiles_.size())
+				break;
+			if (tilemapTiles_[index]->isSolid())
+			{
+				solidTiles_.push_back(tilemapTiles_[index]);
+			}
+		}
+	}
+
+	return solidTiles_;
 }
 
 void Tilemap::Render(sf::RenderWindow& wnd_, float dt_)
@@ -144,12 +169,12 @@ void Tilemap::Render(sf::RenderWindow& wnd_, float dt_)
 	sf::View vw = wnd_.getView();
 
 	auto center = vw.getCenter();
-	auto left = center.x - (vw.getSize().x / 2.f);
-	left /= tilemapTiles_.at(0)->getWorldSize().x;
-	left = std::max(left, 0.f);
-	auto top = center.y - (vw.getSize().y / 2.f);
-	top /= tilemapTiles_.at(0)->getTexRect().size.y;
-	top = std::max(top, 0.f);
+	auto left = (int)(center.x - (vw.getSize().x / 2.f));
+	left /= (int)tilemapTiles_.at(0)->getWorldSize().x;
+	left = std::max(left, 0);
+	auto top = (int)(center.y - (vw.getSize().y / 2.f));
+	top /= (int)tilemapTiles_.at(0)->getTexRect().size.y;
+	top = std::max(top, 0);
 
 	int numTilesX = (int)vw.getSize().x / tilemapTiles_.at(0)->getTexRect().size.x;
 	int numTilesY = (int)vw.getSize().y / tilemapTiles_.at(0)->getTexRect().size.y;

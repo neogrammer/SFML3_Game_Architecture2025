@@ -59,6 +59,8 @@ public:
 	void setTexRect(sf::IntRect rect_);
 	sf::Vector2f getVelocity();
 	void setVelocity(sf::Vector2f vel_);
+
+	sf::FloatRect getTestArea(float dt_);
 };
 
 #endif

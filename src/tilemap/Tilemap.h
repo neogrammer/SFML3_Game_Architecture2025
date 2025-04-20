@@ -10,7 +10,7 @@ class Tilemap
 {
 	std::vector<std::shared_ptr<Tile>> tilesetTiles_{};
 	std::vector<std::shared_ptr<Tile>> tilemapTiles_{};
-	std::vector<std::weak_ptr<Tile>> visibleTiles_{};
+	std::vector<std::weak_ptr<Tile>> solidTiles_{};
 
 
 
@@ -31,7 +31,7 @@ public:
 	Tilemap() = delete;
 	Tilemap(std::string tilesetFile_, std::string tilemapFile);
 
-	std::vector<std::weak_ptr<Tile>>& getVisibleTiles();
+	std::vector<std::weak_ptr<Tile>>& getSolidTiles(sf::FloatRect testArea_);
 	int getCols() { return cols; }
 	int getRows() { return rows; }
 	int getTW() { return tw; }

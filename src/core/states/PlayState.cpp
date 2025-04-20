@@ -52,6 +52,13 @@ std::string PlayState::update()
 
 std::string PlayState::finalize()
 {
+	// before final moves, handle collisions
+	
+	for (auto& t : tmap.getSolidTiles(player.getTestArea(*pGameTime)))
+	{
+		Physics::resolveCollision(&player, t.lock().get());
+	}
+
 	// move all objects other than the player
 
 	// move player AND the map, dependency

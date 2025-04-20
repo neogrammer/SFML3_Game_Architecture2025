@@ -246,6 +246,18 @@ void GameObject::setVelocity(sf::Vector2f vel_)
 	velocity = vel_;
 }
 
+sf::FloatRect GameObject::getTestArea(float dt_)
+{
+	sf::FloatRect area;
+
+	area.position.x = getPosition().x - (std::fabsf(velocity.x) * dt_);
+	area.position.y = getPosition().y - (std::fabsf(velocity.y) * dt_);
+	area.size.x = getWorldSize().x + (2 * std::fabsf(velocity.x) * dt_);
+	area.size.y = getWorldSize().y + (2 * std::fabsf(velocity.y) * dt_);
+
+	return area;
+}
+
 sf::IntRect GameObject::getTexRect()
 {
 	return currTexRect;
