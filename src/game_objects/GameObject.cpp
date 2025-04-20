@@ -236,6 +236,16 @@ void GameObject::setTexRect(sf::IntRect rect_)
 	updatePosition();
 }
 
+sf::Vector2f GameObject::getVelocity()
+{
+	return velocity;
+}
+
+void GameObject::setVelocity(sf::Vector2f vel_)
+{
+	velocity = vel_;
+}
+
 sf::IntRect GameObject::getTexRect()
 {
 	return currTexRect;

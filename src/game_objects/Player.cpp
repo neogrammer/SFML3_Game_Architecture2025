@@ -146,7 +146,7 @@ void Player::finalize(float dt_, sf::RenderWindow& wnd_)
 		// if player is going to be still on the left side of screen after moving, then move the player
 		if (getPosition().x + velocity.x * dt_ > bgHighBoundX || vw.getCenter().x <= bgLowBoundX)
 		{
-			move(velocity * dt_);
+			move({ velocity.x * dt_, 0.f });
 		}
 		else // move the player to the center, move the view instead by (playerPosition if moved - view.getCenter) * dt_
 		{
@@ -155,6 +155,9 @@ void Player::finalize(float dt_, sf::RenderWindow& wnd_)
 			setPosition({ wnd_.mapPixelToCoords({(int)bgLowBoundX,(int)bgLowBoundY}).x, getPosition().y });
 		}
 	}
+
+	// apply y velocity
+	setPosition({ getPosition().x, getPosition().y + (getVelocity().y * dt_) });
 }
 
 void Player::setBGSize(float lx_, float hx_, float ly_, float hy_)

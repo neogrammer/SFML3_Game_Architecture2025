@@ -57,6 +57,8 @@ public:
 	sf::Vector2f getCurrOffset();
 	sf::IntRect getTexRect();
 	void setTexRect(sf::IntRect rect_);
+	sf::Vector2f getVelocity();
+	void setVelocity(sf::Vector2f vel_);
 };
 
 #endif

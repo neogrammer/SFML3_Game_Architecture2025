@@ -120,6 +120,9 @@
     <Filter Include="Source Files\core\states\resources">
       <UniqueIdentifier>{49948927-0537-4107-af31-6d38c96cbbda}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\physics">
+      <UniqueIdentifier>{a717a01d-b8c8-4768-89b0-cb9aa0a50dc7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\ImGui\ImGui_SFML3\imgui-SFML.cpp">
@@ -208,6 +211,9 @@
     </ClCompile>
     <ClCompile Include="src\tilemap\Tilemap.cpp">
       <Filter>Source Files\tilemap</Filter>
+    </ClCompile>
+    <ClCompile Include="src\physics\Physics.cpp">
+      <Filter>Source Files\physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -334,6 +340,9 @@
     <ClInclude Include="src\tilemap\Tilemap.h">
       <Filter>Header Files\tilemap</Filter>
     </ClInclude>
+    <ClInclude Include="src\physics\Physics.h">
+      <Filter>Source Files\physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Font Include="Assets\Fonts\Crusty.ttf">
@@ -353,6 +362,8 @@
     <None Include="Assets\tilemaps\intro.tmap">
       <Filter>Assets\tilemaps</Filter>
     </None>
+    <None Include="Config\tilemaps\intro.tmap" />
+    <None Include="Config\tilesets\intro.tset" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\SplashState\splash.jpg">

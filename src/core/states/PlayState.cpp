@@ -1,6 +1,7 @@
 #include "PlayState.h"
 #include <handlers/GStateMgr.h>
 #include <err/ErrorMacros.h>
+#include <physics/Physics.h>
 
 PlayState::PlayState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
 	: StateBase{ stateMgr, pWnd_, pDT_ }
@@ -22,7 +23,7 @@ PlayState::PlayState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
 std::string PlayState::update()
 {
 	player.handleInput();
-
+	Physics::applyGravity(player, *pGameTime);
 
 	//std::cout << "PlayState updating..." << std::endl;
 	if (entering)

@@ -8,8 +8,8 @@
 #include <tilemap/Tile.h>
 #include <game_objects/BackgroundStatic.h>
 #include <tilemap/Tilemap.h>
-
 class GameStateMgr;
+class Physics;
 
 class PlayState : public StateBase
 {
