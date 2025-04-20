@@ -8,6 +8,7 @@ PlayState::PlayState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
 	, player{}
 	, aTile{}
 	, bgIntro{ Cfg::Textures::BGIntro }
+	, plat1{ Cfg::Textures::Platform1, {{262,269},{191,61}},{0.f,0.f},{191.f,61.f},{900.f,450.f} }
 	, gameView{}
 	, guiView{}
 	, tmap{"intro.tset", "intro2.tmap"}
@@ -24,6 +25,7 @@ std::string PlayState::update()
 {
 	player.handleInput();
 	Physics::applyGravity(player, *pGameTime);
+	plat1.update(*pGameTime);
 
 	//std::cout << "PlayState updating..." << std::endl;
 	if (entering)
@@ -52,12 +54,19 @@ std::string PlayState::update()
 
 std::string PlayState::finalize()
 {
-	// before final moves, handle collisions
+
+	// before final moves,handle collisions
 	
 	for (auto& t : tmap.getSolidTiles(player.getTestArea(*pGameTime)))
 	{
 		Physics::resolveCollision(&player, t.lock().get());
 	}
+
+	Physics::resolveCollision(&player, &plat1);
+
+	//before finalizing other objects, after collision detection, finalize the platforms so attached objects move with the platform
+	plat1.finalize(*pGameTime, *pWnd);
+
 
 	// move all objects other than the player
 
@@ -85,6 +94,7 @@ std::string PlayState::render()
 	pWnd->setView(gameView);
 	pStateMgr->pWnd->draw(bgIntro);
 	tmap.Render(*pWnd, *pGameTime);
+	pStateMgr->pWnd->draw(plat1);
 	pStateMgr->pWnd->draw(player);
 	
 	//pWnd->setView(guiView);

@@ -3,7 +3,7 @@
 #include <game_objects/Player.h>
 
 #include <algorithm> // for std::max, std::min, and std::swap
-
+#include <game_objects/SimplePlatform.h>
 
 class Physics
 {
@@ -242,6 +242,7 @@ public:
         else if (axis == "Top")
         {
             auto* p = dynamic_cast<Player*>(dynamicObj);
+
             if (p != nullptr) // dynamicObj is the player, lets set the canJump flag to true, they just landed
             {
                 
@@ -266,6 +267,14 @@ public:
 
                 dynamicObj->setVelocity({ dynamicObj->getVelocity().x, 0.f });
 
+            }
+
+
+            // we landed, if it was onto a platform, attach that object to the platform
+            auto* plat = dynamic_cast<SimplePlatform*>(staticObj);
+            if (plat != nullptr)
+            {
+                plat->attach(dynamicObj);
             }
 
 

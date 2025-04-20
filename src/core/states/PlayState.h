@@ -8,15 +8,18 @@
 #include <tilemap/Tile.h>
 #include <game_objects/BackgroundStatic.h>
 #include <tilemap/Tilemap.h>
+#include <game_objects/SimplePlatform.h>
+
 class GameStateMgr;
 class Physics;
 
 class PlayState : public StateBase
 {
-	
+
 	Player player{};
 	Tile aTile{};
 	BackgroundStatic bgIntro;
+	SimplePlatform plat1{};
 
 	Tilemap tmap;
 

@@ -108,9 +108,6 @@
     <Filter Include="Assets\tilesets">
       <UniqueIdentifier>{1d257ec3-ae18-4752-a27f-728a1d76b50d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\core\states\resources">
-      <UniqueIdentifier>{49948927-0537-4107-af31-6d38c96cbbda}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\physics">
       <UniqueIdentifier>{a717a01d-b8c8-4768-89b0-cb9aa0a50dc7}</UniqueIdentifier>
     </Filter>
@@ -122,6 +119,9 @@
     </Filter>
     <Filter Include="Header Files\external\ImGui\ImGui_SFML3">
       <UniqueIdentifier>{c187b269-2568-4576-9f9e-0f055b3aeea9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\resources">
+      <UniqueIdentifier>{49948927-0537-4107-af31-6d38c96cbbda}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -180,7 +180,7 @@
       <Filter>Source Files\core\states</Filter>
     </ClCompile>
     <ClCompile Include="src\core\resources\Cfg.cpp">
-      <Filter>Source Files\core\states\resources</Filter>
+      <Filter>Source Files\core\resources</Filter>
     </ClCompile>
     <ClCompile Include="src\game_objects\GameObject.cpp">
       <Filter>Source Files\game_objects</Filter>
@@ -214,6 +214,9 @@
     </ClCompile>
     <ClCompile Include="src\physics\Physics.cpp">
       <Filter>Source Files\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game_objects\SimplePlatform.cpp">
+      <Filter>Source Files\game_objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -342,6 +345,9 @@
     </ClInclude>
     <ClInclude Include="src\physics\Physics.h">
       <Filter>Source Files\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game_objects\SimplePlatform.h">
+      <Filter>Header Files\game_objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

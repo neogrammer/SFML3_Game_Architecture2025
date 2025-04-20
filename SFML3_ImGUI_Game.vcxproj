@@ -169,6 +169,7 @@
     <ClCompile Include="src\game_objects\GameObject.cpp" />
     <ClCompile Include="src\game_objects\InvariantObject.cpp" />
     <ClCompile Include="src\game_objects\Player.cpp" />
+    <ClCompile Include="src\game_objects\SimplePlatform.cpp" />
     <ClCompile Include="src\global.cpp" />
     <ClCompile Include="src\handlers\AnimMgr.cpp" />
     <ClCompile Include="src\handlers\GStateMgr.cpp" />
@@ -213,6 +214,7 @@
     <ClInclude Include="src\game_objects\GameObject.h" />
     <ClInclude Include="src\game_objects\InvariantObject.h" />
     <ClInclude Include="src\game_objects\Player.h" />
+    <ClInclude Include="src\game_objects\SimplePlatform.h" />
     <ClInclude Include="src\global.h" />
     <ClInclude Include="src\handlers\AnimMgr.h" />
     <ClInclude Include="src\handlers\GStateMgr.h" />
