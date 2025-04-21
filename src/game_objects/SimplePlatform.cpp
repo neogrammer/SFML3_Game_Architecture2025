@@ -1,5 +1,6 @@
 #include "SimplePlatform.h"
 #include <err/ErrorMacros.h>
+#include "Player.h"
 SimplePlatform::~SimplePlatform()
 {
 }
@@ -50,6 +51,18 @@ bool SimplePlatform::isObjectAttached(GameObject* obj_)
 
 void SimplePlatform::attach(GameObject* obj_)
 {
+	bool found = false;
+	for (auto* o : attachedObjects)
+	{
+		if (obj_ == o)
+		{
+			// already in vector, break out
+			found = true;
+			break;
+		}
+	}
+	if (found) { return; }
+
 	attachedObjects.push_back(obj_);
 }
 
@@ -97,7 +110,7 @@ void SimplePlatform::update(float dt_)
 	{
 		if (movingUp)
 		{
-			if (originalPosY - getPosition().y > originalPosY - upDist)
+			if (originalPosY - getPosition().y > originalPosY - (originalPosY - upDist))
 			{
 				setPosition({ getPosition().x, originalPosY - upDist });
 				velocity.y = 0.f;
@@ -134,6 +147,12 @@ void SimplePlatform::update(float dt_)
 				movingUp = false;
 				movingDown = true;
 				velocity.y = 100.f;
+
+				if (!attachedObjects.empty())
+				{
+				auto* p =	dynamic_cast<Player*>(attachedObjects[0]);
+
+				}
 			}
 			else
 			{
@@ -157,6 +176,7 @@ void SimplePlatform::finalize(float dt_, sf::RenderWindow& wnd_)
 		if (o->getVelocity().y > 0.f)
 		{
 			o->setVelocity({ o->getVelocity().x,0.f });
+			o->setVelocity({ o->getVelocity().x + velocity.x, o->getVelocity().y + velocity.y });
 		}
 		if (o->getVelocity().y < 0.f)
 		{

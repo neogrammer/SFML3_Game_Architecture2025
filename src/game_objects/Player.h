@@ -13,9 +13,10 @@ class Player : public AnimObject
 
 	float bgLowBoundY{ 450.f };
 	float bgHighBoundY{ 450.f };
-
+	bool waitingForJumpButton{ false };
 	bool rightPressed{ false };
 	bool leftPressed{ false };
+	bool landingJumpButtonHeld{ false };
 	bool jumpPressed{ false };
 	const float MOVESPEED{ 300.f };
 

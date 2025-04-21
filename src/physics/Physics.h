@@ -250,16 +250,37 @@ public:
                 if (p->justJumped)
                 {
                     // allow frame to continue once so that the player will move up and not trigger this velocity setting to 0.f in the y axis
+                   
+
+                        p->landingJumpButtonHeld = false;
+                    
                     
                 }
                 else
                 {
-                    p->canJump = true;
+                    
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
+                    {
+                        p->landingJumpButtonHeld = true;
+
+                    }
+
+
+                    if (!p->landingJumpButtonHeld)
+                    {
+                        p->canJump = true;
+                    }
+
+
+
+
+
 
                     newY -= minOverlap;
 
                     dynamicObj->setVelocity({ dynamicObj->getVelocity().x, 0.f });
                 }
+                
             }
             else
             {

@@ -37,7 +37,11 @@ void Player::handleInput()
 	{
 		jumpPressed = true;
 	}
-
+	if (!jumpPressed && landingJumpButtonHeld)
+	{
+		landingJumpButtonHeld = false;
+		canJump = true;
+	}
 }
 
 void Player::update(float dt_)
@@ -112,6 +116,12 @@ void Player::update(float dt_)
 	{
 
 	}
+	if (!jumpPressed && landingJumpButtonHeld)
+	{
+		landingJumpButtonHeld = false;
+		canJump = true;
+	}
+	
 
 	// lets update jump before doing a jump() so that the initial jump state gets counted for this frame then next frame it will update as needed, jump() is idempotent if canJump is false, which happens when first jumping until landing back down
 	//  flag must be changed by the collision system
@@ -121,13 +131,22 @@ void Player::update(float dt_)
 		jump();
 	}
 
+	if (!jumpPressed && waitingForJumpButton)
+	{
+		waitingForJumpButton = false;
+		canJump = true;
+	}
+
 	//if (name != fsm.getStateName() || dir != animMgr.getCurrDir())
 	//{
 		//animation switched, update the texture
 		
 		//animMgr.switchAnim(AnimNameLUT[name], animMgr.getCurrDir());
 	//}
+
+
 	
+
 	
 //	auto r = animMgr.currFrame();
 	animMgr.animate(dt_);
