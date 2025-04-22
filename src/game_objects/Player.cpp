@@ -25,6 +25,52 @@ void Player::renderBullets(sf::RenderWindow& wnd_)
 	{
 		wnd_.draw(*b);
 	}
+
+	std::vector<std::vector<std::shared_ptr<Projectile>>::iterator> itt{};
+
+	for (int i = 0; i < projectiles.size(); i++)
+	{
+		auto vw = wnd_.getView().getCenter().x;
+		if (projectiles[i]->getPosition().x < vw - wnd_.getSize().x / 2.f || projectiles[i]->getPosition().x > vw + wnd_.getSize().x / 2.f)
+		{
+
+			itt.push_back(projectiles.begin() + i);
+
+		}
+
+	}
+
+	for (auto start = itt.rbegin(); start != itt.rend(); start++)
+	{
+		projectiles.erase(*start);
+	}
+	projectiles.shrink_to_fit();
+
+
+	std::vector<std::vector<std::shared_ptr<Projectile>>::iterator>  ers;
+	for (int i = 0; i < projectiles.size(); i++)
+	{
+		if (projectiles[i]->hasCollided())
+		{
+			auto* collider = projectiles[i]->getCollider();
+
+			if (collider)
+			{
+				collider->getHit(projectiles[i]->getPower());
+
+			}
+
+			ers.push_back(projectiles.begin() + i);
+		}
+	}
+
+	for (auto start = ers.rbegin(); start != ers.rend(); start++)
+	{
+		projectiles.erase(*start);
+	}
+
+	projectiles.shrink_to_fit();
+
 }
 
 void Player::handleInput()
@@ -65,8 +111,7 @@ void Player::handleInput()
 void Player::update(float dt_)
 {
 
-
-
+	
 
 	for (auto& b : projectiles)
 	{
@@ -206,7 +251,7 @@ void Player::update(float dt_)
 
 void Player::finalize(float dt_, sf::RenderWindow& wnd_)
 {
-	std::vector<std::vector<std::shared_ptr<Projectile>>::iterator> itt{};
+	/*std::vector<std::vector<std::shared_ptr<Projectile>>::iterator> itt{};
 	
 	for (int i = 0; i < projectiles.size(); i++)
 	{
@@ -249,7 +294,7 @@ void Player::finalize(float dt_, sf::RenderWindow& wnd_)
 		projectiles.erase(*start);
 	}
 
-	projectiles.shrink_to_fit();
+	projectiles.shrink_to_fit();*/
 
 
 

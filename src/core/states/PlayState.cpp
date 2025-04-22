@@ -20,7 +20,8 @@ PlayState::PlayState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
 	guiView = pWnd_->getDefaultView();
 	pWnd_->setView(gameView);
 
-
+	googlyEye = std::make_unique<Enemy1>(2.5f, sf::Vector2f{1000.f,806.f});
+	
 }
 
 std::string PlayState::update()
@@ -29,6 +30,7 @@ std::string PlayState::update()
 	Physics::applyGravity(player, *pGameTime);
 	plat1.update(*pGameTime);
 
+	googlyEye->update(*pGameTime);
 
 	//std::cout << "PlayState updating..." << std::endl;
 	if (entering)
@@ -85,7 +87,7 @@ std::string PlayState::finalize()
 	}
 	//before finalizing other objects, after collision detection, finalize the platforms so attached objects move with the platform
 	plat1.finalize(*pGameTime, *pWnd);
-	
+	googlyEye->finalize(*pGameTime, *pWnd);
 	// move all objects other than the player
 
 	// move player AND the map, dependency
@@ -114,6 +116,7 @@ std::string PlayState::render()
 	tmap.Render(*pWnd, *pGameTime);
 	pStateMgr->pWnd->draw(plat1);
 	pStateMgr->pWnd->draw(player);
+	pStateMgr->pWnd->draw(*googlyEye);
 	player.renderBullets(*pWnd);
 	//pWnd->setView(guiView);
 	return "OK";

@@ -238,6 +238,7 @@
     <None Include="Assets\tilemaps\intro.tmap" />
     <None Include="Assets\tilesets\intro.tset" />
     <None Include="Config\Animations\BusterShot.anim" />
+    <None Include="Config\Animations\GooglyEye.anim" />
     <None Include="Config\Animations\Player.anim" />
     <None Include="Config\tilemaps\intro.tmap" />
     <None Include="Config\tilemaps\intro2.tmap" />
@@ -246,6 +247,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\backgrounds\Bg1.jpg" />
+    <Image Include="Assets\Textures\Enemies\GooglyEye.png" />
     <Image Include="Assets\Textures\Enemies\i8aic.png" />
     <Image Include="Assets\Textures\Enemies\platfromer (1).png" />
     <Image Include="Assets\Textures\Enemies\platfromer.png" />

@@ -22,7 +22,7 @@ public:
 	static void Initialize();
 	static void Uninitialize();
 	// Resource Enums 
-	enum class Textures : int { BusterShot, Platform1, SplashBG, TitleBG,TitleText,Invariant, PlayerAtlas132x150, MegaManSheet1x48x48x1, TilesetIntro, BGIntro, Invalid };
+	enum class Textures : int { GooglyEye, BusterShot, Platform1, SplashBG, TitleBG,TitleText,Invariant, PlayerAtlas132x150, MegaManSheet1x48x48x1, TilesetIntro, BGIntro, Invalid };
 	enum class Fonts : int { Font1 };
 	enum class Music : int { TitleBGMusic };
   enum class Sounds : int { XHurt, XDie, BustershotNormal, BustershotCharged, XCharging, EnemyHurt1, EnemyDie1, HelmetHit, XJump, XLand, };

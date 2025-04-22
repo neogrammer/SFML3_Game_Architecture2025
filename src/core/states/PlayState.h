@@ -10,6 +10,9 @@
 #include <tilemap/Tilemap.h>
 #include <game_objects/SimplePlatform.h>
 #include <game_objects/BusterShot.h>
+#include <game_objects/Enemy1.h>
+#include <memory>
+#include <utility>
 class GameStateMgr;
 class Physics;
 
@@ -20,7 +23,7 @@ class PlayState : public StateBase
 	Tile aTile{};
 	BackgroundStatic bgIntro;
 	SimplePlatform plat1{};
-
+	std::unique_ptr<Enemy1> googlyEye;
 	Tilemap tmap;
 
 	sf::View gameView;
