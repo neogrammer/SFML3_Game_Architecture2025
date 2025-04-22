@@ -64,6 +64,7 @@ public:
 
 	void jump();
 	void updateJump(float dt_);
+	virtual void getHit(int power) override;
 
 	void shoot();
 

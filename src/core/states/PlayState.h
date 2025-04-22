@@ -20,7 +20,7 @@ class PlayState : public StateBase
 	Tile aTile{};
 	BackgroundStatic bgIntro;
 	SimplePlatform plat1{};
-	BusterShot busterShot{};
+
 	Tilemap tmap;
 
 	sf::View gameView;

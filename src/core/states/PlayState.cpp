@@ -12,7 +12,6 @@ PlayState::PlayState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
 	, gameView{}
 	, guiView{}
 	, tmap{"intro.tset", "intro2.tmap"}
-	, busterShot{ &player, Cfg::Textures::BusterShot, {{0,0},{24,14}}, {0.f,0.f}, {24.f,14.f},player.getPosition() } 
 {
 	aTile.setTexID(Cfg::Textures::TilesetIntro);
 
@@ -21,7 +20,6 @@ PlayState::PlayState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
 	guiView = pWnd_->getDefaultView();
 	pWnd_->setView(gameView);
 
-	busterShot.loadInFile("BusterShot.anim");
 
 }
 
@@ -31,7 +29,6 @@ std::string PlayState::update()
 	Physics::applyGravity(player, *pGameTime);
 	plat1.update(*pGameTime);
 
-	busterShot.update(*pGameTime);
 
 	//std::cout << "PlayState updating..." << std::endl;
 	if (entering)
@@ -70,10 +67,25 @@ std::string PlayState::finalize()
 
 	Physics::resolveCollision(&player, &plat1);
 
+	for (auto& b : player.projectiles)
+	{
+		sf::FloatRect r{ sf::FloatRect{sf::Vector2f{(float)(b->getPosition().x - (std::fabsf(b->getVelocity().x) * *pGameTime)),
+			(float)(b->getPosition().y - (std::fabsf(b->getVelocity().y) * *pGameTime)) } ,
+			{(float)(b->getWorldSize().x + (std::fabsf(b->getVelocity().x) * *pGameTime * 2.f)),
+			(float)(b->getWorldSize().y + (std::fabsf(b->getVelocity().y) * *pGameTime * 2.f))}} };
+
+		for (auto& t : tmap.getSolidTiles(r))
+		{
+			Physics::resolveCollision(b.get(), t.lock().get());
+		}
+
+
+		Physics::resolveCollision(b.get(), &plat1);
+
+	}
 	//before finalizing other objects, after collision detection, finalize the platforms so attached objects move with the platform
 	plat1.finalize(*pGameTime, *pWnd);
-	busterShot.finalize(*pGameTime, *pWnd);
-
+	
 	// move all objects other than the player
 
 	// move player AND the map, dependency
@@ -102,7 +114,6 @@ std::string PlayState::render()
 	tmap.Render(*pWnd, *pGameTime);
 	pStateMgr->pWnd->draw(plat1);
 	pStateMgr->pWnd->draw(player);
-	pStateMgr->pWnd->draw(busterShot);
 	player.renderBullets(*pWnd);
 	//pWnd->setView(guiView);
 	return "OK";

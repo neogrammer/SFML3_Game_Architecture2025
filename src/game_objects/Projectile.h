@@ -4,7 +4,9 @@
 class Projectile : public AnimObject
 {
 	AnimObject* owner{ nullptr };
-
+	bool collided{ false };
+	GameObject* collider{ nullptr };
+	int power{ 1 };
 public:
 	using AnimObject::AnimObject;
 	Projectile() : AnimObject{} {}
@@ -14,6 +16,10 @@ public:
 	virtual void update(float dt_) = 0;
 	virtual void render(sf::RenderWindow& wnd_) = 0;
 
+	bool hasCollided();
+	GameObject* getCollider();
+	void collide(GameObject* obj_);
+	int getPower();
 };
 
 #endif

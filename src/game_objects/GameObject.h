@@ -21,6 +21,8 @@ protected:
 	sf::Vector2f velocity{ 0.f,0.f };
 	sf::Vector2f acceleration{ 0.f,0.f };
 	
+
+
 	bool alive{ true };
 
 	Cfg::Textures texID{ Cfg::Textures::Invariant };
@@ -46,6 +48,8 @@ public:
 	virtual void executeScript() {}
 	virtual void update(float dt_) = 0;
 	virtual void finalize(float dt_, sf::RenderWindow& wnd_) = 0;
+
+	virtual void getHit(int power) {}
 
 	void move(sf::Vector2f amt_);
 	void setPosition(sf::Vector2f pos_);

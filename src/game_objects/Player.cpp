@@ -214,7 +214,7 @@ void Player::finalize(float dt_, sf::RenderWindow& wnd_)
 		if (projectiles[i]->getPosition().x < vw - wnd_.getSize().x / 2.f || projectiles[i]->getPosition().x > vw + wnd_.getSize().x / 2.f)
 		{
 		
-			itt.push_back(projectiles.begin());
+			itt.push_back(projectiles.begin()+i);
 
 		}
 		
@@ -226,6 +226,30 @@ void Player::finalize(float dt_, sf::RenderWindow& wnd_)
 	}
 	projectiles.shrink_to_fit();
 	
+
+	std::vector<std::vector<std::shared_ptr<Projectile>>::iterator>  ers;
+	for (int i = 0; i < projectiles.size(); i++)
+	{
+		if (projectiles[i]->hasCollided())
+		{
+			auto* collider = projectiles[i]->getCollider();
+
+			if (collider)
+			{
+				collider->getHit(projectiles[i]->getPower());
+
+			}
+
+			ers.push_back(projectiles.begin() + i);
+		}
+	}
+
+	for (auto start = ers.rbegin(); start != ers.rend(); start++)
+	{
+		projectiles.erase(*start);
+	}
+
+	projectiles.shrink_to_fit();
 
 
 
@@ -326,11 +350,16 @@ void Player::updateJump(float dt_)
 	}
 }
 
+void Player::getHit(int power)
+{
+}
+
 void Player::shoot()
 {
 	if (!shootCoolingDown)
 	{
-		projectiles.push_back(std::make_shared<BusterShot>(Cfg::Textures::BusterShot, sf::IntRect{ sf::Vector2i{0,0},sf::Vector2i{24,14} }, sf::Vector2f{ 0.f,0.f }, sf::Vector2f{ 24.f,14.f }, getPosition()));
+		projectiles.push_back(std::make_shared<BusterShot>(this, Cfg::Textures::BusterShot, sf::IntRect{ sf::Vector2i{0,0},sf::Vector2i{24,14} }, sf::Vector2f{ 0.f,0.f }, sf::Vector2f{ 24.f,14.f }, getPosition()));
+	
 		if (animMgr.getCurrDir() == AnimDir::Right)
 		{ 
 			projectiles.back()->setVelocity({ 500.f, 0.f });

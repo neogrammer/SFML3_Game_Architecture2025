@@ -32,7 +32,7 @@ public:
 	void detach(int index);
 	void detachAll();
 	int getNumAttached();
-
+	virtual void getHit(int power) override {};
 	void update(float dt_);
 	void finalize(float dt_, sf::RenderWindow& wnd_);
 

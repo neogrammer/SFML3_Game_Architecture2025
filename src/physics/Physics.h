@@ -233,11 +233,24 @@ public:
         {
             newX -= minOverlap;
             dynamicObj->setVelocity({0.f, dynamicObj->getVelocity().y});
+
+            auto* b = dynamic_cast<Projectile*>(dynamicObj);
+            if (b)
+            {
+                b->collide(staticObj);
+            }
+
         }
         else if (axis == "Right")
         {
             newX += minOverlap;
             dynamicObj->setVelocity({  0.f,dynamicObj->getVelocity().y });
+
+            auto* b = dynamic_cast<Projectile*>(dynamicObj);
+            if (b)
+            {
+                b->collide(staticObj);
+            }
         }
         else if (axis == "Top")
         {

@@ -22,6 +22,8 @@ public:
 	void setTW(int tw_);
 	void setTH(int th_);
 
+	virtual void getHit(int power) override {}
+
 	std::unique_ptr<Tile> copyTile();
 
 	virtual void update(float dt_) override;

@@ -9,3 +9,24 @@ Projectile::Projectile(GameObject* owner_, Cfg::Textures texID_, sf::IntRect rec
 Projectile::~Projectile()
 {
 }
+
+bool Projectile::hasCollided()
+{
+	return collided;
+}
+
+GameObject* Projectile::getCollider()
+{
+	return collider;
+}
+
+void Projectile::collide(GameObject* obj_)
+{
+	collider = obj_;
+	collided = true;
+}
+
+int Projectile::getPower()
+{
+	return power;
+}

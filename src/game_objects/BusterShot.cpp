@@ -4,7 +4,6 @@ BusterShot::BusterShot(GameObject* owner_, Cfg::Textures texID_, sf::IntRect rec
 	: Projectile::Projectile{ owner_, texID_, rect_, texOff_, size_, pos_ }
 {
 	// set texture and position based on owners frame index and animation, and direction
-	texID = Cfg::Textures::BusterShot;
 
 	auto* p = dynamic_cast<Player*>(owner_);
  	if (p != nullptr)
@@ -21,11 +20,15 @@ BusterShot::BusterShot(GameObject* owner_, Cfg::Textures texID_, sf::IntRect rec
 
 	}
 
-	setWorldSize({ 24,14, });
-	setTexRect({ { 0, 0 }, { 24, 14 } });
+	setWorldSize({ 20,14, });
+	setTexRect({ { 0, 0 }, { 20, 14 } });
 	setPosition(owner_->getPosition());
 
+	loadInFile("BusterShot.anim");
+	texID = Cfg::Textures::BusterShot;
 
+	setTexID(Cfg::Textures::BusterShot);
+	animMgr.switchAnim(AnimName::Idle, dynamic_cast<Player*>(owner_)->animMgr.getCurrDir());
 }
 
 BusterShot::~BusterShot()
@@ -34,6 +37,7 @@ BusterShot::~BusterShot()
 
 void BusterShot::update(float dt_)
 {
+	animMgr.animate(dt_);
 
 	move(velocity * dt_);
 }
