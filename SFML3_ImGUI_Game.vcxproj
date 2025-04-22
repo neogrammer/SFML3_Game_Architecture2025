@@ -166,9 +166,11 @@
     <ClCompile Include="src\err\CidError.cpp" />
     <ClCompile Include="src\game_objects\AnimObject.cpp" />
     <ClCompile Include="src\game_objects\BackgroundStatic.cpp" />
+    <ClCompile Include="src\game_objects\BusterShot.cpp" />
     <ClCompile Include="src\game_objects\GameObject.cpp" />
     <ClCompile Include="src\game_objects\InvariantObject.cpp" />
     <ClCompile Include="src\game_objects\Player.cpp" />
+    <ClCompile Include="src\game_objects\Projectile.cpp" />
     <ClCompile Include="src\game_objects\SimplePlatform.cpp" />
     <ClCompile Include="src\global.cpp" />
     <ClCompile Include="src\handlers\AnimMgr.cpp" />
@@ -211,9 +213,11 @@
     <ClInclude Include="src\err\ErrorMacros.h" />
     <ClInclude Include="src\game_objects\AnimObject.h" />
     <ClInclude Include="src\game_objects\BackgroundStatic.h" />
+    <ClInclude Include="src\game_objects\BusterShot.h" />
     <ClInclude Include="src\game_objects\GameObject.h" />
     <ClInclude Include="src\game_objects\InvariantObject.h" />
     <ClInclude Include="src\game_objects\Player.h" />
+    <ClInclude Include="src\game_objects\Projectile.h" />
     <ClInclude Include="src\game_objects\SimplePlatform.h" />
     <ClInclude Include="src\global.h" />
     <ClInclude Include="src\handlers\AnimMgr.h" />
@@ -228,6 +232,7 @@
   <ItemGroup>
     <None Include="Assets\tilemaps\intro.tmap" />
     <None Include="Assets\tilesets\intro.tset" />
+    <None Include="Config\Animations\BusterShot.anim" />
     <None Include="Config\Animations\Player.anim" />
     <None Include="Config\tilemaps\intro.tmap" />
     <None Include="Config\tilemaps\intro2.tmap" />
@@ -238,6 +243,7 @@
     <Image Include="Assets\Textures\backgrounds\Bg1.jpg" />
     <Image Include="Assets\Textures\Player\GokuSheet.png" />
     <Image Include="Assets\Textures\Player\MegaManWee.png" />
+    <Image Include="Assets\Textures\projectiles\busterBulletSM.png" />
     <Image Include="Assets\Textures\SplashState\splash.jpg" />
     <Image Include="Assets\Textures\tilesets\TSet1_50x50.png" />
     <Image Include="Assets\Textures\TitleState\TitleBG.jpg" />

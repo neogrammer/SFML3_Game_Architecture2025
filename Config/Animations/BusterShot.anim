@@ -1,0 +1,9 @@
+ANIMATION
++
+2
+Bullet Right
+PlayerAtlas 5 1 0 24 5 24 14 180 Normal 0 0 1 0 0
+24 14 0 0 0
+Bullet Left
+PlayerAtlas 5 1 0 24 5 24 14 5000 Normal 0 0 1 0 0
+24 14 0 0 0 

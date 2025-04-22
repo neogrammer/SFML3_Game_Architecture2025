@@ -123,6 +123,9 @@
     <Filter Include="Source Files\core\resources">
       <UniqueIdentifier>{49948927-0537-4107-af31-6d38c96cbbda}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\Textures\projectiles">
+      <UniqueIdentifier>{009466fa-08a0-43a1-8121-b5fc19317253}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\ImGui\ImGui_SFML3\imgui-SFML.cpp">
@@ -217,6 +220,12 @@
     </ClCompile>
     <ClCompile Include="src\game_objects\SimplePlatform.cpp">
       <Filter>Source Files\game_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game_objects\BusterShot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game_objects\Projectile.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -349,6 +358,12 @@
     <ClInclude Include="src\game_objects\SimplePlatform.h">
       <Filter>Header Files\game_objects</Filter>
     </ClInclude>
+    <ClInclude Include="src\game_objects\BusterShot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game_objects\Projectile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Font Include="Assets\Fonts\Crusty.ttf">
@@ -373,6 +388,9 @@
     <None Include="Config\tilemaps\intro2.tmap">
       <Filter>Assets\tilemaps</Filter>
     </None>
+    <None Include="Config\Animations\BusterShot.anim">
+      <Filter>Config\Animations</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\SplashState\splash.jpg">
@@ -392,6 +410,9 @@
     </Image>
     <Image Include="Assets\Textures\backgrounds\Bg1.jpg" />
     <Image Include="Assets\Textures\tilesets\TSet1_50x50.png" />
+    <Image Include="Assets\Textures\projectiles\busterBulletSM.png">
+      <Filter>Assets\Textures\projectiles</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Media Include="Assets\Music\TitleBGMusic.wav">

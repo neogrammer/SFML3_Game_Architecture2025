@@ -4,6 +4,11 @@
 
 #include "AnimObject.h"
 #include <animation/PlayerAnimFSM.h>
+#include <game_objects/BusterShot.h>
+#include <stack>
+#include <memory>
+#include <utility>
+
 class Player : public AnimObject
 {
 	friend class Physics;
@@ -33,8 +38,15 @@ class Player : public AnimObject
 	const float MAXJUMPHEIGHT{800.f};
 	float jumpHeightComparator{ 0.f };
 
+	const int MAXBULLETS{ 6 };
+	int currBullets{ 0 };
 
+	std::vector<std::shared_ptr<Projectile>> projectiles{ nullptr };
 
+	float shootCooldownTime{ 0.3f };
+	float shootCooldownElapsed{ 0.f };
+
+	bool shootCoolingDown{ false };
 
 public:
 	using AnimObject::AnimObject;
@@ -49,6 +61,8 @@ public:
 
 	void jump();
 	void updateJump(float dt_);
+
+	void shoot();
 
 public:
 	FSM_Player fsm;

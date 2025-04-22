@@ -3,12 +3,16 @@
 
 Player::Player()
 	: AnimObject{ Cfg::Textures::MegaManSheet1x48x48x1,{{0,160}, { 130,160 }},{50.f,50.f}, {49.f,79.f},{300.f,300.f} }
+	, projectiles{}
 {
 	setPosition({ 300.f,600.f });
 	setTexRect({ {0,160},{130,160} });
 	currWorldSize = {49.f,79.f};
 	loadInFile("Player.anim");
+	animMgr.switchAnim(AnimName::Idle, AnimDir::Right);
 	setWorldSize({ 49.f,79.f });
+
+	projectiles.clear();
 }
 
 Player::~Player()
@@ -46,6 +50,9 @@ void Player::handleInput()
 
 void Player::update(float dt_)
 {
+
+
+
 	bool playerFacingRight{};
 
 
@@ -254,6 +261,16 @@ void Player::updateJump(float dt_)
 		{
 			falling = false;
 		}
+	}
+}
+
+void Player::shoot()
+{
+	if (!shootCoolingDown)
+	{
+		projectiles.push_back(std::make_shared<BusterShot>(Cfg::Textures::BusterShot, sf::IntRect{ sf::Vector2i{0,0},sf::Vector2i{24,14} }, sf::Vector2f{ 0.f,0.f }, sf::Vector2f{ 24.f,14.f }, getPosition()));
+		shootCoolingDown = true;
+		shootCooldownElapsed = 0.f;
 	}
 }
 

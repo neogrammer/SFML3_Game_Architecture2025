@@ -12,6 +12,7 @@ PlayState::PlayState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
 	, gameView{}
 	, guiView{}
 	, tmap{"intro.tset", "intro2.tmap"}
+	, busterShot{ &player, Cfg::Textures::BusterShot, {{0,0},{24,14}}, {0.f,0.f}, {24.f,14.f},player.getPosition() } 
 {
 	aTile.setTexID(Cfg::Textures::TilesetIntro);
 
@@ -19,6 +20,9 @@ PlayState::PlayState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
 	gameView = pWnd_->getDefaultView();
 	guiView = pWnd_->getDefaultView();
 	pWnd_->setView(gameView);
+
+	busterShot.loadInFile("BusterShot.anim");
+
 }
 
 std::string PlayState::update()
@@ -26,6 +30,8 @@ std::string PlayState::update()
 	player.handleInput();
 	Physics::applyGravity(player, *pGameTime);
 	plat1.update(*pGameTime);
+
+	busterShot.update(*pGameTime);
 
 	//std::cout << "PlayState updating..." << std::endl;
 	if (entering)
@@ -66,7 +72,7 @@ std::string PlayState::finalize()
 
 	//before finalizing other objects, after collision detection, finalize the platforms so attached objects move with the platform
 	plat1.finalize(*pGameTime, *pWnd);
-
+	busterShot.finalize(*pGameTime, *pWnd);
 
 	// move all objects other than the player
 
@@ -96,6 +102,7 @@ std::string PlayState::render()
 	tmap.Render(*pWnd, *pGameTime);
 	pStateMgr->pWnd->draw(plat1);
 	pStateMgr->pWnd->draw(player);
+	pStateMgr->pWnd->draw(busterShot);
 	
 	//pWnd->setView(guiView);
 	return "OK";

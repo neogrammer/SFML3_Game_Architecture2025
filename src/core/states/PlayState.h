@@ -9,7 +9,7 @@
 #include <game_objects/BackgroundStatic.h>
 #include <tilemap/Tilemap.h>
 #include <game_objects/SimplePlatform.h>
-
+#include <game_objects/BusterShot.h>
 class GameStateMgr;
 class Physics;
 
@@ -20,7 +20,7 @@ class PlayState : public StateBase
 	Tile aTile{};
 	BackgroundStatic bgIntro;
 	SimplePlatform plat1{};
-
+	BusterShot busterShot{};
 	Tilemap tmap;
 
 	sf::View gameView;
