@@ -37,6 +37,8 @@ class Player : public AnimObject
 	float currJumpHeight{ 0.f };
 	const float MAXJUMPHEIGHT{800.f};
 	float jumpHeightComparator{ 0.f };
+	bool shootPressed{ false };
+
 
 	const int MAXBULLETS{ 6 };
 	int currBullets{ 0 };
@@ -52,7 +54,8 @@ public:
 	using AnimObject::AnimObject;
 	Player();
 	virtual ~Player() override final;
-	
+	void renderBullets(sf::RenderWindow& wnd_);
+
 	void handleInput() override final;
 	void update(float dt_) override final;
 	void finalize(float dt_, sf::RenderWindow& wnd_) override final;

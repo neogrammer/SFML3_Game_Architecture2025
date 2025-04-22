@@ -103,7 +103,7 @@ std::string PlayState::render()
 	pStateMgr->pWnd->draw(plat1);
 	pStateMgr->pWnd->draw(player);
 	pStateMgr->pWnd->draw(busterShot);
-	
+	player.renderBullets(*pWnd);
 	//pWnd->setView(guiView);
 	return "OK";
 }

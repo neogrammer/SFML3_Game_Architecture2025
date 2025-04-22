@@ -19,13 +19,21 @@ Player::~Player()
 {
 }
 
+void Player::renderBullets(sf::RenderWindow& wnd_)
+{
+	for (auto& b : projectiles)
+	{
+		wnd_.draw(*b);
+	}
+}
+
 void Player::handleInput()
 {
 
 	rightPressed = false;
 	leftPressed = false;
 	jumpPressed = false;
-
+	shootPressed = false;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
 	{
 		rightPressed = true;
@@ -46,12 +54,24 @@ void Player::handleInput()
 		landingJumpButtonHeld = false;
 		canJump = true;
 	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter))
+	{
+		shootPressed = true;
+	}
+
 }
 
 void Player::update(float dt_)
 {
 
 
+
+
+	for (auto& b : projectiles)
+	{
+		b->update(dt_);
+	}
 
 	bool playerFacingRight{};
 
@@ -89,6 +109,25 @@ void Player::update(float dt_)
 
 		}
 	}
+
+	if (shootCoolingDown)
+	{
+		shootCooldownElapsed += dt_;
+		if (shootCooldownElapsed >= shootCooldownTime)
+		{
+			shootCooldownElapsed = 0.f;
+			shootCoolingDown = false;
+		}
+	}
+	else
+	{
+		if (shootPressed)
+		{
+			shoot();
+		}
+	}
+
+
 
 	bool playerFacingRightAfter{};
 	
@@ -167,6 +206,29 @@ void Player::update(float dt_)
 
 void Player::finalize(float dt_, sf::RenderWindow& wnd_)
 {
+	std::vector<std::vector<std::shared_ptr<Projectile>>::iterator> itt{};
+	
+	for (int i = 0; i < projectiles.size(); i++)
+	{
+		auto vw = wnd_.getView().getCenter().x;
+		if (projectiles[i]->getPosition().x < vw - wnd_.getSize().x / 2.f || projectiles[i]->getPosition().x > vw + wnd_.getSize().x / 2.f)
+		{
+		
+			itt.push_back(projectiles.begin());
+
+		}
+		
+	}
+
+	for (auto start = itt.rbegin(); start != itt.rend(); start++)
+	{
+		projectiles.erase(*start);
+	}
+	projectiles.shrink_to_fit();
+	
+
+
+
 	auto vw = wnd_.getView();
 	if (rightPressed)
 	{
@@ -269,6 +331,15 @@ void Player::shoot()
 	if (!shootCoolingDown)
 	{
 		projectiles.push_back(std::make_shared<BusterShot>(Cfg::Textures::BusterShot, sf::IntRect{ sf::Vector2i{0,0},sf::Vector2i{24,14} }, sf::Vector2f{ 0.f,0.f }, sf::Vector2f{ 24.f,14.f }, getPosition()));
+		if (animMgr.getCurrDir() == AnimDir::Right)
+		{ 
+			projectiles.back()->setVelocity({ 500.f, 0.f });
+		}
+		else
+		{
+			projectiles.back()->setVelocity({ -500.f,0.f });
+		}
+
 		shootCoolingDown = true;
 		shootCooldownElapsed = 0.f;
 	}
