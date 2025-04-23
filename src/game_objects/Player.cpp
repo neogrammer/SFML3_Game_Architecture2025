@@ -9,7 +9,7 @@ Player::Player()
 	setTexRect({ {0,160},{130,160} });
 	currWorldSize = {49.f,79.f};
 	loadInFile("Player.anim");
-	animMgr.switchAnim(AnimName::Idle, AnimDir::Right);
+	//animMgr.switchAnim(AnimName::Shooting, AnimDir::Right);
 	setWorldSize({ 49.f,79.f });
 
 	projectiles.clear();

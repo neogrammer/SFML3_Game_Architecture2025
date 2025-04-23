@@ -6,10 +6,12 @@
 //}
 
 Enemy1::Enemy1(float coolDown_, sf::Vector2f position_)
-	: Enemy::Enemy{ Cfg::Textures::GooglyEye, {{0,0},{96,64}}, {45.f,44.f}, {42.f,20.f}, {position_} }
+	: Enemy::Enemy{ Cfg::Textures::GooglyEye, {{0,0},{192,128}}, {90.f,88.f}, {84.f,40.f}, {position_} }
 	, cannonCoolDown {coolDown_}
 {
-	loadInFile("GoogleEye.anim");
+	loadInFile("GooglyEye.anim");
+	animMgr.switchAnim(AnimName::Idle, AnimDir::Left);
+	
 }
 
 void Enemy1::update(float dt_)

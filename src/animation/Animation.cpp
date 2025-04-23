@@ -7,6 +7,8 @@ std::unordered_map<std::string, AnimName> AnimNameLUT = {
     {"IdleToRun", AnimName::IdleToRun},
     {"RunToIdle", AnimName::RunToIdle},
     {"Running", AnimName::Running},
+    {"ShootSetup", AnimName::ShootSetup},
+    {"Shooting", AnimName::Shooting},
     {"Fly",AnimName::Fly}
 };
 std::unordered_map < std::string, AnimDir> DirectionLUT = {
@@ -19,6 +21,7 @@ std::unordered_map < std::string, Cfg::Textures> TextureIDLUT = {
     {"Intro", Cfg::Textures::TilesetIntro},
     {"Platform1", Cfg::Textures::Platform1},
     {"GooglyEye", Cfg::Textures::GooglyEye }
+
 };
 std::unordered_map < std::string, AnimSheetType> AnimSheetTypeLUT = {
     {"Blocks", AnimSheetType::Blocks},

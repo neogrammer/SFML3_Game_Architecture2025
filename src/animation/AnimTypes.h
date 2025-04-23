@@ -8,6 +8,8 @@ enum class AnimName
 	IdleToRun,
 	Running,
 	RunToIdle,
+	ShootSetup,
+	Shooting,
 	Invariant
 };
 
