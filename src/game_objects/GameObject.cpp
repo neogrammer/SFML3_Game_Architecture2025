@@ -1,5 +1,6 @@
 #include "GameObject.h"
 #include <iostream>
+#include <game_objects/AnimObject.h>
 GameObject::GameObject()
 {
 	texID = Cfg::Textures::Invariant;
@@ -206,6 +207,11 @@ sf::Vector2f GameObject::getPosition()
 
 sf::Vector2f GameObject::getWorldSize()
 {
+	auto anO = dynamic_cast<AnimObject*>(this);
+	if (anO != nullptr)
+	{
+		return anO->getWorldSize();
+	}
 	return currWorldSize;
 }
 

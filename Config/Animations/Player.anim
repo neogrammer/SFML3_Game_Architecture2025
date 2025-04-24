@@ -10,38 +10,40 @@ ANIMATION
 12
 Idle Right
 PlayerAtlas 3 1 0 1 17 130 160 5000 Normal 0 0 1 1 100
-49 79 0 50 50
+0 49 79 0 50 50 0 0 0
 Idle Left
 PlayerAtlas 3 1 0 14 17 130 160 5000 Normal 0 0 1 1 100
-49 79 0 50 50
+0 49 79 0 50 50 0 0 0
 IdleToRun Right
 PlayerAtlas 2 1 0 2 17 130 160 0 Normal 0 0 0 0 0
-49 79 0 50 50
+0 49 79 0 50 50 0 0 0
 IdleToRun Left
 PlayerAtlas 2 1 0 15 17 130 160 0 Normal 0 0 0 0 0
-49 79 0 50 50
+0 49 79 0 50 50  0 0 0 
 RunToIdle Right
 PlayerAtlas 1 1 1 2 17 130 160 0 Normal 0 0 0 0 0
-49 79 0 50 50
+0 49 79 0 50 50 0 0 0 
 RunToIdle Left
 PlayerAtlas 1 1 1 15 17 130 160 0 Normal 0 0 0 0 0
-49 79 0 50 50
+0 49 79 0 50 50 0 0 0
 Running Right
 PlayerAtlas 10 1 3 2 17 130 160 75 Normal 0 0 1 0 0
-49 79 0 50 50
+0 49 79 1 53 50 42 52 42 52 42 52 55 45 53 50 47 49 49 49 52 47 50 49 0 0 0
 Running Left
 PlayerAtlas 10 1 3 15 17 130 160 75 Normal 0 0 1 0 0
-49 79 0 50 50
+0 49 79 1 53 50 42 52 42 52 42 52 55 45 53 50 47 49 49 49 52 47 50 49 0 0 0 
 ShootSetup Right 
 PlayerAtlas 2 1 9 1 17 130 160 150 Normal 0 0 0 0 0
-55 82 0 39 43
+0 55 82 1 39 43 38 43 0 0 0
 ShootSetup Left
 PlayerAtlas 2 1 9 14 17 130 160 150 Normal 0 0 0 0 0
-55 82 0 39 43
+0 55 82 1 39 43 38 43 0 0 0
 Shooting Right 
 PlayerAtlas 1 1 12 1 17 130 160 150 Normal 0 0 0 0 0
-59 79 0 31 48
+0 59 79 0 31 48 0 93 61
 Shooting Left 
 PlayerAtlas 1 1 12 14 17 130 160 150 Normal 0 0 0 0 0
-59 79 0 31 48
+0 59 79 0 31 48 0 26 61 
+
+
 

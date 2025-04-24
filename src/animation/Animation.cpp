@@ -85,3 +85,43 @@ sf::Vector2f Animation::getOffset(AnimDir dir_, int index)
     }
     return { 0.f,0.f };
 }
+
+sf::Vector2f Animation::getWorldSize(AnimDir dir_, int index_)
+{
+    using a = AnimDir;
+    switch (dir_)
+    {
+    case a::Right:
+        return rightSizes.at(index_);
+        break;
+    case a::Left:
+        return leftSizes.at(index_);
+        break;
+    case a::Uni:
+        return uniSizes.at(index_);
+        break;
+    default:
+        break;
+    }
+    return { 0.f,0.f };
+}
+
+sf::Vector2f Animation::getBulletPoint(AnimDir dir_, int index_)
+{
+    using a = AnimDir;
+    switch (dir_)
+    {
+    case a::Right:
+        return rightBulletAnchors.at(index_);
+        break;
+    case a::Left:
+        return leftBulletAnchors.at(index_);
+        break;
+    case a::Uni:
+        return uniBulletAnchors.at(index_);
+        break;
+    default:
+        break;
+    }
+    return { 0.f,0.f };
+}

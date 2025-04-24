@@ -3,7 +3,7 @@ ANIMATION
 2
 Idle Right
 Bullet 5 1 0 24 5 24 14 180 Normal 0 0 1 0 0
-20 14 0 0 0
+0 20 14 0 0 0 0 0 0 
 Idle Left
 Bullet 5 1 0 24 5 24 14 5000 Normal 0 0 1 0 0
-20 14 0 0 0 
+0 20 14 0 0 0 0 0 0 

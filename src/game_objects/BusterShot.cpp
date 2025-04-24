@@ -6,8 +6,10 @@ BusterShot::BusterShot(GameObject* owner_, Cfg::Textures texID_, sf::IntRect rec
 	// set texture and position based on owners frame index and animation, and direction
 
 	auto* p = dynamic_cast<Player*>(owner_);
+
  	if (p != nullptr)
 	{
+		p->animMgr.switchAnim(AnimName::Shooting, p->animMgr.getCurrDir());
 
 		if (p->animMgr.getCurrDir() == AnimDir::Right)
 		{
@@ -20,10 +22,20 @@ BusterShot::BusterShot(GameObject* owner_, Cfg::Textures texID_, sf::IntRect rec
 
 	}
 
-	setWorldSize({ 20,14, });
+	setWorldSize({ 20,14 });
 	setTexRect({ { 0, 0 }, { 20, 14 } });
-	setPosition(owner_->getPosition());
+	auto* an = dynamic_cast<AnimObject*>(owner_);
+	if (an)
+	{
+		setPosition(owner_->getPosition() + an->animMgr.getBulletPoint(AnimName::Shooting, an->animMgr.getCurrDir(), 0) - an->getCurrOffset());
 
+	}
+	else
+	{
+
+
+		setPosition(owner_->getPosition());
+	}
 	loadInFile("BusterShot.anim");
 	texID = Cfg::Textures::BusterShot;
 

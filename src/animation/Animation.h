@@ -28,13 +28,20 @@ public:
 	std::vector<sf::Vector2f> rightOffsets{};
 	std::vector<sf::Vector2f> uniOffsets{};
 
+	std::vector<sf::Vector2f> leftSizes{};
+	std::vector<sf::Vector2f> rightSizes{};
+	std::vector<sf::Vector2f> uniSizes{};
+
+	std::vector<sf::Vector2f> leftBulletAnchors{};
+	std::vector<sf::Vector2f> rightBulletAnchors{};
+	std::vector<sf::Vector2f> uniBulletAnchors{};
+
 	AnimState previousState{ AnimState::Invariant };
 	AnimState transientState{ AnimState::Invariant };
 	AnimState currState{ AnimState::Invariant };
 	AnimName name{ AnimName::Invariant };
 	Cfg::Textures texID{ Cfg::Textures::Invariant };
 
-	sf::Vector2f worldSize{0.f,0.f};
 	float frameDelay{ 0.f };
 	float loopWaitDelay{ 0.f };
 	bool loopWaits{ false };
@@ -47,6 +54,8 @@ public:
 
 	sf::IntRect getFrame(AnimDir dir_, int index);
 	sf::Vector2f getOffset(AnimDir dir_, int index);
+	sf::Vector2f getWorldSize(AnimDir dir_, int index_);
+	sf::Vector2f getBulletPoint(AnimDir dir_, int index_);
 
 };
 

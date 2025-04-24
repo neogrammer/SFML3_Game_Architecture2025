@@ -9,7 +9,9 @@
 
 struct IdleState {};
 struct RunningState {};
+struct ShootSetupState {};
+struct ShootingState {};
 
 
-using PlayerAnimVar = std::variant<IdleState, RunningState>;
+using PlayerAnimVar = std::variant<IdleState, RunningState, ShootSetupState, ShootingState>;
 //using AnimVariant = PlayerAnimVar;

@@ -10,6 +10,7 @@ public:
 
 
 	virtual ~AnimObject() override {}
+	sf::Vector2f getWorldSize() override final;
 	virtual void handleInput() override {}
 	virtual void executeScript() override {}
 	virtual void setTexRect(sf::IntRect tRect_);

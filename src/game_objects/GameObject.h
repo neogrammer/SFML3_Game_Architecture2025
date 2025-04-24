@@ -5,7 +5,7 @@
 #include <map>
 #include <vector>
 
-
+class AnimObject;
 /// <summary>
 /// GameObjects all have a representation in the game world.  First vertex in quad is the objects position in the world minus the tex offset
 /// </summary>
@@ -54,7 +54,8 @@ public:
 	void move(sf::Vector2f amt_);
 	void setPosition(sf::Vector2f pos_);
 	sf::Vector2f getPosition();
-	sf::Vector2f getWorldSize();
+	virtual sf::Vector2f getWorldSize();
+
 	void setWorldSize(sf::Vector2f size_);
 	Cfg::Textures getTexID();
 	void setTexID(Cfg::Textures texID_);

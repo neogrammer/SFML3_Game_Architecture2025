@@ -8,7 +8,7 @@ AnimMgr::~AnimMgr()
 {
 
 }
-void AnimMgr::allocateAnim(AnimName name_, Cfg::Textures  texID_, int numFrames_, float frameDelay_, bool loops_, bool loopWaits_, float loopWaitDelay_, sf::Vector2f size_)
+void AnimMgr::allocateAnim(AnimName name_, Cfg::Textures  texID_, int numFrames_, float frameDelay_, bool loops_, bool loopWaits_, float loopWaitDelay_)
 {
 	animMap.emplace(name_, Animation{});
 
@@ -23,7 +23,6 @@ void AnimMgr::allocateAnim(AnimName name_, Cfg::Textures  texID_, int numFrames_
 	animMap[name_].playing = true;
 	animMap[name_].previousState = AnimState::Playing;
 	animMap[name_].transientState = AnimState::Playing;
-	animMap[name_].worldSize = size_;
 }
 
 AnimDir AnimMgr::getCurrDir()
@@ -43,16 +42,13 @@ int AnimMgr::getNumAnims()
 
 
 
-void AnimMgr::AddLeftFrames(AnimName name_, Cfg::Textures texID_, int numFrames_, int numRows_, int startCol_, int startRow_, int pitch_, int frameW_, int frameH_, float frameDelay_, AnimSheetType sheetType_, int pad_, int spacer_, bool loops_, bool loopWaits_, float loopDelay_, sf::Vector2f size_)
+void AnimMgr::AddLeftFrames(AnimName name_, Cfg::Textures texID_, int numFrames_, int numRows_, int startCol_, int startRow_, int pitch_, int frameW_, int frameH_, float frameDelay_, AnimSheetType sheetType_, int pad_, int spacer_, bool loops_, bool loopWaits_, float loopDelay_)
 {
 
-	if (size_ == sf::Vector2f{ 0.f, 0.f })
-	{
-		size_ = { (float)frameW_,(float)frameH_ };
-	}
+
 
 	auto found = this->animMap.find(name_);
-	if (found == animMap.end()) { allocateAnim(name_, texID_, numFrames_, frameDelay_, loops_, loopWaits_, loopDelay_,  size_); }
+	if (found == animMap.end()) { allocateAnim(name_, texID_, numFrames_, frameDelay_, loops_, loopWaits_, loopDelay_); }
 
 	
 
@@ -108,16 +104,10 @@ void AnimMgr::AddLeftFrames(AnimName name_, Cfg::Textures texID_, int numFrames_
 }
 
 
-void AnimMgr::AddRightFrames(AnimName name_, Cfg::Textures texID_, int numFrames_, int numRows_, int startCol_, int startRow_, int pitch_, int frameW_, int frameH_, float frameDelay_, AnimSheetType sheetType_, int pad_, int spacer_, bool loops_, bool loopWaits_, float loopDelay_, sf::Vector2f size_)
+void AnimMgr::AddRightFrames(AnimName name_, Cfg::Textures texID_, int numFrames_, int numRows_, int startCol_, int startRow_, int pitch_, int frameW_, int frameH_, float frameDelay_, AnimSheetType sheetType_, int pad_, int spacer_, bool loops_, bool loopWaits_, float loopDelay_)
 {
-
-	if (size_ == sf::Vector2f{ 0.f, 0.f })
-	{
-		size_ = { (float)frameW_,(float)frameH_ };
-	}
-
 	auto found = this->animMap.find(name_);
-	if (found == animMap.end()) { allocateAnim(name_, texID_, numFrames_, frameDelay_, loops_, loopWaits_, loopDelay_, size_); }
+	if (found == animMap.end()) { allocateAnim(name_, texID_, numFrames_, frameDelay_, loops_, loopWaits_, loopDelay_); }
 
 	if (animMap[name_].rightFrames.empty())
 	{
@@ -165,16 +155,11 @@ void AnimMgr::AddRightFrames(AnimName name_, Cfg::Textures texID_, int numFrames
 	}
 }
 
-void AnimMgr::AddUniFrames(AnimName name_, Cfg::Textures texID_, int numFrames_, int numRows_, int startCol_, int startRow_, int pitch_, int frameW_, int frameH_, float frameDelay_, AnimSheetType sheetType_, int pad_, int spacer_, bool loops_, bool loopWaits_, float loopDelay_, sf::Vector2f size_)
+void AnimMgr::AddUniFrames(AnimName name_, Cfg::Textures texID_, int numFrames_, int numRows_, int startCol_, int startRow_, int pitch_, int frameW_, int frameH_, float frameDelay_, AnimSheetType sheetType_, int pad_, int spacer_, bool loops_, bool loopWaits_, float loopDelay_)
 {
 
-	if (size_ == sf::Vector2f{ 0.f, 0.f })
-	{
-		size_ = { (float)frameW_,(float)frameH_ };
-	}
-
 	auto found = this->animMap.find(name_);
-	if (found == animMap.end()) { allocateAnim(name_, texID_, numFrames_, frameDelay_, loops_, loopWaits_, loopDelay_, size_); }
+	if (found == animMap.end()) { allocateAnim(name_, texID_, numFrames_, frameDelay_, loops_, loopWaits_, loopDelay_); }
 
 	if (animMap[name_].uniFrames.empty())
 	{
@@ -243,7 +228,7 @@ sf::Vector2f AnimMgr::currOffset()
 
 sf::Vector2f AnimMgr::currSize()
 {
-	return animMap[currAnim].worldSize;
+	return animMap[currAnim].getWorldSize(currDir, currIndex);
 }
 
 void AnimMgr::animate(float dt_)
@@ -307,6 +292,11 @@ void AnimMgr::animate(float dt_)
 	}
 }
 
+int AnimMgr::getCurrIndex()
+{
+	return currIndex;
+}
+
 void AnimMgr::resizeOffsets(AnimName animName_, AnimDir animDir_, int numFrames_)
 {
 	if (animMap.find(animName_) != animMap.end())
@@ -321,6 +311,110 @@ void AnimMgr::resizeOffsets(AnimName animName_, AnimDir animDir_, int numFrames_
 			break;
 		case AnimDir::Uni:
 			animMap[animName_].uniOffsets.resize(numFrames_);
+			break;
+		default:
+			break;
+		}
+	}
+}
+
+void AnimMgr::resizeWorldSizes(AnimName animName_, AnimDir animDir_, int numFrames_)
+{
+	if (animMap.find(animName_) != animMap.end())
+	{
+		switch (animDir_)
+		{
+		case AnimDir::Left:
+			animMap[animName_].leftSizes.resize(numFrames_);
+			break;
+		case AnimDir::Right:
+			animMap[animName_].rightSizes.resize(numFrames_);
+			break;
+		case AnimDir::Uni:
+			animMap[animName_].uniSizes.resize(numFrames_);
+			break;
+		default:
+			break;
+		}
+	}
+}
+
+AnimName AnimMgr::getCurrAnimName()
+{
+	return currAnim;
+}
+
+void AnimMgr::resizeBulletPoints(AnimName aName, AnimDir aDir, int numFrames)
+{
+	if (animMap.find(aName) != animMap.end())
+	{
+		switch (aDir)
+		{
+		case AnimDir::Left:
+			animMap[aName].leftBulletAnchors.resize(numFrames);
+			break;
+		case AnimDir::Right:
+			animMap[aName].rightBulletAnchors.resize(numFrames);
+			break;
+		case AnimDir::Uni:
+			animMap[aName].uniBulletAnchors.resize(numFrames);
+			break;
+		default:
+			break;
+		}
+	}
+}
+
+void AnimMgr::setBulletAnchorPoint(AnimName aName, AnimDir aDir, int index, int numX, int numY)
+{
+	if (animMap.find(aName) != animMap.end())
+	{
+		switch (aDir)
+		{
+		case AnimDir::Left:
+			if (index >= 0 && index < animMap[aName].leftBulletAnchors.size())
+				animMap[aName].leftBulletAnchors[index] = { (float)numX,(float)numY };
+
+			break;
+		case AnimDir::Right:
+			if (index >= 0 && index < animMap[aName].rightBulletAnchors.size())
+				animMap[aName].rightBulletAnchors[index] = { (float)numX,(float)numY };
+
+			break;
+		case AnimDir::Uni:
+			if (index >= 0 && index < animMap[aName].uniBulletAnchors.size())
+				animMap[aName].uniBulletAnchors[index] = { (float)numX,(float)numY };
+			break;
+		default:
+			break;
+		}
+	}
+}
+
+sf::Vector2f AnimMgr::getBulletPoint(AnimName aName, AnimDir aDir, int index)
+{
+	return animMap[aName].getBulletPoint(aDir, index);
+}
+
+void AnimMgr::setFrameWorldSize(AnimName animName_, AnimDir animDir_, int index_, int width_, int height_)
+{
+	if (animMap.find(animName_) != animMap.end())
+	{
+		switch (animDir_)
+		{
+		case AnimDir::Left:
+			if (index_ >= 0 && index_ < animMap[animName_].leftSizes.size())
+				animMap[animName_].leftSizes[index_] = { (float)width_,(float)height_ };
+
+			break;
+		case AnimDir::Right:
+			if (index_ >= 0 && index_ < animMap[animName_].rightSizes.size())
+				animMap[animName_].rightSizes[index_] = { (float)width_,(float)height_ };
+
+			break;
+		case AnimDir::Uni:
+			if (index_ >= 0 && index_ < animMap[animName_].uniSizes.size())
+				animMap[animName_].uniSizes[index_] = { (float)width_,(float)height_ };
 			break;
 		default:
 			break;
@@ -355,9 +449,22 @@ void AnimMgr::setOffset(AnimName animName_, AnimDir animDir_, int index_, int x_
 }
 
 // call after loading frames or the size will be the frame size
-void AnimMgr::setSize(AnimName animName_, int sizeX, int sizeY)
+void AnimMgr::setSize(AnimName animName_, AnimDir animDir_, int currIndex_, int sizeX, int sizeY)
 {
-	animMap[animName_].worldSize = {(float)sizeX,(float)sizeY};
+	switch (animDir_)
+	{
+	case AnimDir::Left:
+		animMap[animName_].leftSizes[currIndex_] = {(float)sizeX,(float)sizeY};
+
+		break;
+	case AnimDir::Right:
+		animMap[animName_].rightSizes[currIndex_] = { (float)sizeX,(float)sizeY };
+		break;
+	case AnimDir::Uni:
+		animMap[animName_].uniSizes[currIndex_] = { (float)sizeX,(float)sizeY };
+		break;
+	}
+	
 }
 
 void AnimMgr::switchAnim(AnimName name_, AnimDir dir_)

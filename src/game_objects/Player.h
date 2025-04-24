@@ -39,7 +39,6 @@ class Player : public AnimObject
 	float jumpHeightComparator{ 0.f };
 	bool shootPressed{ false };
 
-
 	const int MAXBULLETS{ 6 };
 	int currBullets{ 0 };
 
@@ -49,6 +48,8 @@ class Player : public AnimObject
 	float shootCooldownElapsed{ 0.f };
 
 	bool shootCoolingDown{ false };
+
+
 
 public:
 	using AnimObject::AnimObject;

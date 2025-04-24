@@ -1,16 +1,17 @@
 #include "Player.h"
 #include <animation/DuckFold.h>
-
+#include <iostream>
 Player::Player()
 	: AnimObject{ Cfg::Textures::MegaManSheet1x48x48x1,{{0,160}, { 130,160 }},{50.f,50.f}, {49.f,79.f},{300.f,300.f} }
 	, projectiles{}
 {
 	setPosition({ 300.f,600.f });
 	setTexRect({ {0,160},{130,160} });
-	currWorldSize = {49.f,79.f};
+	//currWorldSize = {49.f,79.f};
+
 	loadInFile("Player.anim");
 	//animMgr.switchAnim(AnimName::Shooting, AnimDir::Right);
-	setWorldSize({ 49.f,79.f });
+	//setWorldSize({ 49.f,79.f });
 
 	projectiles.clear();
 }
@@ -160,6 +161,15 @@ void Player::update(float dt_)
 		shootCooldownElapsed += dt_;
 		if (shootCooldownElapsed >= shootCooldownTime)
 		{
+			if (getVelocity().x == 0.f)
+			{
+				animMgr.switchAnim(AnimName::Idle, animMgr.getCurrDir());
+			}
+			else
+			{
+				animMgr.switchAnim(AnimName::Running, animMgr.getCurrDir());
+
+			}
 			shootCooldownElapsed = 0.f;
 			shootCoolingDown = false;
 		}
@@ -403,8 +413,8 @@ void Player::shoot()
 {
 	if (!shootCoolingDown)
 	{
-		projectiles.push_back(std::make_shared<BusterShot>(this, Cfg::Textures::BusterShot, sf::IntRect{ sf::Vector2i{0,0},sf::Vector2i{24,14} }, sf::Vector2f{ 0.f,0.f }, sf::Vector2f{ 24.f,14.f }, getPosition()));
-	
+		projectiles.push_back(std::make_shared<BusterShot>(this, Cfg::Textures::BusterShot, sf::IntRect{ sf::Vector2i{0,0},sf::Vector2i{24,14} }, sf::Vector2f{ 0.f,0.f }, sf::Vector2f{ 24.f,14.f }, sf::Vector2f{ getPosition().x + animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).x, getPosition().y + animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).y}));
+		//projectiles.back()->setPosition({ getPosition().x + (animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).x - getPosition().x),getPosition().y + (animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).y - getPosition().y) });
 		if (animMgr.getCurrDir() == AnimDir::Right)
 		{ 
 			projectiles.back()->setVelocity({ 500.f, 0.f });
@@ -416,6 +426,9 @@ void Player::shoot()
 
 		shootCoolingDown = true;
 		shootCooldownElapsed = 0.f;
+
+		std::cout << "PlayerPosition: x= " << getPosition().x << ", y= " << getPosition().y << "\n>>>  TexOffset: x= " << getCurrOffset().x << ", y= " << getCurrOffset().y << "\n>>> AnchorPointRelative: x= " << animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).x << ", y= " << animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).y << " \nFinalPositionBullet: x= " << projectiles.back()->getPosition().x << ", y= " << projectiles.back()->getPosition().y << std::endl;
+
 	}
 }
 
