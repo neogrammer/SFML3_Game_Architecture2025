@@ -110,9 +110,10 @@ void Player::handleInput()
 	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter) && shootPressed)
 	{
 		shootReleased = true;
-		dispatch(fsm, EventStoppedShooting{});
 	}
 
+	jumpPressed = false;
+	shootPressed = false;
 	rightPressed = false;
 	leftPressed = false;
 
@@ -135,7 +136,7 @@ void Player::handleInput()
 
 	}
 
-	jumpReleased = false;
+
 	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
 	{
 		if (jumpPressed)
@@ -160,7 +161,7 @@ void Player::handleInput()
 		}
 	}
 
-	jumpPressed = false;
+
 	// Jump logic
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
 	{
@@ -213,17 +214,8 @@ void Player::handleInput()
 		}
 	}
 
-	shootReleased = false;
-	// Shoot logic
-	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter))
-	{
-		if (shootPressed)
-		{
-			shootReleased = true;
-			//dispatch(fsm, EventStoppedShooting{});
-		}
 
-	}
+	
 	shootPressed = false;
 	// Shoot logic
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter))
@@ -237,9 +229,21 @@ void Player::handleInput()
 			{
 				dispatch(fsm, EventShootSetupTimedOut{});
 				shoot();
+				shootCoolingDown = true;
 			}
 		}
-		dispatch(fsm, EventShoot{});
+		else
+		{
+			dispatch(fsm, EventShoot{});
+			if (!shootCoolingDown)
+			{
+				shoot();
+				shootCoolingDown = true;
+			}
+		}
+
+
+
 	}
 
 }
@@ -247,24 +251,27 @@ void Player::handleInput()
 void Player::shoot()
 {
 	 //for shooting at the correct location
-	if (!shootCoolingDown)
+	if (projectiles.size() < maxBullets)
 	{
-		projectiles.push_back(std::make_shared<BusterShot>(this, Cfg::Textures::BusterShot, sf::IntRect{ sf::Vector2i{0,0},sf::Vector2i{24,14} }, sf::Vector2f{ 0.f,0.f }, sf::Vector2f{ 24.f,14.f }, sf::Vector2f{ getPosition().x + animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).x, getPosition().y + animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).y }));
-		//projectiles.back()->setPosition({ getPosition().x + (animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).x - getPosition().x),getPosition().y + (animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).y - getPosition().y) });
-		if (animMgr.getCurrDir() == AnimDir::Right)
+		if (!shootCoolingDown)
 		{
-			projectiles.back()->setVelocity({ 500.f, 0.f });
+			projectiles.push_back(std::make_shared<BusterShot>(this, Cfg::Textures::BusterShot, sf::IntRect{ sf::Vector2i{0,0},sf::Vector2i{24,14} }, sf::Vector2f{ 0.f,0.f }, sf::Vector2f{ 24.f,14.f }, sf::Vector2f{ getPosition().x + animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).x, getPosition().y + animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).y }));
+			//projectiles.back()->setPosition({ getPosition().x + (animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).x - getPosition().x),getPosition().y + (animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).y - getPosition().y) });
+			if (animMgr.getCurrDir() == AnimDir::Right)
+			{
+				projectiles.back()->setVelocity({ 700.f, 0.f });
+			}
+			else
+			{
+				projectiles.back()->setVelocity({ -700.f,0.f });
+			}
+
+			shootCoolingDown = true;
+			shootCooldownElapsed = 0.f;
+
+			std::cout << "PlayerPosition: x= " << getPosition().x << ", y= " << getPosition().y << "\n>>>  TexOffset: x= " << getCurrOffset().x << ", y= " << getCurrOffset().y << "\n>>> AnchorPointRelative: x= " << animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).x << ", y= " << animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).y << " \nFinalPositionBullet: x= " << projectiles.back()->getPosition().x << ", y= " << projectiles.back()->getPosition().y << std::endl;
+
 		}
-		else
-		{
-			projectiles.back()->setVelocity({ -500.f,0.f });
-		}
-
-		shootCoolingDown = true;
-		shootCooldownElapsed = 0.f;
-
-		std::cout << "PlayerPosition: x= " << getPosition().x << ", y= " << getPosition().y << "\n>>>  TexOffset: x= " << getCurrOffset().x << ", y= " << getCurrOffset().y << "\n>>> AnchorPointRelative: x= " << animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).x << ", y= " << animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).y << " \nFinalPositionBullet: x= " << projectiles.back()->getPosition().x << ", y= " << projectiles.back()->getPosition().y << std::endl;
-
 	}
 
 }
@@ -273,11 +280,21 @@ void Player::update(float dt_)
 {
 	
 
-	
+	if (shootCoolingDown)
+	{
+		shootCooldownElapsed += dt_;
+
+		if (shootCooldownElapsed >= shootCooldownTime)
+		{
+			shootCooldownElapsed = 0;
+
+			shootCoolingDown = false;
+		}
+	}
 
 	if (justJumped)
 	{
-		velocity.y = -900.f;
+		velocity.y = -777.f;
 		worldPos.y -= 1.f;
 		justJumped = false;
 		canJump = false;
@@ -298,25 +315,42 @@ void Player::update(float dt_)
 	static bool flag{ false };
 	if (shootReleased)
 	{
-		flag = false;
+		flag = true;
 		shootStopElapsed = 0.f;
+
+		if (animMgr.getCurrAnimName() == AnimName::ShootSetup)
+		{
+			flag = true;
+			dispatch(fsm, EventShootSetupTimedOut{});
+
+		}
+
 	}
-	else
+
+	if (flag)
+	{
+		shootStopElapsed += dt_;
+		if (shootStopElapsed >= shootStopDelay)
+		{
+			flag = false;
+			dispatch(fsm, EventStoppedShooting{});
+		}
+	}
+
+	/*else
 	{
 		if (!shootPressed)
 		{
 			shootStopElapsed += dt_;
-			if (!flag)
-			{
-
 				if (shootStopElapsed >= shootStopDelay)
 				{
 					flag = true;
-					dispatch(fsm, EventStoppedShooting{});
+					shootStopElapsed = 0.f;
 				}
 			}
 		}
-	}
+		
+	}*/
 
 
 //	auto r = animMgr.currFrame();

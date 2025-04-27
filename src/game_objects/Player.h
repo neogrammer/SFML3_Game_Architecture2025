@@ -43,18 +43,19 @@ class Player : public AnimObject
 	const float MAXJUMPHEIGHT{800.f};
 	float jumpHeightComparator{ 0.f };
 	float shootStopElapsed{ 0.f };
-	float shootStopDelay{ 0.40f };
+	float shootStopDelay{ 0.35f };
 	const int MAXBULLETS{ 6 };
 	int currBullets{ 0 };
 
 	std::vector<std::shared_ptr<Projectile>> projectiles{ nullptr };
 
-	float shootCooldownTime{ 0.3f };
+	float shootCooldownTime{ 0.1f };
 	float shootCooldownElapsed{ 0.f };
 
 	bool shootCoolingDown{ false };
 
 	bool continueShooting{ false };
+	int maxBullets{ 5 };
 public:
 
 	FSM_Player fsm;
