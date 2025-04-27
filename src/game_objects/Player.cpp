@@ -294,7 +294,7 @@ void Player::update(float dt_)
 
 	if (justJumped)
 	{
-		velocity.y = -777.f;
+		velocity.y = -1150.f;
 		worldPos.y -= 1.f;
 		justJumped = false;
 		canJump = false;

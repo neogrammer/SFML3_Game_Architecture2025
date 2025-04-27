@@ -21,7 +21,12 @@ PlayState::PlayState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
 	pWnd_->setView(gameView);
 
 	googlyEye = std::make_unique<Enemy1>(2.5f, sf::Vector2f{1000.f,806.f});
+
 	
+	auto& music = Cfg::music.get((int)Cfg::Music::IntroLevel);
+	//music.play();
+	music.setVolume(10);
+	music.setAttenuation(0);
 }
 
 std::string PlayState::update()
@@ -74,7 +79,7 @@ std::string PlayState::finalize()
 	}
 
 	Physics::resolveCollision(&player, &plat1);
-
+	
 	for (auto& b : player.projectiles)
 	{
 		sf::FloatRect r{ sf::FloatRect{sf::Vector2f{(float)(b->getPosition().x - (std::fabsf(b->getVelocity().x) * *pGameTime)),

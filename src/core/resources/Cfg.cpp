@@ -27,6 +27,8 @@ void Cfg::initMusic()
 {
 	music.clear();
 	music.load((int)Music::TitleBGMusic, "Assets/Music/TitleBGMusic.wav");
+	music.load((int)Music::IntroLevel, "Assets/Music/LoveDaWicked.wav");
+
 }
 
 void Cfg::initSounds()

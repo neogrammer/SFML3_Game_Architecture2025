@@ -442,5 +442,6 @@
     <Media Include="Assets\Music\TitleBGMusic.wav">
       <Filter>Assets\Music</Filter>
     </Media>
+    <Media Include="Assets\Music\LoveDaWicked.wav" />
   </ItemGroup>
 </Project>

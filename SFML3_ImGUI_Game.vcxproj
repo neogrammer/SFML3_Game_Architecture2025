@@ -266,6 +266,7 @@
     <Image Include="Assets\Textures\TitleState\TitleText.png" />
   </ItemGroup>
   <ItemGroup>
+    <Media Include="Assets\Music\LoveDaWicked.wav" />
     <Media Include="Assets\Music\TitleBGMusic.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
