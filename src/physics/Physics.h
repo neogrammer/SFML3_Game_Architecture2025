@@ -260,39 +260,18 @@ public:
             {
                 
 
-                if (p->justJumped)
-                {
-                    // allow frame to continue once so that the player will move up and not trigger this velocity setting to 0.f in the y axis
-                   
-
-                        p->landingJumpButtonHeld = false;
+                
+                p->canJump = true;
+                p->fsm.dispatch(EventLanded{});
                     
-                    
-                }
-                else
-                {
-                    
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
-                    {
-                        p->landingJumpButtonHeld = true;
-
-                    }
-
-
-                    if (!p->landingJumpButtonHeld)
-                    {
-                        p->canJump = true;
-                    }
 
 
 
 
+                 newY -= minOverlap;
 
-
-                    newY -= minOverlap;
-
-                    dynamicObj->setVelocity({ dynamicObj->getVelocity().x, 0.f });
-                }
+                  dynamicObj->setVelocity({ dynamicObj->getVelocity().x, 0.f });
+                
                 
             }
             else
@@ -319,31 +298,14 @@ public:
             auto* p = dynamic_cast<Player*>(dynamicObj);
             if (p != nullptr) // dynamicObj is the player, lets set the canJump flag to true, they just landed
             {
-                p->canJump = true;
+                p->fsm.dispatch(EventFell{});
             }
             newY += minOverlap;
             dynamicObj->setVelocity({ dynamicObj->getVelocity().x, 0.f });
         }
 
-        auto* p = dynamic_cast<Player*>(dynamicObj);
-        if (p != nullptr) // dynamicObj is the player, lets set the canJump flag to true, they just landed
-        {
-
-
-            if (p->justJumped)
-            {
-                // allow frame to continue unabated for a frame, change just jumped now, so next frame adjustment will be made if needed so users position has time to lift off the ground and not trigger a false collision
-                p->justJumped = false;
-            }
-            else
-            {
-
-                dynamicObj->setPosition({ newX, newY });
-            }
-        }
-        else
-        {
-            dynamicObj->setPosition({ newX, newY });
-        }
+       
+        dynamicObj->setPosition({ newX, newY });
+        
     }
 };

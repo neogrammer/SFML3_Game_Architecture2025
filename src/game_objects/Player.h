@@ -23,6 +23,11 @@ class Player : public AnimObject
 	bool leftPressed{ false };
 	bool landingJumpButtonHeld{ false };
 	bool jumpPressed{ false };
+	bool shootPressed{ false };
+	bool rightReleased{ false };
+	bool leftReleased{ false };
+	bool jumpReleased{ false };
+	bool shootReleased{ false };
 	const float MOVESPEED{ 300.f };
 
 	bool canJump{ false };
@@ -37,8 +42,8 @@ class Player : public AnimObject
 	float currJumpHeight{ 0.f };
 	const float MAXJUMPHEIGHT{800.f};
 	float jumpHeightComparator{ 0.f };
-	bool shootPressed{ false };
-
+	float shootStopElapsed{ 0.f };
+	float shootStopDelay{ 0.40f };
 	const int MAXBULLETS{ 6 };
 	int currBullets{ 0 };
 
@@ -49,14 +54,17 @@ class Player : public AnimObject
 
 	bool shootCoolingDown{ false };
 
+	bool continueShooting{ false };
+public:
 
-
+	FSM_Player fsm;
+	
 public:
 	using AnimObject::AnimObject;
 	Player();
 	virtual ~Player() override final;
 	void renderBullets(sf::RenderWindow& wnd_);
-
+	void shoot();
 	void handleInput() override final;
 	void update(float dt_) override final;
 	void finalize(float dt_, sf::RenderWindow& wnd_) override final;
@@ -67,10 +75,9 @@ public:
 	void updateJump(float dt_);
 	virtual void getHit(int power) override;
 
-	void shoot();
 
 public:
-	FSM_Player fsm;
+
 };
 
 #endif

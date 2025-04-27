@@ -13,6 +13,8 @@ extern std::unordered_map<std::string, AnimName> AnimNameLUT;
 extern std::unordered_map < std::string, AnimDir> DirectionLUT;
 extern std::unordered_map < std::string, Cfg::Textures> TextureIDLUT;
 extern std::unordered_map < std::string, AnimSheetType> AnimSheetTypeLUT;
+extern std::unordered_map < AnimName, std::string > FSMStateNameLUT;
+extern std::unordered_map < std::string, AnimName > FSMAnimNameLUT;
 
 
 struct Animation
@@ -56,6 +58,7 @@ public:
 	sf::Vector2f getOffset(AnimDir dir_, int index);
 	sf::Vector2f getWorldSize(AnimDir dir_, int index_);
 	sf::Vector2f getBulletPoint(AnimDir dir_, int index_);
+	int getNumFrames();
 
 };
 

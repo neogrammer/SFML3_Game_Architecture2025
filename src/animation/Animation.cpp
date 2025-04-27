@@ -5,10 +5,22 @@ std::unordered_map<std::string, AnimName> AnimNameLUT = {
     {"Idle",AnimName::Idle},
     {"Invariant",AnimName::Invariant},
     {"IdleToRun", AnimName::IdleToRun},
-    {"RunToIdle", AnimName::RunToIdle},
     {"Running", AnimName::Running},
     {"ShootSetup", AnimName::ShootSetup},
     {"Shooting", AnimName::Shooting},
+    {"RunningAndShooting", AnimName::RunningAndShooting},
+    {"LiftOff", AnimName::LiftOff},
+    {"Rising", AnimName::Rising},
+    {"JumpPeakRising", AnimName::JumpPeakRising},
+    {"JumpPeakFalling", AnimName::JumpPeakFalling},
+    {"Falling", AnimName::Falling},
+    {"Landing", AnimName::Landing},
+    {"LiftOffAndShooting", AnimName::LiftOffAndShooting},
+    {"RisingAndShooting", AnimName::RisingAndShooting},
+    {"JumpPeakRisingAndShooting", AnimName::JumpPeakRisingAndShooting},
+    {"JumpPeakFallingAndShooting", AnimName::JumpPeakFallingAndShooting},
+    {"FallingAndShooting", AnimName::FallingAndShooting},
+    {"LandingAndShooting", AnimName::LandingAndShooting},
     {"Fly",AnimName::Fly}
 };
 std::unordered_map < std::string, AnimDir> DirectionLUT = {
@@ -28,6 +40,55 @@ std::unordered_map < std::string, AnimSheetType> AnimSheetTypeLUT = {
     {"Normal", AnimSheetType::Normal},
     {"Padded", AnimSheetType::Padded},
     {"Vertical", AnimSheetType::Vertical}
+};
+
+
+std::unordered_map < AnimName, std::string > FSMStateNameLUT =
+{
+    {AnimName::Idle                       , "Idle"                          },
+    {AnimName::Invariant                  , "Invariant"                     },
+    {AnimName::IdleToRun                  , "IdleToRun"                     },
+    {AnimName::Running                    , "Running"                       },
+    {AnimName::ShootSetup                 , "ShootSetup"                    },
+    {AnimName::Shooting                   , "Shooting"                      },
+    {AnimName::RunningAndShooting                   , "RunningAndShooting"            },
+    {AnimName::LiftOff                    , "LiftOff"                       },
+    {AnimName::Rising                     , "Rising"                        },
+    {AnimName::JumpPeakRising             , "JumpPeakRising"                },
+    {AnimName::JumpPeakFalling            , "JumpPeakFalling"               },
+    {AnimName::Falling                    , "Falling"                       },
+    {AnimName::Landing                    , "Landing"                       },
+    {AnimName::LiftOffAndShooting         , "LiftOffAndShooting"            },
+    {AnimName::RisingAndShooting          , "RisingAndShooting"             },
+    {AnimName::JumpPeakRisingAndShooting  , "JumpPeakRisingAndShooting"     },
+    {AnimName::JumpPeakFallingAndShooting , "JumpPeakFallingAndShooting"     },
+    {AnimName::FallingAndShooting         , "FallingAndShooting"            },
+    {AnimName::LandingAndShooting         , "LandingAndShooting"            },
+    {AnimName::Fly                        , "Fly"                            }
+};
+
+std::unordered_map < std::string, AnimName > FSMAnimNameLUT =
+{
+   {"Idle",AnimName::Idle},
+    {"Invariant",AnimName::Invariant},
+    {"IdleToRun", AnimName::IdleToRun},
+    {"Running", AnimName::Running},
+    {"ShootSetup", AnimName::ShootSetup},
+    {"Shooting", AnimName::Shooting},
+    {"RunningAndShooting", AnimName::RunningAndShooting},
+    {"LiftOff", AnimName::LiftOff},
+    {"Rising", AnimName::Rising},
+    {"JumpPeakRising", AnimName::JumpPeakRising},
+    {"JumpPeakFalling", AnimName::JumpPeakFalling},
+    {"Falling", AnimName::Falling},
+    {"Landing", AnimName::Landing},
+    {"LiftOffAndShooting", AnimName::LiftOffAndShooting},
+    {"RisingAndShooting", AnimName::RisingAndShooting},
+    {"JumpPeakRisingAndShooting", AnimName::JumpPeakRisingAndShooting},
+    {"JumpPeakFallingAndShooting", AnimName::JumpPeakFallingAndShooting},
+    {"FallingAndShooting", AnimName::FallingAndShooting},
+    {"LandingAndShooting", AnimName::LandingAndShooting},
+    {"Fly",AnimName::Fly}
 };
 
 
@@ -124,4 +185,22 @@ sf::Vector2f Animation::getBulletPoint(AnimDir dir_, int index_)
         break;
     }
     return { 0.f,0.f };
+}
+
+int Animation::getNumFrames()
+{
+    if (leftFrames.size() != 0)
+    {
+        return (int)leftFrames.size();
+    }
+    else if (rightFrames.size() != 0)
+    {
+        return (int)rightFrames.size();
+    }
+    else if (uniFrames.size() != 0)
+    {
+        return (int)uniFrames.size();
+    }
+    else
+        return 0;
 }

@@ -258,6 +258,7 @@
     <Image Include="Assets\Textures\Enemies\Tux_Junior.png" />
     <Image Include="Assets\Textures\Player\GokuSheet.png" />
     <Image Include="Assets\Textures\Player\MegaManWee.png" />
+    <Image Include="Assets\Textures\Player\PlayerAtlas.png" />
     <Image Include="Assets\Textures\projectiles\busterBulletSM.png" />
     <Image Include="Assets\Textures\SplashState\splash.jpg" />
     <Image Include="Assets\Textures\tilesets\TSet1_50x50.png" />

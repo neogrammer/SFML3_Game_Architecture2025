@@ -10,6 +10,19 @@ enum class AnimName
 	RunToIdle,
 	ShootSetup,
 	Shooting,
+	LiftOff,
+	LiftOffAndShooting,
+	Rising,
+	RisingAndShooting,
+	Falling,
+	FallingAndShooting,
+	JumpPeakRising,
+	JumpPeakRisingAndShooting,
+	JumpPeakFalling,
+	JumpPeakFallingAndShooting,
+	Landing,
+	LandingAndShooting,
+	RunningAndShooting,
 	Invariant
 };
 

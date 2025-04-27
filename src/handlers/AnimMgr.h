@@ -42,9 +42,10 @@ public:
 	sf::IntRect currFrame();
 	sf::Vector2f currOffset();
 	sf::Vector2f currSize();
-
+	void reset();
 	void animate(float dt_);
 	int getCurrIndex();
+	int getCurrNumFrames();
 	void resizeOffsets(AnimName animName_, AnimDir animDir_, int numFrames_);
 	void resizeWorldSizes(AnimName animName_, AnimDir animDir_, int numFrames_);
 	AnimName getCurrAnimName();

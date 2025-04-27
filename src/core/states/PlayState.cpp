@@ -27,9 +27,15 @@ PlayState::PlayState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
 std::string PlayState::update()
 {
 	player.handleInput();
-	Physics::applyGravity(player, *pGameTime);
-	plat1.update(*pGameTime);
+	
+	if (!player.justJumped)
+		Physics::applyGravity(player, *pGameTime);
 
+	plat1.update(*pGameTime);
+	for (auto& b : player.projectiles)
+	{
+		b->update(*pGameTime);
+	}
 	googlyEye->update(*pGameTime);
 
 	//std::cout << "PlayState updating..." << std::endl;

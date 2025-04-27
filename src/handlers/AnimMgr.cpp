@@ -231,6 +231,13 @@ sf::Vector2f AnimMgr::currSize()
 	return animMap[currAnim].getWorldSize(currDir, currIndex);
 }
 
+void AnimMgr::reset()
+{
+	currIndex = 0;
+	frameElapsed = 0.f;
+	loopWaitElapsed = 0.f;
+}
+
 void AnimMgr::animate(float dt_)
 {
 	if (animMap[currAnim].playing)
@@ -295,6 +302,11 @@ void AnimMgr::animate(float dt_)
 int AnimMgr::getCurrIndex()
 {
 	return currIndex;
+}
+
+int AnimMgr::getCurrNumFrames()
+{
+	return animMap[currAnim].getNumFrames();
 }
 
 void AnimMgr::resizeOffsets(AnimName animName_, AnimDir animDir_, int numFrames_)

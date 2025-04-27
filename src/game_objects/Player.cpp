@@ -77,115 +77,271 @@ void Player::renderBullets(sf::RenderWindow& wnd_)
 void Player::handleInput()
 {
 
+	// running logic
+
+	rightReleased = false;
+	leftReleased = false;
+	jumpReleased = false;
+	shootReleased = false;
+
+	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) && rightPressed)
+	{
+		rightReleased = true;
+		if (!leftPressed)
+			dispatch(fsm, EventStoppedMoving{});
+	}
+
+
+	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) && leftPressed)
+	{
+		leftReleased = true;
+		if (!rightPressed)
+			dispatch(fsm, EventStoppedMoving{});
+	}
+
+
+	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && jumpPressed)
+	{
+		jumpReleased = true;
+		dispatch(fsm, EventJumpReleased{});
+	}
+
+
+	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter) && shootPressed)
+	{
+		shootReleased = true;
+		dispatch(fsm, EventStoppedShooting{});
+	}
+
 	rightPressed = false;
 	leftPressed = false;
-	jumpPressed = false;
-	shootPressed = false;
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
 	{
 		rightPressed = true;
+		velocity.x = 300.f;
+		dispatch(fsm, EventMoved{});
+		animMgr.setCurrDir(AnimDir::Right);
 	}
-	
+
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
 	{
 		leftPressed = true;
+		velocity.x = -300.f;
+		dispatch(fsm, EventMoved{});
+		animMgr.setCurrDir(AnimDir::Left);
+
+
 	}
-	
+
+	jumpReleased = false;
+	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
+	{
+		if (jumpPressed)
+		{
+
+			if (velocity.y < 0.f)
+			{
+
+				velocity.y *= 0.997f;
+			}
+			dispatch(fsm, EventJumpReleased{});
+			jumpReleased = true;
+		}
+
+	}
+
+	if (!jumpPressed)
+	{
+		if (velocity.y < 0.f)
+		{
+			velocity.y *= 0.997f;
+		}
+	}
+
+	jumpPressed = false;
+	// Jump logic
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
 	{
 		jumpPressed = true;
-	}
-	if (!jumpPressed && landingJumpButtonHeld)
-	{
-		landingJumpButtonHeld = false;
-		canJump = true;
+
+		if (canJump && animMgr.getCurrAnimName() != AnimName::Landing && animMgr.getCurrAnimName() != AnimName::Falling && animMgr.getCurrAnimName() != AnimName::LandingAndShooting && animMgr.getCurrAnimName() != AnimName::FallingAndShooting)
+		{
+			justJumped = true;
+			dispatch(fsm, EventJumped{});
+		}
+
 	}
 
+	if (animMgr.getCurrAnimName() == AnimName::LiftOff || animMgr.getCurrAnimName() == AnimName::LiftOffAndShooting)
+	{
+		if (animMgr.getCurrIndex() == 2)
+		{
+			dispatch(fsm, EventLiftOffTimedOut{});
+		}
+	}
+
+	if (animMgr.getCurrAnimName() == AnimName::Rising || animMgr.getCurrAnimName() == AnimName::RisingAndShooting)
+	{
+		if (std::fabsf(velocity.y) < 50.f)
+		{
+			dispatch(fsm, EventEnteredJumpPeak{});
+		}
+	}
+
+	if (animMgr.getCurrAnimName() == AnimName::JumpPeakRising || animMgr.getCurrAnimName() == AnimName::JumpPeakRisingAndShooting)
+	{
+		if (std::fabsf(velocity.y) < 0.5f)
+		{
+			dispatch(fsm, EventReachedJumpMax{});
+		}
+	}
+
+	if (animMgr.getCurrAnimName() == AnimName::JumpPeakFalling || animMgr.getCurrAnimName() == AnimName::JumpPeakFallingAndShooting)
+	{
+		if (std::fabsf(velocity.y) > 50.f)
+		{
+			dispatch(fsm, EventExitingJumpPeak{});
+		}
+	}
+	if (animMgr.getCurrAnimName() == AnimName::Landing || animMgr.getCurrAnimName() == AnimName::LandingAndShooting)
+	{
+		if (animMgr.getCurrIndex() == 2)
+		{
+			dispatch(fsm, EventFullyLanded{});
+		}
+	}
+
+	shootReleased = false;
+	// Shoot logic
+	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter))
+	{
+		if (shootPressed)
+		{
+			shootReleased = true;
+			//dispatch(fsm, EventStoppedShooting{});
+		}
+
+	}
+	shootPressed = false;
+	// Shoot logic
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter))
 	{
+
 		shootPressed = true;
+
+		if (animMgr.getCurrAnimName() == AnimName::ShootSetup)
+		{
+			if (animMgr.getCurrIndex() == 1)
+			{
+				dispatch(fsm, EventShootSetupTimedOut{});
+				shoot();
+			}
+		}
+		dispatch(fsm, EventShoot{});
+	}
+
+}
+
+void Player::shoot()
+{
+	 //for shooting at the correct location
+	if (!shootCoolingDown)
+	{
+		projectiles.push_back(std::make_shared<BusterShot>(this, Cfg::Textures::BusterShot, sf::IntRect{ sf::Vector2i{0,0},sf::Vector2i{24,14} }, sf::Vector2f{ 0.f,0.f }, sf::Vector2f{ 24.f,14.f }, sf::Vector2f{ getPosition().x + animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).x, getPosition().y + animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).y }));
+		//projectiles.back()->setPosition({ getPosition().x + (animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).x - getPosition().x),getPosition().y + (animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).y - getPosition().y) });
+		if (animMgr.getCurrDir() == AnimDir::Right)
+		{
+			projectiles.back()->setVelocity({ 500.f, 0.f });
+		}
+		else
+		{
+			projectiles.back()->setVelocity({ -500.f,0.f });
+		}
+
+		shootCoolingDown = true;
+		shootCooldownElapsed = 0.f;
+
+		std::cout << "PlayerPosition: x= " << getPosition().x << ", y= " << getPosition().y << "\n>>>  TexOffset: x= " << getCurrOffset().x << ", y= " << getCurrOffset().y << "\n>>> AnchorPointRelative: x= " << animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).x << ", y= " << animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).y << " \nFinalPositionBullet: x= " << projectiles.back()->getPosition().x << ", y= " << projectiles.back()->getPosition().y << std::endl;
+
 	}
 
 }
 
 void Player::update(float dt_)
 {
+	
 
 	
 
-	for (auto& b : projectiles)
+	if (justJumped)
 	{
-		b->update(dt_);
+		velocity.y = -900.f;
+		worldPos.y -= 1.f;
+		justJumped = false;
+		canJump = false;
+		dispatch(fsm, EventJumped{});
+	}
+	
+	if (velocity.y > 0.f)
+	{
+		if (animMgr.getCurrAnimName() == AnimName::JumpPeakRising ||
+			animMgr.getCurrAnimName() == AnimName::JumpPeakRisingAndShooting ||
+			animMgr.getCurrAnimName() == AnimName::JumpPeakFalling ||
+			animMgr.getCurrAnimName() == AnimName::JumpPeakFallingAndShooting)
+		{
+			dispatch(fsm, EventFell{});
+		}
 	}
 
+	static bool flag{ false };
+	if (shootReleased)
+	{
+		flag = false;
+		shootStopElapsed = 0.f;
+	}
+	else
+	{
+		if (!shootPressed)
+		{
+			shootStopElapsed += dt_;
+			if (!flag)
+			{
+
+				if (shootStopElapsed >= shootStopDelay)
+				{
+					flag = true;
+					dispatch(fsm, EventStoppedShooting{});
+				}
+			}
+		}
+	}
+
+
+//	auto r = animMgr.currFrame();
+
+	//}
+
+}
+
+void Player::finalize(float dt_, sf::RenderWindow& wnd_)
+{
+
+
+
+	// checks if the direction or animation needs to change then update the animation for either one changing, changing the direction first and using that in the anim switch
+
 	bool playerFacingRight{};
-
-
-	auto nameBefore = fsm.getStateName();
+	bool playerFacingRightAfter{};
+	auto nameBefore = animMgr.getCurrAnimName();
 	auto dirBefore = animMgr.getCurrDir();
 	if (dirBefore == AnimDir::Right)
 		playerFacingRight = true;
 	else if (dirBefore == AnimDir::Left)
 		playerFacingRight = false;
 	AnimDir dirAfter{ dirBefore };
-	if ((rightPressed && leftPressed) || (!rightPressed && !leftPressed))
-	{
-		dispatch(fsm, EventStoppedMoving{});
-		velocity.x = 0.f;
-	}
-	else
-	{
-		if (rightPressed)
-		{
-			dispatch(fsm, EventMoved{});
-			velocity.x = MOVESPEED;
-			dirAfter = AnimDir::Right;
-		
-		}
-		else if (leftPressed)
-		{
-			// left was pressed
-			dispatch(fsm, EventMoved{});
-			velocity.x = -MOVESPEED;
-			dirAfter = AnimDir::Left;
-		}
-		else
-		{
 
-		}
-	}
-
-	if (shootCoolingDown)
-	{
-		shootCooldownElapsed += dt_;
-		if (shootCooldownElapsed >= shootCooldownTime)
-		{
-			if (getVelocity().x == 0.f)
-			{
-				animMgr.switchAnim(AnimName::Idle, animMgr.getCurrDir());
-			}
-			else
-			{
-				animMgr.switchAnim(AnimName::Running, animMgr.getCurrDir());
-
-			}
-			shootCooldownElapsed = 0.f;
-			shootCoolingDown = false;
-		}
-	}
-	else
-	{
-		if (shootPressed)
-		{
-			shoot();
-		}
-	}
-
-
-
-	bool playerFacingRightAfter{};
-	
 	if (dirAfter == AnimDir::Right)
 		playerFacingRightAfter = true;
 	else if (dirAfter == AnimDir::Left)
@@ -208,109 +364,21 @@ void Player::update(float dt_)
 
 	auto finalDir = animMgr.getCurrDir();
 
-	if(nameBefore != nameAfter || finalDir != dirBefore)
+	if (FSMStateNameLUT[nameBefore] != nameAfter || finalDir != dirBefore)
 	{
 		animMgr.switchAnim(AnimNameLUT[nameAfter], finalDir);
 		setTexID(animMgr.getTexID());
-	}
-	else
-	{
+		animMgr.reset();
 
-	}
-	if (!jumpPressed && landingJumpButtonHeld)
-	{
-		landingJumpButtonHeld = false;
-		canJump = true;
-	}
-	
 
-	// lets update jump before doing a jump() so that the initial jump state gets counted for this frame then next frame it will update as needed, jump() is idempotent if canJump is false, which happens when first jumping until landing back down
-	//  flag must be changed by the collision system
-	updateJump(dt_);
-	if (jumpPressed)
-	{
-		jump();
 	}
 
-	if (!jumpPressed && waitingForJumpButton)
-	{
-		waitingForJumpButton = false;
-		canJump = true;
-	}
 
-	//if (name != fsm.getStateName() || dir != animMgr.getCurrDir())
-	//{
-		//animation switched, update the texture
-		
-		//animMgr.switchAnim(AnimNameLUT[name], animMgr.getCurrDir());
-	//}
-
-
-	
-
-	
-//	auto r = animMgr.currFrame();
-	animMgr.animate(dt_);
-//	if (r != animMgr.currFrame())
-//	{
-		// frame changed
-		setTexRect(animMgr.currFrame());
-	//}
-
-}
-
-void Player::finalize(float dt_, sf::RenderWindow& wnd_)
-{
-	/*std::vector<std::vector<std::shared_ptr<Projectile>>::iterator> itt{};
-	
-	for (int i = 0; i < projectiles.size(); i++)
-	{
-		auto vw = wnd_.getView().getCenter().x;
-		if (projectiles[i]->getPosition().x < vw - wnd_.getSize().x / 2.f || projectiles[i]->getPosition().x > vw + wnd_.getSize().x / 2.f)
-		{
-		
-			itt.push_back(projectiles.begin()+i);
-
-		}
-		
-	}
-
-	for (auto start = itt.rbegin(); start != itt.rend(); start++)
-	{
-		projectiles.erase(*start);
-	}
-	projectiles.shrink_to_fit();
-	
-
-	std::vector<std::vector<std::shared_ptr<Projectile>>::iterator>  ers;
-	for (int i = 0; i < projectiles.size(); i++)
-	{
-		if (projectiles[i]->hasCollided())
-		{
-			auto* collider = projectiles[i]->getCollider();
-
-			if (collider)
-			{
-				collider->getHit(projectiles[i]->getPower());
-
-			}
-
-			ers.push_back(projectiles.begin() + i);
-		}
-	}
-
-	for (auto start = ers.rbegin(); start != ers.rend(); start++)
-	{
-		projectiles.erase(*start);
-	}
-
-	projectiles.shrink_to_fit();*/
-
-
-
+	// now check position and velocity of player and move the screen instead when in middle of it moving in a direction until the end of the level then move the player
 	auto vw = wnd_.getView();
 	if (rightPressed)
 	{
+		//velocity.x = 300.f;
 		// if player is going to be still on the left side of screen after moving, then move the player
 		if (getPosition().x + velocity.x * dt_ < bgLowBoundX || vw.getCenter().x >= bgHighBoundX)
 		{
@@ -325,6 +393,7 @@ void Player::finalize(float dt_, sf::RenderWindow& wnd_)
 	}
 	else if (leftPressed)
 	{
+		//velocity.x = -300.f;
 		// if player is going to be still on the left side of screen after moving, then move the player
 		if (getPosition().x + velocity.x * dt_ > bgHighBoundX || vw.getCenter().x <= bgLowBoundX)
 		{
@@ -338,8 +407,17 @@ void Player::finalize(float dt_, sf::RenderWindow& wnd_)
 		}
 	}
 
+	// we set the x above with the screen movement, not adjust the player for the y value
 	// apply y velocity
 	setPosition({ getPosition().x, getPosition().y + (getVelocity().y * dt_) });
+
+
+	// now that our position is finalized, lets animate the frame then update the texture rect
+	animMgr.animate(dt_);
+	//	if (r != animMgr.currFrame())
+	//	{
+			// frame changed
+	setTexRect(animMgr.currFrame());
 }
 
 void Player::setBGSize(float lx_, float hx_, float ly_, float hy_)
@@ -407,28 +485,5 @@ void Player::updateJump(float dt_)
 
 void Player::getHit(int power)
 {
-}
-
-void Player::shoot()
-{
-	if (!shootCoolingDown)
-	{
-		projectiles.push_back(std::make_shared<BusterShot>(this, Cfg::Textures::BusterShot, sf::IntRect{ sf::Vector2i{0,0},sf::Vector2i{24,14} }, sf::Vector2f{ 0.f,0.f }, sf::Vector2f{ 24.f,14.f }, sf::Vector2f{ getPosition().x + animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).x, getPosition().y + animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).y}));
-		//projectiles.back()->setPosition({ getPosition().x + (animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).x - getPosition().x),getPosition().y + (animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).y - getPosition().y) });
-		if (animMgr.getCurrDir() == AnimDir::Right)
-		{ 
-			projectiles.back()->setVelocity({ 500.f, 0.f });
-		}
-		else
-		{
-			projectiles.back()->setVelocity({ -500.f,0.f });
-		}
-
-		shootCoolingDown = true;
-		shootCooldownElapsed = 0.f;
-
-		std::cout << "PlayerPosition: x= " << getPosition().x << ", y= " << getPosition().y << "\n>>>  TexOffset: x= " << getCurrOffset().x << ", y= " << getCurrOffset().y << "\n>>> AnchorPointRelative: x= " << animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).x << ", y= " << animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).y << " \nFinalPositionBullet: x= " << projectiles.back()->getPosition().x << ", y= " << projectiles.back()->getPosition().y << std::endl;
-
-	}
 }
 

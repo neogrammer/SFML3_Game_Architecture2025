@@ -227,6 +227,12 @@
     <ClCompile Include="src\game_objects\Projectile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\game_objects\Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game_objects\Enemy1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="external\ImGui\ImGui_SFML3\imgui-SFML.h">
@@ -364,6 +370,12 @@
     <ClInclude Include="src\game_objects\Projectile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\game_objects\Enemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game_objects\Enemy1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Font Include="Assets\Fonts\Crusty.ttf">
@@ -391,6 +403,8 @@
     <None Include="Config\Animations\BusterShot.anim">
       <Filter>Config\Animations</Filter>
     </None>
+    <None Include="Assets\Textures\Enemies\working-title-assets.zip" />
+    <None Include="Config\Animations\GooglyEye.anim" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\SplashState\splash.jpg">
@@ -413,6 +427,16 @@
     <Image Include="Assets\Textures\projectiles\busterBulletSM.png">
       <Filter>Assets\Textures\projectiles</Filter>
     </Image>
+    <Image Include="Assets\Textures\Enemies\GooglyEye.png" />
+    <Image Include="Assets\Textures\Enemies\i8aic.png" />
+    <Image Include="Assets\Textures\Enemies\platfromer (1).png" />
+    <Image Include="Assets\Textures\Enemies\platfromer.png" />
+    <Image Include="Assets\Textures\Enemies\qb7e6.png" />
+    <Image Include="Assets\Textures\Enemies\sara2balls2.png" />
+    <Image Include="Assets\Textures\Enemies\sara2balls2_stand.png" />
+    <Image Include="Assets\Textures\Enemies\spellun-sprite7 copia.png" />
+    <Image Include="Assets\Textures\Enemies\Tux_Junior.png" />
+    <Image Include="Assets\Textures\Player\PlayerAtlas.png" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="Assets\Music\TitleBGMusic.wav">
