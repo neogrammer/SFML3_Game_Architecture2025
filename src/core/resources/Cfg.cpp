@@ -48,9 +48,11 @@ void Cfg::initTextures()
 	textures.load((int)Textures::MegaManSheet1x48x48x1, "Assets/Textures/Player/PlayerAtlas.png");
 	textures.load((int)Textures::BGIntro, "Assets/Textures/backgrounds/Bg1.jpg");
 	textures.load((int)Textures::GooglyEye, "Assets/Textures/Enemies/GooglyEyeScaled.png");
+	textures.load((int)Textures::GooglyEye, "Assets/Textures/Projectiles/GooglyEyeShot.png");
 
 	textures.load((int)Textures::TilesetIntro, "Assets/Textures/tilesets/TSet1_50x50.png");
 	textures.load((int)Textures::Platform1, "Assets/Textures/Platforms/Platform1.png");
+
 	textures.load((int)Textures::BusterShot, "Assets/Textures/projectiles/busterBulletSM.png");
 
 

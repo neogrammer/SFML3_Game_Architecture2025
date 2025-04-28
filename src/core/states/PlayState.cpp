@@ -35,6 +35,7 @@ std::string PlayState::update()
 	
 	if (!player.justJumped)
 		Physics::applyGravity(player, *pGameTime);
+	Physics::applyGravity(*googlyEye, *pGameTime);
 
 	plat1.update(*pGameTime);
 	for (auto& b : player.projectiles)
@@ -72,11 +73,20 @@ std::string PlayState::finalize()
 {
 
 	// before final moves,handle collisions
-	
+	for (auto& t : tmap.getSolidTiles(googlyEye->getTestArea(*pGameTime)))
+	{
+		auto* tile = t.lock().get();
+		Physics::resolveCollision(googlyEye.get(), tile);
+
+	}
 	for (auto& t : tmap.getSolidTiles(player.getTestArea(*pGameTime)))
 	{
-		Physics::resolveCollision(&player, t.lock().get());
+		auto* tile = t.lock().get();
+		Physics::resolveCollision(&player, tile);
+		
 	}
+
+
 
 	Physics::resolveCollision(&player, &plat1);
 	

@@ -56,6 +56,7 @@ class Player : public AnimObject
 
 	bool continueShooting{ false };
 	int maxBullets{ 5 };
+	bool makeBulletFixed{ false };
 public:
 
 	FSM_Player fsm;

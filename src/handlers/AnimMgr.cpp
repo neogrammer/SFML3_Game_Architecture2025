@@ -405,6 +405,7 @@ void AnimMgr::setBulletAnchorPoint(AnimName aName, AnimDir aDir, int index, int 
 
 sf::Vector2f AnimMgr::getBulletPoint(AnimName aName, AnimDir aDir, int index)
 {
+	
 	return animMap[aName].getBulletPoint(aDir, index);
 }
 

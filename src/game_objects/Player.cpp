@@ -255,21 +255,23 @@ void Player::shoot()
 	{
 		if (!shootCoolingDown)
 		{
-			projectiles.push_back(std::make_shared<BusterShot>(this, Cfg::Textures::BusterShot, sf::IntRect{ sf::Vector2i{0,0},sf::Vector2i{24,14} }, sf::Vector2f{ 0.f,0.f }, sf::Vector2f{ 24.f,14.f }, sf::Vector2f{ getPosition().x + animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).x, getPosition().y + animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).y }));
-			//projectiles.back()->setPosition({ getPosition().x + (animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).x - getPosition().x),getPosition().y + (animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).y - getPosition().y) });
-			if (animMgr.getCurrDir() == AnimDir::Right)
-			{
-				projectiles.back()->setVelocity({ 700.f, 0.f });
-			}
-			else
-			{
-				projectiles.back()->setVelocity({ -700.f,0.f });
-			}
+
+			makeBulletFixed = true;
+
+			//projectiles.push_back(std::make_shared<BusterShot>(this, Cfg::Textures::BusterShot, sf::IntRect{ sf::Vector2i{0,0},sf::Vector2i{24,14} }, sf::Vector2f{ 0.f,0.f }, sf::Vector2f{ 24.f,14.f }, sf::Vector2f{ getPosition().x + animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), (int)animMgr.getCurrIndex()).x, getPosition().y + animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), (int)animMgr.getCurrIndex()).y}));
+			////projectiles.back()->setPosition({ getPosition().x + (animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).x - getPosition().x),getPosition().y + (animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).y - getPosition().y) });
+			//if (animMgr.getCurrDir() == AnimDir::Right)
+			//{
+			//	projectiles.back()->setVelocity({ 700.f, 0.f });
+			//}
+			//else
+			//{
+			//	projectiles.back()->setVelocity({ -700.f,0.f });
+			//}
 
 			shootCoolingDown = true;
 			shootCooldownElapsed = 0.f;
 
-			std::cout << "PlayerPosition: x= " << getPosition().x << ", y= " << getPosition().y << "\n>>>  TexOffset: x= " << getCurrOffset().x << ", y= " << getCurrOffset().y << "\n>>> AnchorPointRelative: x= " << animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).x << ", y= " << animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).y << " \nFinalPositionBullet: x= " << projectiles.back()->getPosition().x << ", y= " << projectiles.back()->getPosition().y << std::endl;
 
 		}
 	}
@@ -362,7 +364,10 @@ void Player::update(float dt_)
 void Player::finalize(float dt_, sf::RenderWindow& wnd_)
 {
 
-
+	if (fsm.getStateName() == "RisingAndShooting" && velocity.y > 0.f)
+	{
+		dispatch(fsm, EventFell{});
+	}
 
 	// checks if the direction or animation needs to change then update the animation for either one changing, changing the direction first and using that in the anim switch
 
@@ -408,6 +413,9 @@ void Player::finalize(float dt_, sf::RenderWindow& wnd_)
 	}
 
 
+
+
+
 	// now check position and velocity of player and move the screen instead when in middle of it moving in a direction until the end of the level then move the player
 	auto vw = wnd_.getView();
 	if (rightPressed)
@@ -444,6 +452,25 @@ void Player::finalize(float dt_, sf::RenderWindow& wnd_)
 	// we set the x above with the screen movement, not adjust the player for the y value
 	// apply y velocity
 	setPosition({ getPosition().x, getPosition().y + (getVelocity().y * dt_) });
+
+	// Now make a nbullet if needed
+	if (makeBulletFixed)
+	{
+		makeBulletFixed = false;
+		projectiles.push_back(std::make_shared<BusterShot>(this, Cfg::Textures::BusterShot, sf::IntRect{ sf::Vector2i{0,0},sf::Vector2i{24,14} }, sf::Vector2f{ 0.f,0.f }, sf::Vector2f{ 24.f,14.f }, sf::Vector2f{ getPosition().x + animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), (int)animMgr.getCurrIndex()).x, getPosition().y + animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), (int)animMgr.getCurrIndex()).y }));
+		//projectiles.back()->setPosition({ getPosition().x + (animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).x - getPosition().x),getPosition().y + (animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).y - getPosition().y) });
+		if (animMgr.getCurrDir() == AnimDir::Right)
+		{
+			projectiles.back()->setVelocity({ 700.f, 0.f });
+		}
+		else
+		{
+			projectiles.back()->setVelocity({ -700.f,0.f });
+		}
+		std::cout << "PlayerPosition: x= " << getPosition().x << ", y= " << getPosition().y << "\n>>>  TexOffset: x= " << getCurrOffset().x << ", y= " << getCurrOffset().y << "\n>>> AnchorPointRelative: x= " << animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).x << ", y= " << animMgr.getBulletPoint(AnimName::Shooting, animMgr.getCurrDir(), 0).y << " \nFinalPositionBullet: x= " << projectiles.back()->getPosition().x << ", y= " << projectiles.back()->getPosition().y << std::endl;
+
+
+	}
 
 
 	// now that our position is finalized, lets animate the frame then update the texture rect

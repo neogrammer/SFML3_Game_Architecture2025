@@ -34,10 +34,10 @@ PlayerAtlas 2 1 9 14 17 130 160 80 Normal 0 0 0 0 0
 0 55 79 1 39 50 38 50 0 0 0
 Shooting Right 
 PlayerAtlas 1 1 12 1 17 130 160 150 Normal 0 0 0 0 0
-0 39 79 0 31 48 0 93 61
+0 39 79 0 31 48 1 93 61
 Shooting Left 
 PlayerAtlas 1 1 12 14 17 130 160 150 Normal 0 0 0 0 0
-0 39 79 0 31 48 0 26 61 
+0 39 79 0 31 48 1 26 61 
 LiftOff Right 
 PlayerAtlas 3 1 0 5 17 130 160 150 Normal 0 0 0 0 0
 0 39 79 0 31 48 0 93 61
@@ -46,16 +46,16 @@ PlayerAtlas 3 1 0 18 17 130 160 150 Normal 0 0 0 0 0
 0 39 79 0 31 48 0 93 61
 LiftOffAndShooting Right 
 PlayerAtlas 3 1 0 6 17 130 160 50 Normal 0 0 0 0 0
-0 39 79 0 31 48 0 93 61
+0 39 79 0 31 48 3 93 61 93 61 93 61
 LiftOffAndShooting Left 
 PlayerAtlas 3 1 0 19 17 130 160 50 Normal 0 0 0 0 0
-0 39 79 0 31 48 0 93 61
+0 39 79 0 31 48 3 26 61 26 61 26 61
 RunningAndShooting Right 
 PlayerAtlas 10 1 3 3 17 130 160 150 Normal 0 0 1 0 0
-0 39 79 0 31 48 0 93 61
+0 39 79 0 31 48 10 105 55 105 55 105 55 105 55 105 55 105 55 105 55 105 55 105 55 105 55
 RunningAndShooting Left 
 PlayerAtlas 10 1 3 16 17 130 160 150 Normal 0 0 1 0 0
-0 39 79 0 31 48 0 93 61
+0 39 79 0 31 48 10 20 55 20 55 20 55 20 55 20 55 20 55 20 55 20 55 20 55 20 55
 Rising Right 
 PlayerAtlas 2 1 3 5 17 130 160 100 Normal 0 0 0 0 0
 0 39 79 0 31 48 0 93 61
@@ -64,10 +64,10 @@ PlayerAtlas 2 1 3 18 17 130 160 100 Normal 0 0 0 0 0
 0 39 79 0 31 48 0 93 61
 RisingAndShooting Right 
 PlayerAtlas 2 1 3 6 17 130 160 100 Normal 0 0 0 0 0
-0 39 79 0 31 48 0 93 61
+0 39 79 0 31 48 2 93 61 93 61
 RisingAndShooting Left 
 PlayerAtlas 2 1 3 19 17 130 160 100 Normal 0 0 0 0 0
-0 39 79 0 31 48 0 93 61
+0 39 79 0 31 48 2 26 61 26 61
 JumpPeakRising Right 
 PlayerAtlas 1 1 5 5 17 130 160 0 Normal 0 0 0 0 0
 0 39 79 0 31 48 0 93 61
@@ -76,10 +76,10 @@ PlayerAtlas 1 1 5 18 17 130 160 0 Normal 0 0 0 0 0
 0 39 79 0 31 48 0 93 61
 JumpPeakRisingAndShooting Right 
 PlayerAtlas 1 1 5 6 17 130 160 0 Normal 0 0 0 0 0
-0 39 79 0 31 48 0 93 61
+0 39 79 0 31 48 1 93 61
 JumpPeakRisingAndShooting Left 
 PlayerAtlas 1 1 5 19 17 130 160 0 Normal 0 0 0 0 0
-0 39 79 0 31 48 0 93 61
+0 39 79 0 31 48 1 26 61
 JumpPeakFalling Right 
 PlayerAtlas 1 1 6 5 17 130 160 0 Normal 0 0 0 0 0
 0 39 79 0 31 48 0 93 61
@@ -88,10 +88,10 @@ PlayerAtlas 1 1 6 18 17 130 160 0 Normal 0 0 0 0 0
 0 39 79 0 31 48 0 93 61
 JumpPeakFallingAndShooting Right 
 PlayerAtlas 1 1 6 6 17 130 160 0 Normal 0 0 0 0 0
-0 39 79 0 31 48 0 93 61
+0 39 79 0 31 48 1 93 61
 JumpPeakFallingAndShooting Left 
 PlayerAtlas 1 1 6 19 17 130 160 0 Normal 0 0 0 0 0
-0 39 79 0 31 48 0 93 61
+0 39 79 0 31 48 1 26 61
 Falling Right 
 PlayerAtlas 1 1 7 5 17 130 160 0 Normal 0 0 0 0 0
 0 39 79 0 31 48 0 93 61
@@ -100,10 +100,10 @@ PlayerAtlas 1 1 7 18 17 130 160 0 Normal 0 0 0 0 0
 0 39 79 0 31 48 0 93 61
 FallingAndShooting Right 
 PlayerAtlas 1 1 7 6 17 130 160 0 Normal 0 0 0 0 0
-0 39 79 0 31 48 0 93 61
+0 39 79 0 31 48 1 93 61
 FallingAndShooting Left 
 PlayerAtlas 1 1 7 19 17 130 160 0 Normal 0 0 0 0 0
-0 39 79 0 31 48 0 93 61
+0 39 79 0 31 48 1 26 61 
 Landing Right 
 PlayerAtlas 3 1 8 5 17 130 160 30 Normal 0 0 0 0 0
 0 39 79 0 31 48 0 93 61
@@ -112,8 +112,8 @@ PlayerAtlas 3 1 8 18 17 130 160 30 Normal 0 0 0 0 0
 0 39 79 0 31 48 0 93 61
 LandingAndShooting Right 
 PlayerAtlas 3 1 8 6 17 130 160 30 Normal 0 0 0 0 0
-0 39 79 0 31 48 0 93 61
+0 39 79 0 31 48 3 93 61 93 61 93 61
 LandingAndShooting Left 
 PlayerAtlas 3 1 8 19 17 130 160 30 Normal 0 0 0 0 0
-0 39 79 0 31 48 0 93 61
+0 39 79 0 31 48 3 26 61 26 61 26 61 
 

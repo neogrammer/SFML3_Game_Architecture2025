@@ -437,6 +437,7 @@
     <Image Include="Assets\Textures\Enemies\spellun-sprite7 copia.png" />
     <Image Include="Assets\Textures\Enemies\Tux_Junior.png" />
     <Image Include="Assets\Textures\Player\PlayerAtlas.png" />
+    <Image Include="Assets\Textures\projectiles\GooglyEyeShot.png" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="Assets\Music\TitleBGMusic.wav">
