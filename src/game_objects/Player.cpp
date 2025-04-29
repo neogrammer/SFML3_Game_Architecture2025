@@ -367,6 +367,8 @@ void Player::finalize(float dt_, sf::RenderWindow& wnd_)
 	if (fsm.getStateName() == "RisingAndShooting" && velocity.y > 0.f)
 	{
 		dispatch(fsm, EventFell{});
+
+
 	}
 
 	// checks if the direction or animation needs to change then update the animation for either one changing, changing the direction first and using that in the anim switch
