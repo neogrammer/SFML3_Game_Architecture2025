@@ -16,10 +16,23 @@ Enemy1::Enemy1(float coolDown_, sf::Vector2f position_)
 
 void Enemy1::update(float dt_)
 {
-	
+	int idx = animMgr.getCurrIndex();
+
+
+	animMgr.animate(dt_);
+
+	int idxAfter = animMgr.getCurrIndex();
+
+	if (idx == 8 && idxAfter == 0)
+	{
+		move({ (float) - animMgr.getTexRect().size.x / 2.8f, 0.f});
+	}
+
 }
 
 void Enemy1::finalize(float dt_, sf::RenderWindow& wnd_)
 {
 	move(velocity * dt_);
+
+	setTexRect(animMgr.getTexRect());
 }

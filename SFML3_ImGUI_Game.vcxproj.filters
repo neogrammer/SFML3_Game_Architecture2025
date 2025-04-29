@@ -233,6 +233,15 @@
     <ClCompile Include="src\game_objects\Enemy1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\scripting\Script.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scripting\ScriptMgr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scripting\ScriptPatrol.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="external\ImGui\ImGui_SFML3\imgui-SFML.h">
@@ -374,6 +383,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\game_objects\Enemy1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scripting\Script.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scripting\ScriptMgr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scripting\ScriptPatrol.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

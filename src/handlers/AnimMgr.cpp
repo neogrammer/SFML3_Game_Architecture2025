@@ -486,3 +486,8 @@ void AnimMgr::switchAnim(AnimName name_, AnimDir dir_)
 	this->currDir = dir_;
 	this->currIndex = 0;
 }
+
+sf::IntRect AnimMgr::getTexRect()
+{
+	return animMap[currAnim].getFrame(currDir, getCurrIndex());
+}

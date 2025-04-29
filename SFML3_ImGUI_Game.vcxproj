@@ -178,6 +178,9 @@
     <ClCompile Include="src\handlers\AnimMgr.cpp" />
     <ClCompile Include="src\handlers\GStateMgr.cpp" />
     <ClCompile Include="src\physics\Physics.cpp" />
+    <ClCompile Include="src\scripting\Script.cpp" />
+    <ClCompile Include="src\scripting\ScriptMgr.cpp" />
+    <ClCompile Include="src\scripting\ScriptPatrol.cpp" />
     <ClCompile Include="src\tilemap\Tile.cpp" />
     <ClCompile Include="src\tilemap\Tilemap.cpp" />
   </ItemGroup>
@@ -227,6 +230,9 @@
     <ClInclude Include="src\handlers\AnimMgr.h" />
     <ClInclude Include="src\handlers\GStateMgr.h" />
     <ClInclude Include="src\physics\Physics.h" />
+    <ClInclude Include="src\scripting\Script.h" />
+    <ClInclude Include="src\scripting\ScriptMgr.h" />
+    <ClInclude Include="src\scripting\ScriptPatrol.h" />
     <ClInclude Include="src\tilemap\Tile.h" />
     <ClInclude Include="src\tilemap\Tilemap.h" />
   </ItemGroup>
