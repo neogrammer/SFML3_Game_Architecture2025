@@ -57,6 +57,8 @@ public:
 	void setSize(AnimName animName_, AnimDir animDir_, int currIndex_, int sizeX, int sizeY);
 	void switchAnim(AnimName name_, AnimDir dir_);
 	sf::IntRect getTexRect();
+	void pauseAnim();
+	void resumeAnim();
 };
 
 #endif

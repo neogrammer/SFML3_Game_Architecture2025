@@ -31,8 +31,16 @@ PlayState::PlayState(GStateMgr* stateMgr, sf::RenderWindow* pWnd_, float* pDT_)
 
 std::string PlayState::update()
 {
+
+
 	player.handleInput();
 	
+	if (googlyEye->animMgr.getCurrIndex() == 0)
+	{
+		googlyEye->shoot(player);
+	}
+
+
 	if (!player.justJumped)
 		Physics::applyGravity(player, *pGameTime);
 	Physics::applyGravity(*googlyEye, *pGameTime);

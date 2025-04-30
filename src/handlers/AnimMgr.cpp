@@ -42,6 +42,7 @@ int AnimMgr::getNumAnims()
 
 
 
+
 void AnimMgr::AddLeftFrames(AnimName name_, Cfg::Textures texID_, int numFrames_, int numRows_, int startCol_, int startRow_, int pitch_, int frameW_, int frameH_, float frameDelay_, AnimSheetType sheetType_, int pad_, int spacer_, bool loops_, bool loopWaits_, float loopDelay_)
 {
 
@@ -490,4 +491,14 @@ void AnimMgr::switchAnim(AnimName name_, AnimDir dir_)
 sf::IntRect AnimMgr::getTexRect()
 {
 	return animMap[currAnim].getFrame(currDir, getCurrIndex());
+}
+
+void AnimMgr::pauseAnim()
+{
+	animMap[currAnim].playing = false;
+}
+
+void AnimMgr::resumeAnim()
+{
+	animMap[currAnim].playing = true;
 }
